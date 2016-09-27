@@ -1,8 +1,12 @@
 /* Theme variables */
 /* =============== */
 @base-font-family: OpenSans, sans-serif;
+@border-radius-base: 5px;
 @navbar-font-size: 11.5pt;
-@navbar-hover-border-radius: 6px;
+@navbar-hover-border-radius: @border-radius-base + 1;
+@underline-border-image: url("../images/underline.png");
+@text-size-h2: 24px;
+@btn-large-padding: 12px;
 
 /* Colours */
 /* ======= */
@@ -10,6 +14,7 @@
 @core-cyan: #00aff0;
 @core-dark-gray: #333;
 @core-light-gray: #c9c9c9;
+@core-lightest-gray: #f6f6f6;
 
 @support-cyan: #23a1d4;
 @support-gray: #b6aaa7;
@@ -18,11 +23,43 @@
 
 @white: #fff;
 
+.uppercase-lowercase{
+
+  text-transform: lowercase;
+
+  strong{
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+}
+.underline(){
+  -moz-border-image: @underline-border-image 2 stretch;
+  -webkit-border-image: @underline-border-image 2 stretch;
+  border-image: @underline-border-image 2 stretch;
+}
+
 /* ======= */
 
 html {
   background-color: @primary;
-  padding-bottom:10px;
+}
+
+@media (max-width: 767px){
+  body{
+    padding: 0;
+  }
+
+  .row{
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+.banner{
+  position: relative;
+  overflow: hidden;
+  padding-top: 90px;
+  padding-bottom: 80px;
 }
 
 h1, h2, h3, h4, h5, h6, .brand, .strapline, label, .btn, button, input, p.intro {
@@ -34,9 +71,9 @@ h1 {
 h2,
 #content h2,
 #content .post .entry h2 {
-  font-size:24px;
-  margin-bottom: 5px;
-  margin-top: 25px;
+  font-size: @text-size-h2;
+  margin-bottom: @text-size-h2 - 19;
+  margin-top: @text-size-h2 + 1;
 }
 h3,
 #content .post .entry h3 {
@@ -53,6 +90,10 @@ h6 {
   font-size: 16px;
 }
 
+figure{
+  margin: 0;
+}
+
 body,
 body #content,
 p,
@@ -67,7 +108,7 @@ body.blog #content li
 #blog-single li {
   font-size: @navbar-font-size;
   line-height: 22px;
-  color:#444444;
+  color: @core-dark-gray;
   font-family: @base-font-family;
 }
 p {
@@ -87,24 +128,29 @@ a {
   color: @primary;
 }
 
+.btn{
+  .uppercase-lowercase;
+  font-weight: 700;
+  strong{
+    font-size: 11pt;
+  }
+}
+
 .btn,
 button,
 a.group-button,
 input[type="submit"],
 input[type="reset"] {
-  -webkit-border-radius: 14px;
-  border-radius: 14px;
-  text-shadow:none;
+  border-radius: @border-radius-base - 3;
+  text-shadow: none;
 }
 
 .btn-large,
 input[type=submit].btn-large,
 input[type=reset].btn-large {
-  -webkit-border-radius: 20px;
-  border-radius: 20px;
-  padding: 7px 14px;
-  font-weight:bold;
-  font-size: 16px;
+  border-radius: @border-radius-base;
+  padding: (@btn-large-padding - 2) @btn-large-padding @btn-large-padding;
+  font-size: 15pt;
 }
 
 .btn-primary,
@@ -112,18 +158,8 @@ button,
 a.group-button,
 input[type="submit"],
 input[type="reset"] {
-  background-color: @primary;
-  background-image: -moz-linear-gradient(top, #0db1db, #0ca9d2);
-  background-image: -ms-linear-gradient(top, #0db1db, #0ca9d2);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0db1db), to(#0ca9d2));
-  background-image: -webkit-linear-gradient(top, #0db1db, #0ca9d2);
-  background-image: -o-linear-gradient(top, #0db1db, #0ca9d2);
-  background-image: linear-gradient(top, #0db1db, #0ca9d2);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0db1db', endColorstr='#0ca9d2', GradientType=0);
-  border-color: #0ca9d2;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false); /* Not modified, but ie seems to not render radius without it */
-  border:none;
+  background: @primary;
+  border: none;
 }
 .btn-primary:hover,
 .btn-primary:active,
@@ -134,10 +170,15 @@ button:hover,
 a.group-button:hover,
 input[type=submit]:hover,
 input[type=reset]:hover {
-  background-color: #0ca9d2;
+  color: @core-dark-gray;
+  background-color: @core-cyan;
 }
 .btn-primary:active, .btn-primary.active {
-  background-color: #0ca9d2 \9;
+  background-color: #00aff0 \9;
+}
+
+.btn-uppercase{
+  text-transform: uppercase;
 }
 
 .btn-inverse {
@@ -188,32 +229,42 @@ input[type="color"]:focus,
 }
 
 .well {
-  border:none;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
+
+  h1{
+    font-weight: 400;
+    font-size: 40pt;
+    line-height: 43pt;
+    margin-bottom: 40px;
+
+    strong{
+      .underline;
+      font-weight: 400;
+      border-bottom: 1px solid @white;
+      color: @primary;
+    }
+  }
+
+  p{
+    font-size: 18px;
+    line-height: 24px;
+
+    &:last-of-type{
+      margin-bottom: 90px;
+    }
+  }
+
+  @media (max-width: 767px){
+    .btn{
+      margin: 20px 0;
+    }
+  }
+
+  border: none;
+  border-radius: 0;
   box-shadow: none;
-  position:relative;
-  padding:25px;
-}
-.well:after {
-  border-bottom: 20px solid transparent;
-  border-left: 35px solid #F5F5F5;
-  border-top: 0 solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  bottom: -19px;
-  left: 25px;
-}
-.coloured .well {
-  background-color: #FFF;
-}
-.coloured .well:after {
-  border-left-color: #FFF;
+  position: relative;
+  padding: 0;
+  background: transparent;
 }
 
 code {
@@ -229,13 +280,20 @@ code {
 /* Header */
 /* ====== */
 .navbar{
-  height: auto;
 }
+
+@media (min-width: 980px){
+  .navbar{
+    max-height: inherit;
+  }
+}
+
+
 .navbar-inner {
   filter: none; /* IE6-9 */
   background-image: none;
   background-color: @primary;
-  padding: 10px 0;
+  padding: 10px 40px;
 }
 .navbar .brand {
   color: #FFF;
@@ -267,6 +325,14 @@ code {
 .navbar .nav li.dropdown.active>.dropdown-toggle,
 .navbar .nav li.dropdown.open.active>.dropdown-toggle{
   color: @core-dark-gray;
+}
+
+.navbar .nav>.active>a,
+.navbar .nav>.active>a:hover,
+.navbar .nav>.active>a:focus{
+  color: @core-dark-gray;
+  background-color: transparent;
+  box-shadow: none;
 }
 
 .dropdown-menu .active>a,
@@ -362,17 +428,8 @@ code {
 section.coloured,
 section.coloured:before,
 section.coloured:after {
-  background-color: @primary;
+  background-color: @core-dark-gray;
 }
-section.coloured .well,
-section.coloured .well h1,
-section.coloured .well h2,
-section.coloured .well h3,
-section.coloured .well h4,
-section.coloured .well p {
-  color:#333333;
-}
-
 
 /* Widgets */
 /* ======= */
@@ -387,10 +444,11 @@ section.coloured .well p {
   line-height:20px;
 }
 #sidebar .widget {
-  background-image:none;
-  background-color:fade(@primary, 13%);
-  border-color:fade(@primary, 0%);
-  color: #444444;
+  background-image: none;
+  background-color: @core-lightest-gray;
+  border-color: transparent;
+  color: inherit;
+  border-radius: @border-radius-base;
 }
 #sidebar .widget > ul li {
   border-top-color:fade(@primary, 35%);
@@ -455,14 +513,6 @@ section.coloured .well p {
 
 /* Home */
 /* ==== */
-body.home-page,
-.home-page p {
-  font-size:18px;
-  line-height:22px;
-}
-.home-page > .container > .row section:nth-of-type(odd) {
-  background-color:fade(@primary, 13%);
-}
 body > .container > .row section > .container {
   padding: 20px 0px;
 }
@@ -557,8 +607,8 @@ body > .tabbable.mailing-lists .nav li a {
   background-color:#FFF;
   background-image:none;
   color:@primary;
-  -webkit-border-radius: 25px;
-  border-radius: 25px;
+  -webkit-border-radius: 5 * @border-radius-base;
+  border-radius: 5 * @border-radius-base;
   font-size: 22px;
   font-weight: bold;
   padding: 10px 40px;
@@ -591,4 +641,90 @@ a.sidelink:after {
 }
 a.sidelink:hover:after {
   background-color: @primary;
+}
+
+.slideshow-window{
+  z-index: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  overflow: hidden;
+
+}
+
+.slideshow-slide{
+  img{
+    width: 100%;
+    opacity: 0.2;
+  }
+}
+
+body div.slideshow-window * img{
+  max-height: inherit;
+}
+
+.slideshow-controls{
+  display: none;
+}
+
+.list-inline{
+  list-style: none;
+  margin-left: inherit;
+
+  li{
+    margin-left: inherit;
+    display: inline-block;
+  }
+}
+
+.latest{
+  padding: 10px 0 40px;
+  background: @core-lightest-gray;
+
+  h2{
+    .uppercase-lowercase;
+    font-weight: 400;
+    color: @core-cyan;
+    margin-bottom: 20px;
+
+    strong{
+      font-size: @text-size-h2 - 5;
+    }
+  }
+
+  .post-wrap{
+    overflow: hidden;
+    background-color: @white;
+    border-radius: @border-radius-base;
+  }
+
+  .post-meta-wrap{
+    padding: 20px;
+
+    .trimmed{
+      max-height: 150px;
+      margin-bottom: 20px;
+    }
+
+    h3{
+      &.trimmed{
+        max-height: 50px;
+      }
+    }
+
+  }
+
+  .post-meta{
+    font-size: 12px;
+  }
+
+  .image{
+    max-height: 150px;
+    overflow: hidden;
+  }
 }

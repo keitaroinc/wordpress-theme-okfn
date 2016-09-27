@@ -131,38 +131,44 @@ function choose_best_category($categories) {
   return '???';
 }
 
-;
+function echo_magazine_post($post, $is_featured, $echo = true) {
 
-function echo_magazine_post($post, $is_featured) {
+  $print = '';
   $post_class = $is_featured ? 'featured' : 'preview';
   $post_category = choose_best_category(array(get_the_category()));
   // Extract the first img src from the post body
   $regex = '/magazine.image\s*=\s*"?([^"\s]*)/';
   preg_match($regex, get_the_content(), $matches);
   if (has_post_thumbnail()) {
-    $post_img = wp_get_attachment_url(get_post_thumbnail_id($post->ID)); // use wp featured image
+    $post_img = wp_get_attachment_url(get_post_thumbnail_id(get_the_ID())); // use wp featured image
   } elseif (count($matches))
     $post_img = $matches[1]; // else use old featured image
   else {
     $post_img = 'http://assets.okfn.org/web/images/blog-placeholder.png'; // else use placeholder
   }
-  echo '<div class="box post ' . $post_class . '">';
-  echo '<div class="padder"> <a class="image" href="' . get_permalink() . '" style="background-image:url(' . $post_img . ');"></a>';
-  echo '<div class="text">';
-  echo '<h2><a href="' . get_permalink() . '" rel="bookmark">';
-  the_title();
-  echo '</a></h2>';
-  echo '<span class="entry-meta"> Posted on ';
-  printf(__('%1$s <span>in %2$s</span>', 'buddypress'), get_the_date(), get_the_category_list(', '));
-  echo 'by ' . bp_core_get_userlink($post->post_author);
-  echo '</span>';
-  echo the_excerpt();
-  echo '</div>';
-  echo '<a href="' . get_permalink() . '" class="btn btn-info">' . __("Full Post", "okfn") . '</a> </div>';
-  echo '<h3 class="ribbon">';
-  echo $post_category;
-  echo '</h3>';
-  echo '</div>';
+  $print .= '<div class="box post ' . $post_class . '">';
+  $print .= '<div class="padder"> <a class="image" href="' . get_permalink() . '" style="background-image:url(' . $post_img . ');"></a>';
+  $print .= '<div class="text">';
+  $print .= '<h2><a href="' . get_permalink() . '" rel="bookmark">';
+  get_the_title();
+  $print .= '</a></h2>';
+  $print .= '<span class="entry-meta"> Posted on ';
+  $print .= sprintf(__('%1$s <span>in %2$s</span>', 'buddypress'), get_the_date(), get_the_category_list(', '));
+  $print .= 'by ' . bp_core_get_userlink($post->post_author);
+  $print .= '</span>';
+  $print .= get_the_excerpt();
+  $print .= '</div>';
+  $print .= '<a href="' . get_permalink() . '" class="btn btn-primary btn-uppercase">' . __("Full Post", "okfn") . '</a> </div>';
+  $print .= '<h3 class="ribbon">';
+  $print .= $post_category;
+  $print .= '</h3>';
+  $print .= '</div>';
+
+  if (true === $echo):
+    echo $print;
+  else:
+    return $print;
+  endif;
 }
 
 // The height and width of your custom header. You can hook into the theme's own filters to change these values.
@@ -898,8 +904,8 @@ function mytheme_admin() {
   if (function_exists('register_sidebar'))
     register_sidebar(array(
       'id' => 'sidebar-1',
-      'before_widget' => '<li id="%1$s" class="widget %2$s">',
-      'after_widget' => '</li>',
+      'before_widget' => '<div id="%1$s" class="widget %2$s">',
+      'after_widget' => '</div>',
       'before_title' => '',
       'after_title' => '',
     ));
@@ -1244,4 +1250,3 @@ function mytheme_admin() {
 
     return explode("\n", $data);
   }
-  
