@@ -30,6 +30,11 @@
   box-shadow: none;
 }
 
+.nav-collapse-responsive{
+  margin: 0 -40px -10px;
+  padding: 0 40px;
+}
+
 .uppercase-lowercase{
 
   text-transform: lowercase;
@@ -317,9 +322,14 @@ code {
 .nav-collapse{
   background: @support-cyan;
 
+  @media (max-width: 979px){
+    &.collapse{
+    .nav-collapse-responsive;
+    }
+  }
+
   &.in{
-    margin: 0 -40px -10px;
-    padding: 0 40px;
+    .nav-collapse-responsive;
 
     .nav{
       padding: 20px 0;
