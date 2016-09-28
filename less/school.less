@@ -1,10 +1,12 @@
 /* Subtheme variables */
 /* =============== */
 @base-font-family: OpenSans, sans-serif;
+@base-font-size: 16px;
 @border-radius-base: 5px;
 @navbar-font-size: 11.5pt;
 @navbar-hover-border-radius: @border-radius-base + 1;
 @underline-border-image: url("../images/underline.png");
+@text-size-hero-numbers: 16px;
 @text-size-h2: 24px;
 @btn-large-padding: 12px;
 
@@ -185,12 +187,21 @@ input[type=reset]:hover {
   color: @core-dark-gray;
   background-color: @core-cyan;
 }
+
+a.group-button,
+button,
+input[type=reset],
+input[type=submit] {
+  font-size: inherit;
+}
+
 .btn-primary:active, .btn-primary.active {
   background-color: #00aff0 \9;
 }
 
 .btn-uppercase{
   text-transform: uppercase;
+  font-size: @base-font-size - 5;
 }
 
 .btn-inverse {
@@ -216,6 +227,26 @@ input[type=reset]:hover {
 }
 .btn-inverse:active, .btn-info.active {
   background-color: #FFF \9;
+}
+
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input{
+  border-color: transparent;
+  box-shadow: none;
 }
 
 textarea:focus,
@@ -459,7 +490,7 @@ code {
 }
 .navbar .navbar-inner .header-search a:hover,
 .navbar .navbar-inner .header-search.active a {
-  background-color:#333333;
+  background-color: @core-dark-gray;
 }
 .navbar .navbar-inner .header-search .search-bar {
   background-color: #0DB1DB;
@@ -470,6 +501,12 @@ code {
   -moz-border-radius: 0px;
   border-radius: 0px;
 }
+
+#sidebar .widget.widget_search input[type=submit]{
+  width: 15px;
+  background: url("../images/search-button-alt.png") top left no-repeat;
+}
+
 .header-text{
   height: auto;
   margin-top: 0;
@@ -518,13 +555,19 @@ section.coloured:after {
   margin-bottom:0px;
 }
 #sidebar .widget a {
-  color:#333333;
+  color: @core-dark-gray;
 }
 #sidebar .widget label {
-  color: #444444;
+  color: @core-dark-gray;
 }
 #sidebar .tb_tweet-info {
-  color: #444444;
+  color: @core-dark-gray;
+}
+#sidebar{
+  .widgettitle{
+    display: block;
+    margin: 0 0 20px;
+  }
 }
 
 .gce-widget-grid .gce-calendar {
@@ -605,20 +648,132 @@ body.single {
 #blog-single p.wp-caption-text,
 .wp-caption-text a,
 #blog-single p.wp-caption-text a {
-  color:#333333;
+  color: @core-dark-gray;
 }
 
 
 /* Footer */
 /* ====== */
 body > footer {
-  background-color: #333333;
-  background-image:none;
+
+  @media (max-width: 980px){
+    padding: 0 40px;
+  }
+  color: @white;
+  background-color: @core-dark-gray;
+  background-image: none;
 }
 body > footer > .inner {
   min-height:100px;
   padding:20px 0px;
   background-image:none;
+}
+
+footer{
+  p,
+  li{
+    color: inherit;
+  }
+
+  .textwidget{
+    font-size: inherit;
+  }
+
+  .widget{
+
+    :first-child{
+      margin-top: 0;
+    }
+
+    @media (max-width:767px){
+      margin: 40px 0;
+    }
+  }
+
+  .widgettitle{
+    font-size: @text-size-hero-numbers - 2;
+    margin-bottom: 20px;
+  }
+}
+
+.subscribe-form{
+  input[type="text"]{
+    width: 95%;
+  }
+}
+
+.okf-footer{
+  border: none;
+  font-size: inherit;
+  @media (min-width:767px){
+    padding: 0 0 0 20px;
+  }
+
+  a{
+    opacity: inherit;
+  }
+
+  .container{
+    width: auto;
+
+    ul{
+      @media (max-width:767px){
+        text-align: center;
+      }
+      li{
+        border: none;
+        padding: 0;
+        margin: 0 0 10px;
+        font-weight: 700;
+        @media (max-width:767px){
+          margin: 0 10px;
+        }
+
+        @media (min-width:767px){
+          display: block;
+        }
+      }
+    }
+  }
+
+}
+
+.hero-numbers{
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid @support-gray;
+  color: @core-cyan;
+  font-size: @text-size-hero-numbers + 5;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  @media (min-width: 980px){
+    font-size: @text-size-hero-numbers;
+    flex-direction: row;
+  }
+}
+
+.hero-numbers-block{
+
+  font-weight: 700;
+  .uppercase-lowercase;
+  strong{
+    font-size: @text-size-hero-numbers * 0.8;
+  }
+
+  @media (max-width: 980px){
+    margin: 5px;
+
+    strong{
+      font-size: @text-size-hero-numbers;
+    }
+  }
+
+  &:not(:last-child){
+    margin-right: 20px;
+  }
+
 }
 
 
@@ -633,7 +788,7 @@ body > .tabbable.mailing-lists .nav li a {
 /* Popups */
 #bp-default .fsp_content {
   background-color: @primary;
-  border-color:#333333;
+  border-color: @core-dark-gray;
 }
 #bp-default .fsp_content #closediv {
   padding: 10px 0 2px 32px;

@@ -8,8 +8,6 @@
 
 <div class="topbar">
   <div class="padder">
-
-
     <?php wp_footer(); ?>
   </div>
 </div>
@@ -37,57 +35,31 @@ if ($okfn_mailinglist_bar_location == "footer") {
 <footer>
   <div class="inner">
     <div class="container">
-      <?php
-
-      $active_footers = 0;
-      if (is_active_sidebar('first-footer-widget-area'))
-        $active_footers++;
-      if (is_active_sidebar('second-footer-widget-area'))
-        $active_footers++;
-      if (is_active_sidebar('third-footer-widget-area'))
-        $active_footers++;
-      //if ( is_active_sidebar( 'fourth-footer-widget-area' ) ) $active_footers++;
-      if ($active_footers > 0) :
-        $footer_width = (940 - 20 * ($active_footers - 1)) / $active_footers;
-
-        ?>
-        <style scoped>
-          #footer-widget-area > div {
-            width: <?php echo $footer_width; ?>px !important;
-          }
-        </style>
-        <div class="row">
-          <div id="footer-widgets">
-            <?php get_sidebar('footer') ?>
-            <div class="footer-buttons">
-              <?php if (!empty($okfn_twitter_username) && $okfn_twitter_link == "true" && $okfn_twitter_location != "default") : ?>
-                <a class="twitter" href="https://twitter.com/<?php echo $okfn_twitter_username ?>">twitter</a>
-              <?php endif; ?>
-              <?php if (!empty($okfn_facebook_username) && $okfn_facebook_link == "true" && $okfn_facebook_location != "default") : ?>
-                <a class="facebook" href="http://www.facebook.com/<?php echo $okfn_facebook_username ?>">facebook</a>
-              <?php endif; ?>
-
-              <?php if ($okfn_flattr_okfn == "true") : ?>
-                <a href="http://flattr.com/thing/605365/Open-Knowledge-Foundation" target="_blank">
-                  <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" />
-                </a>
-              <?php endif; ?>
-              <?php if ($okfn_sharethis == "true" && $okfn_sharethis_location == "footer") : ?>
-                <span class='st_facebook' displayText='Facebook'></span>
-                <span class='st_twitter' displayText='Twitter'></span>
-              <?php endif; ?>
-            </div>
-          </div><!-- /footer-widgets -->
-        </div><!-- /row -->
-      <?php endif; ?>
-
-      <div id="row">
-        <?php do_action('bp_footer') ?>
+      <div class="row">
+        <?php get_sidebar('footer'); ?>
       </div>
+      <div class="row">
+        <div class="footer-buttons">
+          <?php if (!empty($okfn_twitter_username) && $okfn_twitter_link == "true" && $okfn_twitter_location != "default") : ?>
+            <a class="twitter" href="https://twitter.com/<?php echo $okfn_twitter_username ?>">twitter</a>
+          <?php endif; ?>
+          <?php if (!empty($okfn_facebook_username) && $okfn_facebook_link == "true" && $okfn_facebook_location != "default") : ?>
+            <a class="facebook" href="http://www.facebook.com/<?php echo $okfn_facebook_username ?>">facebook</a>
+          <?php endif; ?>
 
+          <?php if ($okfn_flattr_okfn == "true") : ?>
+            <a href="http://flattr.com/thing/605365/Open-Knowledge-Foundation" target="_blank">
+              <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" />
+            </a>
+          <?php endif; ?>
+          <?php if ($okfn_sharethis == "true" && $okfn_sharethis_location == "footer") : ?>
+            <span class='st_facebook' displayText='Facebook'></span>
+            <span class='st_twitter' displayText='Twitter'></span>
+          <?php endif; ?>
+        </div>
+      </div><!-- /row -->
     </div><!-- /container -->
   </div><!-- /inner -->
-  <?php do_action('okf_footer'); ?>
 </footer>
 
 <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js"></script>
@@ -99,7 +71,7 @@ if ($okfn_mailinglist_bar_location == "footer") {
   $('.btn-navbar').click(function () {
     if (!$('.nav-collapse').hasClass('in')) {
       $(this).text('Close');
-    }else{
+    } else {
       $(this).text('Menu');
     }
   });

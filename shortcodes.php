@@ -503,14 +503,17 @@ function latest_posts_shortcode($atts) {
 add_shortcode('latest_posts', 'latest_posts_shortcode');
 
 /* * *******************************************************************************************
- * Single post
+ * Latest single post
  * ******************************************************************************************** */
 
-function single_post_shortcode($atts) {
+function latest_post_shortcode($atts) {
+
   extract(shortcode_atts(array(
     'category' => '',
     'class' => '',
           ), $atts));
+
+  $latest_post = '';
 
   $q = new WP_Query(
       array('posts_per_page' => 1, 'category_name' => '' . $category . '')
@@ -546,7 +549,7 @@ function single_post_shortcode($atts) {
   return $latest_post;
 }
 
-add_shortcode('single_post', 'single_post_shortcode');
+add_shortcode('latest_post', 'latest_post_shortcode');
 
 /* * *******************************************************************************************
  * Name:        Flickr Banner

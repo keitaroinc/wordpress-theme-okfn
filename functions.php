@@ -25,6 +25,7 @@ include('simple_html_dom.php');
 
 function remove_xprofile_links() {
   remove_filter('bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
+
 }
 
 add_action('bp_init', 'remove_xprofile_links');
@@ -64,6 +65,7 @@ function filter_nav_menu($header) {
   }
 
   return $header;
+
 }
 
 /* Taken from buddypress:functions.php.bp_dtheme_main_nav. Used by header.php */
@@ -82,12 +84,14 @@ function okfn_fallback_nav_menu($args) {
   echo $menu;
 
   do_action('bp_nav_items');
+
 }
 
 function register_form_blurb($args) {
   echo "<p>Community Membership is a way of &quot;opting in&quot; and publicly acknowledging a connnection with the Open Knowledge Foundation and support for its activities."
   . " It entails no specific obligations (nor confers specific rights!) and anyone may join.</p>"
   . "<p><a href=\"/governance/#community-membership\">Read more about Community Membership &raquo;</a></p>";
+
 }
 
 /*
@@ -129,6 +133,7 @@ function choose_best_category($categories) {
   return $categories[0]->name;
   // I have no special categories. Just choose the first one.
   return '???';
+
 }
 
 function echo_magazine_post($post, $is_featured, $echo = true) {
@@ -169,6 +174,7 @@ function echo_magazine_post($post, $is_featured, $echo = true) {
   else:
     return $print;
   endif;
+
 }
 
 // The height and width of your custom header. You can hook into the theme's own filters to change these values.
@@ -544,6 +550,7 @@ function mytheme_add_admin() {
   }
 
   add_theme_page($themename . " Options", "" . $themename . " Options", 'switch_themes', basename(__FILE__), 'mytheme_admin');
+
 }
 
 function mytheme_admin() {
@@ -901,17 +908,48 @@ function mytheme_admin() {
   ?>
   <?php
 
-  if (function_exists('register_sidebar'))
-    register_sidebar(array(
-      'id' => 'sidebar-1',
-      'before_widget' => '<div id="%1$s" class="widget %2$s">',
-      'after_widget' => '</div>',
-      'before_title' => '',
-      'after_title' => '',
-    ));
+  add_action('widgets_init', 'okfn_widgets_init');
 
+  function okfn_widgets_init() {
+    if (function_exists('register_sidebar')):
 
+      register_sidebar(array(
+        'id' => 'sidebar-1',
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget' => '</div>'
+      ));
 
+      register_sidebar(array(
+        'id' => 'first-footer-widget-area',
+        'name' => __('First Footer Widget Area', 'okfn'),
+        'before_widget' => '<div class="widget">',
+        'after_widget' => '</div>',
+      ));
+
+      register_sidebar(array(
+        'id' => 'second-footer-widget-area',
+        'name' => __('Second Footer Widget Area', 'okfn'),
+        'before_widget' => '<div class="widget">',
+        'after_widget' => '</div>',
+      ));
+
+      register_sidebar(array(
+        'id' => 'third-footer-widget-area',
+        'name' => __('Third Footer Widget Area', 'okfn'),
+        'before_widget' => '<div class="widget">',
+        'after_widget' => '</div>',
+      ));
+
+      register_sidebar(array(
+        'id' => 'fourth-footer-widget-area',
+        'name' => __('Fourth Footer Widget Area', 'okfn'),
+        'before_widget' => '<div class="widget">',
+        'after_widget' => '</div>',
+      ));
+
+    endif;
+
+  }
 
   /*   * *********************************************************************
    * @Author: Boutros AbiChedid
@@ -1063,6 +1101,7 @@ function mytheme_admin() {
       }
       echo '</ul>';
     }
+
   }
 
   /*
@@ -1124,6 +1163,7 @@ function mytheme_admin() {
       }
 
       return $html;
+
     }
 
   }
@@ -1134,6 +1174,7 @@ function mytheme_admin() {
 
   function set_bp_default_avatar_style($avatar_default) {
     return 'mystery';
+
   }
 
   /**
@@ -1230,6 +1271,7 @@ function mytheme_admin() {
       )
     );
     tgmpa($plugins, $config);
+
   }
 
   add_theme_support('post-thumbnails');
@@ -1249,4 +1291,5 @@ function mytheme_admin() {
     curl_close($ch);
 
     return explode("\n", $data);
+
   }
