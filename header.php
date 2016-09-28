@@ -207,11 +207,7 @@
                 <?php echo stripslashes($okfn_header_textarea2); ?>
               </div>
             <?php endif; ?>
-            <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar collapsed">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </a>
+            <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar collapsed">Menu</a>
             <a title="<?php _ex('Home', 'Home page banner link title', 'buddypress'); ?>"
                class="brand"
                href="<?php echo home_url(); ?>">

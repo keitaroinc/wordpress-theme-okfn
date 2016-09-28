@@ -96,6 +96,14 @@ if ($okfn_mailinglist_bar_location == "footer") {
 <script>
   $(".trimmed").dotdotdot({});
 
+  $('.btn-navbar').click(function () {
+    if (!$('.nav-collapse').hasClass('in')) {
+      $(this).text('Close');
+    }else{
+      $(this).text('Menu');
+    }
+  });
+
   // Tweeter
   $("div.tweeter.carousel > ul").addClass("carousel-inner");
   $("div.tweeter.carousel > ul li").addClass("item");
