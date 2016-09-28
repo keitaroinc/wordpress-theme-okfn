@@ -35,11 +35,10 @@ endif;
 
 <?php endif; ?>
 
-<div id="fourth" class="span4">
-  <?php do_action('okf_footer'); ?>
-  <?php if (is_active_sidebar('fourth-footer-widget-area')) : ?>
+<?php if (is_active_sidebar('fourth-footer-widget-area')) : ?>
+  <div id="fourth" class="span4">
 
     <?php dynamic_sidebar('fourth-footer-widget-area'); ?>
+  </div><!-- #fourth .widget-area -->
 
-  <?php endif; ?>
-</div><!-- #fourth .widget-area -->
+<?php endif; ?>

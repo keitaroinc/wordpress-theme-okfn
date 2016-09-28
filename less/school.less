@@ -51,6 +51,24 @@
   -webkit-border-image: @underline-border-image 2 stretch;
   border-image: @underline-border-image 2 stretch;
 }
+.footer-menu{
+  @media (max-width:767px){
+    text-align: center;
+  }
+  li{
+    border: none;
+    padding: 0;
+    margin: 0 0 10px;
+    font-weight: 700;
+    @media (max-width:767px){
+      margin: 0 10px;
+    }
+
+    @media (min-width:767px){
+      display: block;
+    }
+  }
+}
 
 /* ======= */
 
@@ -569,6 +587,11 @@ section.coloured:after {
     margin: 0 0 20px;
   }
 }
+.widget{
+  .menu{
+    .footer-menu;
+  }
+}
 
 .gce-widget-grid .gce-calendar {
   border-color:#FFF;
@@ -717,22 +740,7 @@ footer{
     width: auto;
 
     ul{
-      @media (max-width:767px){
-        text-align: center;
-      }
-      li{
-        border: none;
-        padding: 0;
-        margin: 0 0 10px;
-        font-weight: 700;
-        @media (max-width:767px){
-          margin: 0 10px;
-        }
-
-        @media (min-width:767px){
-          display: block;
-        }
-      }
+      .footer-menu;
     }
   }
 
