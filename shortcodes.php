@@ -530,7 +530,7 @@ function latest_post_shortcode($atts) {
     } elseif (count($matches))
       $post_img = $matches[1]; // else use old featured image
     else {
-      $post_img = 'http://assets.okfn.org/web/images/blog-placeholder.png'; // else use placeholder
+      $post_img = get_template_directory_uri() . '/images/scoda-horizontal-212x60-nontransparent.png'; // else use placeholder
     }
 
     $latest_post .= sprintf('<div class="post-wrap %1$s">', $class);
