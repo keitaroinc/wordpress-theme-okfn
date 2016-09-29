@@ -537,7 +537,7 @@ function latest_post_shortcode($atts) {
     $latest_post .= sprintf('<figure class="image"><a href="%2$s"><img src="%1$s" alt="%3$s"></a></figure>', $post_img, get_permalink(), '');
     $latest_post .= sprintf('<div class="post-meta-wrap">');
     $latest_post .= sprintf('<h3 class="trimmed">%1$s</h3>', get_the_title());
-    $latest_post .= sprintf('<p class="post-meta">%3$s %1$s by %2$s</p>', get_the_date(), get_the_author_posts_link(), __('Published on', 'okfn'));
+    $latest_post .= sprintf('<p class="post-meta trimmed">%3$s %1$s by %2$s</p>', get_the_date(), get_the_author_posts_link(), __('Published on', 'okfn'));
     $latest_post .= sprintf('<div class="trimmed">%1$s</div>', get_the_excerpt());
     $latest_post .= '<a href="' . get_permalink() . '" class="btn btn-primary btn-uppercase">' . __("Full Post", "okfn") . '</a>';
     $latest_post .= '</div>';
