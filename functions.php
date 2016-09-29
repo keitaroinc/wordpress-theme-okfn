@@ -919,33 +919,33 @@ function mytheme_admin() {
         'after_widget' => '</div>'
       ));
 
-//      register_sidebar(array(
-//        'id' => 'first-footer-widget-area',
-//        'name' => __('First Footer Widget Area', 'okfn'),
-//        'before_widget' => '<div class="widget">',
-//        'after_widget' => '</div>',
-//      ));
-//
-//      register_sidebar(array(
-//        'id' => 'second-footer-widget-area',
-//        'name' => __('Second Footer Widget Area', 'okfn'),
-//        'before_widget' => '<div class="widget">',
-//        'after_widget' => '</div>',
-//      ));
-//
-//      register_sidebar(array(
-//        'id' => 'third-footer-widget-area',
-//        'name' => __('Third Footer Widget Area', 'okfn'),
-//        'before_widget' => '<div class="widget">',
-//        'after_widget' => '</div>',
-//      ));
-//
-//      register_sidebar(array(
-//        'id' => 'fourth-footer-widget-area',
-//        'name' => __('Fourth Footer Widget Area', 'okfn'),
-//        'before_widget' => '<div class="widget">',
-//        'after_widget' => '</div>',
-//      ));
+      register_sidebar(array(
+        'id' => 'first-footer-widget-area',
+        'name' => __('First Footer Widget Area', 'okfn'),
+        'before_widget' => '<div class="widget">',
+        'after_widget' => '</div>',
+      ));
+
+      register_sidebar(array(
+        'id' => 'second-footer-widget-area',
+        'name' => __('Second Footer Widget Area', 'okfn'),
+        'before_widget' => '<div class="widget">',
+        'after_widget' => '</div>',
+      ));
+
+      register_sidebar(array(
+        'id' => 'third-footer-widget-area',
+        'name' => __('Third Footer Widget Area', 'okfn'),
+        'before_widget' => '<div class="widget">',
+        'after_widget' => '</div>',
+      ));
+
+      register_sidebar(array(
+        'id' => 'fourth-footer-widget-area',
+        'name' => __('Fourth Footer Widget Area', 'okfn'),
+        'before_widget' => '<div class="widget">',
+        'after_widget' => '</div>',
+      ));
 
     endif;
 
