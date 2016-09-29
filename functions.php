@@ -905,9 +905,6 @@ function mytheme_admin() {
 
   add_action('admin_menu', 'mytheme_add_admin');
 
-  ?>
-  <?php
-
   add_action('widgets_init', 'okfn_widgets_init');
 
   function okfn_widgets_init() {
@@ -1296,6 +1293,14 @@ function mytheme_admin() {
 
   // Include scripts the proper way and in the footer
 
+  add_action('wp_enqueue_scripts', 'okfn_deregister_scripts');
+
+  function okfn_deregister_scripts() {
+    /* Force our chosen version of jquery */
+    wp_deregister_script('jquery');
+    wp_register_script('jquery', '//code.jquery.com/jquery-1.7.2.min.js', array(), '1.7.2', true);
+  }
+
   add_action('wp_print_scripts', 'okfn_enqueue_scripts');
 
   function okfn_enqueue_scripts() {
@@ -1303,10 +1308,6 @@ function mytheme_admin() {
     if (is_singular() && bp_is_blog_page() && get_option('thread_comments')):
       wp_enqueue_script('comment-reply');
     endif;
-
-    /* Force our chosen version of jquery */
-    wp_deregister_script('jquery');
-    wp_register_script('jquery', '//code.jquery.com/jquery-1.7.2.min.js', [], '1.7.2', true);
 
     if (!is_admin()):
       wp_enqueue_script('jquery');
@@ -1323,79 +1324,6 @@ function mytheme_admin() {
   add_action('wp_print_styles', 'okfn_enqueue_styles');
 
   function okfn_enqueue_styles() {
-
     wp_enqueue_style('wordpress-theme-okfn', get_stylesheet_uri(), array(), filemtime(get_stylesheet_directory() . '/style.css'));
-
-    if ($okfn_flags_sprite == "true") :
-      wp_enqueue_style('flags16', '//cloud.github.com/downloads/lafeber/world-flags-sprite/flags16.css');
-      wp_enqueue_style('flags32', '//cloud.github.com/downloads/lafeber/world-flags-sprite/flags32.css');
-    endif;
-
-    // Theme settings
-    if ($okfn_subheader == "true") :
-      wp_enqueue_style('okfn-sub-header', get_stylesheet_directory_uri() . '/css/sub-header.css', array(), '1');
-    endif;
-
-    if ($okfn_colours == "blue") :
-      wp_enqueue_style('okfn-blue', get_stylesheet_directory_uri() . '/css/blue.css', array(), '1.1.1');
-    elseif ($okfn_colours == "grey") :
-      wp_enqueue_style('okfn-grey', get_stylesheet_directory_uri() . '/css/grey.css', array(), '1.1.2');
-    elseif ($okfn_colours == "white") :
-      wp_enqueue_style('okfn-white', get_stylesheet_directory_uri() . '/css/white.css', array(), '1.1.0');
-    elseif ($okfn_colours == "turquoise") :
-      wp_enqueue_style('okfn-turquoise', get_stylesheet_directory_uri() . '/css/turquoise.css', array(), '1.1.0');
-    elseif ($okfn_colours == "school") :
-      wp_enqueue_style('okfn-school', get_stylesheet_directory_uri() . '/css/school.css', array(), '1.1.2');
-    endif;
-
-    ?>
-
-    <style type="text/css">
-  <?php if ($okfn_tall_header == "true") : ?>
-        @media (min-width: 980px) {
-          .navbar{
-            max-height: 65px;
-          }
-          .navbar .brand {
-            line-height: 65px;
-          }
-          .navbar .brand img {
-            margin-top:15px;
-            height:35px;
-          }
-          .navbar .nav > li > a {
-            padding-top:24px;
-            padding-bottom:22px;
-          }
-          .navbar .sub-brand {
-            line-height:60px;
-            padding-top:5px;
-          }
-          .header-text {
-            margin-top:15px;
-          }
-          .navbar .navbar-inner .social-links,
-          .navbar .navbar-inner .header-search {
-            margin-top:22px;
-          }
-        }
-  <?php endif; ?>
-  <?php if ($okfn_large_title == "true" && $okfn_tall_header == "true") : ?>
-        .navbar .brand {font-size: 36px; letter-spacing:-1px; text-indent:-5px; line-height: 62px;}
-  <?php endif; ?>
-  <?php if ($okfn_logo_font == "ubuntu") : ?>
-        @import url(//fonts.googleapis.com/css?family=Ubuntu);
-        .navbar .brand {font-family: 'Ubuntu', sans-serif; font-weight:400;}
-  <?php endif; ?>
-  <?php if ($okfn_subheader == "true" && !is_front_page()) : ?>
-        .navbar-inner {border-bottom:none;}
-  <?php endif; ?>
-  <?php if ($okfn_buddypress_disable == "true") : ?>
-        #wpadminbar {display:none; }
-        html {margin-top: 0px !important;}
-  <?php endif; ?>
-    </style>
-
-    <?php
 
   }

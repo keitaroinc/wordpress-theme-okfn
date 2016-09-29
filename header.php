@@ -43,6 +43,11 @@
     <!-- Theme Settings -->
     <?php
 
+    if ($okfn_flags_sprite == "true") :
+      wp_enqueue_style('flags16', '//cloud.github.com/downloads/lafeber/world-flags-sprite/flags16.css');
+      wp_enqueue_style('flags32', '//cloud.github.com/downloads/lafeber/world-flags-sprite/flags32.css');
+    endif;
+
     if ($okfn_colours == "blue") :
       wp_enqueue_style('okfn-blue', get_stylesheet_directory_uri() . '/css/blue.css', array(), '1.1.1');
     elseif ($okfn_colours == "grey") :
