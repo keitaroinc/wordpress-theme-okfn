@@ -3,13 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
   <head>
     <meta http-equiv="Content-Type" content="<?php bloginfo('html_type') ?>; charset=<?php bloginfo('charset') ?>" />
-    <?php
-
-    /* Force our chosen version of jquery */
-    wp_deregister_script('jquery');
-    wp_register_script('jquery', '//code.jquery.com/jquery-1.7.2.min.js');
-
-    ?>
     <title>
       <?php
 

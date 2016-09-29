@@ -300,11 +300,11 @@ $options = array(
     "id" => $shortname . "_okf_ribbon",
     "type" => "checkbox",
     "std" => "false"),
-  array("name" => "Search Icon",
-    "desc" => "Enable search bar in header",
-    "id" => $shortname . "_header_search",
-    "type" => "checkbox",
-    "std" => "false"),
+//  array("name" => "Search Icon",
+//    "desc" => "Enable search bar in header",
+//    "id" => $shortname . "_header_search",
+//    "type" => "checkbox",
+//    "std" => "false"),
   array("name" => "Sub-Header",
     "type" => "title"),
   array("name" => "Sub-header Bar?",
@@ -919,33 +919,33 @@ function mytheme_admin() {
         'after_widget' => '</div>'
       ));
 
-      register_sidebar(array(
-        'id' => 'first-footer-widget-area',
-        'name' => __('First Footer Widget Area', 'okfn'),
-        'before_widget' => '<div class="widget">',
-        'after_widget' => '</div>',
-      ));
-
-      register_sidebar(array(
-        'id' => 'second-footer-widget-area',
-        'name' => __('Second Footer Widget Area', 'okfn'),
-        'before_widget' => '<div class="widget">',
-        'after_widget' => '</div>',
-      ));
-
-      register_sidebar(array(
-        'id' => 'third-footer-widget-area',
-        'name' => __('Third Footer Widget Area', 'okfn'),
-        'before_widget' => '<div class="widget">',
-        'after_widget' => '</div>',
-      ));
-
-      register_sidebar(array(
-        'id' => 'fourth-footer-widget-area',
-        'name' => __('Fourth Footer Widget Area', 'okfn'),
-        'before_widget' => '<div class="widget">',
-        'after_widget' => '</div>',
-      ));
+//      register_sidebar(array(
+//        'id' => 'first-footer-widget-area',
+//        'name' => __('First Footer Widget Area', 'okfn'),
+//        'before_widget' => '<div class="widget">',
+//        'after_widget' => '</div>',
+//      ));
+//
+//      register_sidebar(array(
+//        'id' => 'second-footer-widget-area',
+//        'name' => __('Second Footer Widget Area', 'okfn'),
+//        'before_widget' => '<div class="widget">',
+//        'after_widget' => '</div>',
+//      ));
+//
+//      register_sidebar(array(
+//        'id' => 'third-footer-widget-area',
+//        'name' => __('Third Footer Widget Area', 'okfn'),
+//        'before_widget' => '<div class="widget">',
+//        'after_widget' => '</div>',
+//      ));
+//
+//      register_sidebar(array(
+//        'id' => 'fourth-footer-widget-area',
+//        'name' => __('Fourth Footer Widget Area', 'okfn'),
+//        'before_widget' => '<div class="widget">',
+//        'after_widget' => '</div>',
+//      ));
 
     endif;
 
@@ -1292,4 +1292,20 @@ function mytheme_admin() {
 
     return explode("\n", $data);
 
+  }
+
+  add_action('wp_enqueue_scripts', 'okfn_enqueue_scripts');
+
+  function okfn_enqueue_scripts() {
+    /* Force our chosen version of jquery */
+    wp_deregister_script('jquery');
+    wp_register_script('jquery', '//code.jquery.com/jquery-1.7.2.min.js');
+
+    if (!is_admin()):
+      wp_enqueue_script('jquery');
+    endif;
+
+    wp_enqueue_script('bootstrap-js', '//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js');
+    wp_enqueue_script('dotdotdot', get_stylesheet_directory_uri() . '/include/jquery.dotdotdot-1.5.6-packed.js');
+    wp_enqueue_script('footer', get_stylesheet_directory_uri() . '/include/footer.js');
   }

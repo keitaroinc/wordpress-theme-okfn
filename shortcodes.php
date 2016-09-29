@@ -530,7 +530,7 @@ function latest_post_shortcode($atts) {
     } elseif (count($matches))
       $post_img = $matches[1]; // else use old featured image
     else {
-      $post_img = get_template_directory_uri() . '/images/scoda-horizontal-212x60-nontransparent.png'; // else use placeholder
+      $post_img = get_stylesheet_directory_uri() . '/images/scoda-horizontal-212x60-nontransparent.png'; // else use placeholder
     }
 
     $latest_post .= sprintf('<div class="post-wrap %1$s">', $class);
@@ -742,7 +742,7 @@ add_shortcode('scrollme', 'scrollme_shortcode');
 
 function tweeter_shortcode($atts) {
   extract(shortcode_atts(array(
-    'total' => '10',
+    'total' => '5',
     'user' => '',
     'id' => '1',
           ), $atts));
@@ -757,5 +757,3 @@ function tweeter_shortcode($atts) {
 }
 
 add_shortcode('tweeter', 'tweeter_shortcode');
-
-?>
