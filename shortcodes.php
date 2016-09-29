@@ -509,6 +509,7 @@ add_shortcode('latest_posts', 'latest_posts_shortcode');
 function latest_post_shortcode($atts) {
 
   extract(shortcode_atts(array(
+    'id' => '',
     'category' => '',
     'class' => '',
           ), $atts));
@@ -516,7 +517,7 @@ function latest_post_shortcode($atts) {
   $latest_post = '';
 
   $q = new WP_Query(
-      array('posts_per_page' => 1, 'category_name' => '' . $category . '')
+      array('posts_per_page' => 1, 'category_name' => $category, 'p' => $id )
   );
 
   while ($q->have_posts()) : $q->the_post();
