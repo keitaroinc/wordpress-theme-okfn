@@ -1,6 +1,6 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?>>
   <head>
     <meta http-equiv="Content-Type" content="<?php bloginfo('html_type') ?>; charset=<?php bloginfo('charset') ?>" />
     <title>
@@ -27,129 +27,117 @@
       <?php endif; ?>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <?php if (get_bloginfo('description')) : ?>
-        <meta name="description" content="<?php echo bloginfo('description'); ?>" />
-      <?php endif; ?>
-      <?php do_action('bp_head') ?>
+    <?php if (get_bloginfo('description')) : ?>
+      <meta name="description" content="<?php echo bloginfo('description'); ?>" />
+    <?php endif; ?>
+    <?php do_action('bp_head') ?>
 
-      <link rel="pingback" href="<?php bloginfo('pingback_url') ?>" />
+    <link rel="pingback" href="<?php bloginfo('pingback_url') ?>" />
 
-      <?php
+    <?php
 
-      if (is_singular() && bp_is_blog_page() && get_option('thread_comments')):
-        wp_enqueue_script('comment-reply');
-      endif;
+    wp_head();
 
-      wp_head();
+    ?>
 
-      if ($okfn_flags_sprite == "true") :
+    <!-- Theme Settings -->
+    <?php
 
-        wp_enqueue_style('flags16', '//cloud.github.com/downloads/lafeber/world-flags-sprite/flags16.css');
-        wp_enqueue_style('flags32', '//cloud.github.com/downloads/lafeber/world-flags-sprite/flags32.css');
-      endif;
+    if ($okfn_subheader == "true") :
+      wp_enqueue_style('okfn-sub-header', get_stylesheet_directory_uri() . '/css/sub-header.css', array(), '1');
+    endif;
 
-      wp_enqueue_style('wordpress-theme-okfn', get_stylesheet_uri(), array(), filemtime(get_stylesheet_directory() . '/style.css'));
+    if ($okfn_colours == "blue") :
+      wp_enqueue_style('okfn-blue', get_stylesheet_directory_uri() . '/css/blue.css', array(), '1.1.1');
+    elseif ($okfn_colours == "grey") :
+      wp_enqueue_style('okfn-grey', get_stylesheet_directory_uri() . '/css/grey.css', array(), '1.1.2');
+    elseif ($okfn_colours == "white") :
+      wp_enqueue_style('okfn-white', get_stylesheet_directory_uri() . '/css/white.css', array(), '1.1.0');
+    elseif ($okfn_colours == "turquoise") :
+      wp_enqueue_style('okfn-turquoise', get_stylesheet_directory_uri() . '/css/turquoise.css', array(), '1.1.0');
+    elseif ($okfn_colours == "school") :
+      wp_enqueue_style('okfn-school', get_stylesheet_directory_uri() . '/css/school.css', array(), '1.1.2');
+    endif;
 
-      ?>
+    ?>
 
-      <!-- Theme Settings -->
-      <?php
-
-      if ($okfn_subheader == "true") :
-        wp_enqueue_style('okfn-sub-header', get_stylesheet_directory_uri() . '/css/sub-header.css', array(), '1');
-      endif;
-
-      if ($okfn_colours == "blue") :
-        wp_enqueue_style('okfn-blue', get_stylesheet_directory_uri() . '/css/blue.css', array(), '1.1.1');
-      elseif ($okfn_colours == "grey") :
-        wp_enqueue_style('okfn-grey', get_stylesheet_directory_uri() . '/css/grey.css', array(), '1.1.2');
-      elseif ($okfn_colours == "white") :
-        wp_enqueue_style('okfn-white', get_stylesheet_directory_uri() . '/css/white.css', array(), '1.1.0');
-      elseif ($okfn_colours == "turquoise") :
-        wp_enqueue_style('okfn-turquoise', get_stylesheet_directory_uri() . '/css/turquoise.css', array(), '1.1.0');
-      elseif ($okfn_colours == "school") :
-        wp_enqueue_style('okfn-school', get_stylesheet_directory_uri() . '/css/school.css', array(), '1.1.2');
-      endif;
-
-      ?>
-
-      <style type="text/css">
+    <style type="text/css">
 <?php if ($okfn_tall_header == "true") : ?>
-          @media (min-width: 980px) {
-            .navbar{
-              max-height: 65px;
-            }
-            .navbar .brand {
-              line-height: 65px;
-            }
-            .navbar .brand img {
-              margin-top:15px;
-              height:35px;
-            }
-            .navbar .nav > li > a {
-              padding-top:24px;
-              padding-bottom:22px;
-            }
-            .navbar .sub-brand {
-              line-height:60px;
-              padding-top:5px;
-            }
-            .header-text {
-              margin-top:15px;
-            }
-            .navbar .navbar-inner .social-links,
-            .navbar .navbar-inner .header-search {
-              margin-top:22px;
-            }
+        @media (min-width: 980px) {
+          .navbar{
+            max-height: 65px;
           }
+          .navbar .brand {
+            line-height: 65px;
+          }
+          .navbar .brand img {
+            margin-top:15px;
+            height:35px;
+          }
+          .navbar .nav > li > a {
+            padding-top:24px;
+            padding-bottom:22px;
+          }
+          .navbar .sub-brand {
+            line-height:60px;
+            padding-top:5px;
+          }
+          .header-text {
+            margin-top:15px;
+          }
+          .navbar .navbar-inner .social-links,
+          .navbar .navbar-inner .header-search {
+            margin-top:22px;
+          }
+        }
 <?php endif; ?>
 <?php if ($okfn_large_title == "true" && $okfn_tall_header == "true") : ?>
-          .navbar .brand {font-size: 36px; letter-spacing:-1px; text-indent:-5px; line-height: 62px;}
+        .navbar .brand {font-size: 36px; letter-spacing:-1px; text-indent:-5px; line-height: 62px;}
 <?php endif; ?>
 <?php if ($okfn_logo_font == "ubuntu") : ?>
-          @import url(//fonts.googleapis.com/css?family=Ubuntu);
-          .navbar .brand {font-family: 'Ubuntu', sans-serif; font-weight:400;}
+        @import url(//fonts.googleapis.com/css?family=Ubuntu);
+        .navbar .brand {font-family: 'Ubuntu', sans-serif; font-weight:400;}
 <?php endif; ?>
 <?php if ($okfn_subheader == "true" && !is_front_page()) : ?>
-          .navbar-inner {border-bottom:none;}
+        .navbar-inner {border-bottom:none;}
 <?php endif; ?>
 <?php if ($okfn_buddypress_disable == "true") : ?>
-          #wpadminbar {display:none; }
-          html {margin-top: 0px !important;}
+        #wpadminbar {display:none; }
+        html {margin-top: 0px !important;}
 <?php endif; ?>
-      </style>
+    </style>
 
-      <?php
+    <?php
 
-      if (!empty($okfn_favicon)) {
-        $favicon_url = $okfn_favicon;
-      } elseif ($okfn_colours == "blue") {
-        $favicon_url = '//assets.okfn.org/p/ckan/img/ckan.ico';
-      } elseif ($okfn_colours == "white" || $okfn_colours == "turquoise") {
-        $favicon_url = '//assets.okfn.org/p/okfn/img/grey-favicon.ico';
-      } elseif ($okfn_colours == "school") {
-        $favicon_url = '//assets.okfn.org/p/schoolofdata/img/favicon.ico';
-      } else {
-        $favicon_url = '//assets.okfn.org/p/okfn/img/favicon.ico';
-      }
+    if (!empty($okfn_favicon)) {
+      $favicon_url = $okfn_favicon;
+    } elseif ($okfn_colours == "blue") {
+      $favicon_url = '//assets.okfn.org/p/ckan/img/ckan.ico';
+    } elseif ($okfn_colours == "white" || $okfn_colours == "turquoise") {
+      $favicon_url = '//assets.okfn.org/p/okfn/img/grey-favicon.ico';
+    } elseif ($okfn_colours == "school") {
+      $favicon_url = '//assets.okfn.org/p/schoolofdata/img/favicon.ico';
+    } else {
+      $favicon_url = '//assets.okfn.org/p/okfn/img/favicon.ico';
+    }
 
-      ?>
-      <link rel="shortcut icon" href="<?php echo $favicon_url; ?>" />
+    ?>
+    <link rel="shortcut icon" href="<?php echo $favicon_url; ?>" />
 
-      <script type="text/javascript">
-        var Okfn = Okfn || {};
-        // Make this variable available to Javascript
-        Okfn.theme_directory = '<?php echo get_stylesheet_directory_uri(); ?>';
-      </script>
+    <script type="text/javascript">
+      var Okfn = Okfn || {};
+      // Make this variable available to Javascript
+      Okfn.theme_directory = '<?php echo get_stylesheet_directory_uri(); ?>';
+    </script>
 
-      <!--[if lt IE 9]>
-        <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-      <![endif]-->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-      <?php if (!empty($okfn_facebook_username)) : ?>
-        <meta property="og:type" content="article" />
-        <meta property="article:publisher" content="https://www.facebook.com/<?php echo $okfn_facebook_username ?>" />
-      <?php endif; ?>
+    <?php if (!empty($okfn_facebook_username)) : ?>
+      <meta property="og:type" content="article" />
+      <meta property="article:publisher" content="https://www.facebook.com/<?php echo $okfn_facebook_username ?>" />
+    <?php endif; ?>
 
   </head>
 
@@ -157,7 +145,7 @@
     <?php
 
     /* Javascript includes */
-    do_action('bp_before_header')
+    do_action('bp_before_header');
 
     ?>
     <?php
