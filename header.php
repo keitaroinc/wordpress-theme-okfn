@@ -43,10 +43,6 @@
     <!-- Theme Settings -->
     <?php
 
-    if ($okfn_subheader == "true") :
-      wp_enqueue_style('okfn-sub-header', get_stylesheet_directory_uri() . '/css/sub-header.css', array(), '1');
-    endif;
-
     if ($okfn_colours == "blue") :
       wp_enqueue_style('okfn-blue', get_stylesheet_directory_uri() . '/css/blue.css', array(), '1.1.1');
     elseif ($okfn_colours == "grey") :
