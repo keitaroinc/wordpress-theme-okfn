@@ -1294,18 +1294,20 @@ function mytheme_admin() {
 
   }
 
+  // Include scripts the proper way and in the footer
+
   add_action('wp_enqueue_scripts', 'okfn_enqueue_scripts');
 
   function okfn_enqueue_scripts() {
     /* Force our chosen version of jquery */
     wp_deregister_script('jquery');
-    wp_register_script('jquery', '//code.jquery.com/jquery-1.7.2.min.js');
+    wp_register_script('jquery', '//code.jquery.com/jquery-1.7.2.min.js', [], '1.7.2', true);
 
     if (!is_admin()):
       wp_enqueue_script('jquery');
     endif;
 
-    wp_enqueue_script('bootstrap-js', '//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js');
-    wp_enqueue_script('dotdotdot', get_stylesheet_directory_uri() . '/include/jquery.dotdotdot-1.5.6-packed.js');
-    wp_enqueue_script('footer', get_stylesheet_directory_uri() . '/include/footer.js');
+    wp_enqueue_script('bootstrap-js', '//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js', ['jquery'], '2.1.1', true);
+    wp_enqueue_script('dotdotdot', get_stylesheet_directory_uri() . '/include/jquery.dotdotdot-1.5.6-packed.js', ['jquery'], '1.5.6', true);
+    wp_enqueue_script('footer', get_stylesheet_directory_uri() . '/include/footer.js', ['jquery'], '', true);
   }

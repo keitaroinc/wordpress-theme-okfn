@@ -6,12 +6,8 @@
 
 <?php do_action('bp_after_footer') ?>
 
-<div class="topbar">
-  <div class="padder">
-
-  </div>
-</div>
 <?php do_action('cookie_bar'); ?>
+
 <?php
 
 global $options;
