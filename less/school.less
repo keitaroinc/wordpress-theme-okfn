@@ -918,7 +918,6 @@ a.sidelink:hover:after {
   border: none;
   border-radius: 0;
   overflow: hidden;
-
 }
 
 .slideshow-slide{
@@ -934,6 +933,22 @@ body div.slideshow-window * img{
 
 .slideshow-controls{
   display: none;
+}
+
+@media (max-width: 980px){
+  .slideshow-slide,
+  .slideshow-window{
+    height: 100%;
+  }
+  
+  body div.slideshow-window * img{
+    transform: translateY(0%);
+  }
+
+  .slideshow-slide{
+    width: 200% !important;
+    height: auto !important;
+  }
 }
 
 .list-inline{
@@ -1003,6 +1018,7 @@ body div.slideshow-window * img{
 }
 
 .slideshow-loading,
+.slideshow-slide-caption,
 .jetpack-slideshow-noscript{
   display: none !important;
   color: @core-dark-gray;
