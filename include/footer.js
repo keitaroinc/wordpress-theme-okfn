@@ -25,15 +25,14 @@ function random_words_slider() {
   } else {
     // Hide all elements
     okfn_word_slider.children().hide();
-    okfn_word_slider.children('span:nth-child(' + random_number + ')').show(200);
+    okfn_word_slider.children('span:nth-child(' + random_number + ')').show(250);
     last_number = random_number;
   }
 }
 
 jQuery(document).ready(function ($) {
 
-  okfn_word_slider.children('span:nth-child(1)').show(200);
-  var random_words = setInterval(random_words_slider, 5000);
+  var random_words = setInterval(random_words_slider, 5300);
 
   $(".trimmed").dotdotdot({});
 
