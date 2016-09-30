@@ -765,3 +765,29 @@ add_shortcode('twitter_icon', 'okfn_load_twitter_icon');
 function okfn_load_twitter_icon() {
   return sprintf('<span class="twitter-icon"></span>');
 }
+
+// Include dynamic list of words suitable for the Home page slider
+add_shortcode('okfn_word_slider', 'okfn_word_slider_shortcode');
+
+function okfn_word_slider_shortcode($atts) {
+  extract(shortcode_atts(array(
+      'words' => false), $atts)
+  );
+
+  $options_set = trim(get_option('okfn_underlined_textarea'));
+
+  if (!empty($words)):
+    $slide_words = explode(',', $words);
+  elseif (!empty($options_set)):
+    $slide_words = explode(',', $options_set);
+  else:
+    $slide_words = array('extractive');
+  endif;
+
+  if (!empty($slide_words)):
+    foreach ($slide_words as $item):
+      $echo .= sprintf('<span>%s</span>', $item);
+    endforeach;
+    return sprintf('<strong class="okfn-word-slider">%s</strong>', $echo);
+  endif;
+}
