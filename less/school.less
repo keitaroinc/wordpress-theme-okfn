@@ -25,6 +25,13 @@
 
 @white: #fff;
 
+.animation-fill-mode(@mode){
+  -webkit-animation-fill-mode: @mode;
+  -moz-animation-fill-mode: @mode;
+  -ms-animation-fill-mode: @mode;
+  -o-animation-fill-mode: @mode;
+  animation-fill-mode: @mode;
+}
 .btn-navbar-reset{
   background: transparent;
   text-shadow: none;
@@ -1200,12 +1207,13 @@ body div.slideshow-window * img{
 
 .okfn-word-slider{
   span{
-/*    animation: 5000ms fade-in-out ease-in-out;*/
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
     &:not(:first-child){
       display: none;
     }
+    animation-name: fade-in-out;
+    animation-timing-function: ease-in-out;
+    animation-duration: 5000ms;
+    .animation-fill-mode(forwards);
   }
 }
 
@@ -1257,11 +1265,26 @@ body div.slideshow-window * img{
 @keyframes fade-in-out{
   0% {
     opacity: 0;
+    visibility: hidden;
   }
   15%, 85% {
     opacity: 1;
+    visibility: visible;
   }
   100% {
     opacity: 0;
+    visibility: hidden;
   }
+}
+
+@keyframes fade-in{
+  0% {
+    opacity: 0;
+    visibility: hidden;    
+  }
+  100%{
+    opacity: 1;
+    visibility: visible;
+  }
+
 }

@@ -24,13 +24,13 @@ function random_words_slider() {
   }
   // Hide all elements
   okfn_word_slider.children().css({'display': 'none'});
-  okfn_word_slider.children('span:nth-child(' + random_number + ')').css({'display': 'inline-block', 'animation': '5000ms fade-in-out ease-in-out'});
+  okfn_word_slider.children('span:nth-child(' + random_number + ')').css({'display': 'inline-block'});
   last_number = random_number;
 }
 
 jQuery(document).ready(function ($) {
 
-  var random_words = setInterval(random_words_slider, 4950);
+  var random_words = setInterval(random_words_slider, 5000);
 
   $(".trimmed").dotdotdot({});
 
