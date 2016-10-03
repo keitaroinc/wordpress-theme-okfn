@@ -744,14 +744,23 @@ body.single {
   line-height:18px;
 }*/
 
-.magazine,
-.magazine p {
-  font-size:13px; /* due to inline-block layout */
+.magazine{
+  &,
+  p{
+    font-size:13px; /* due to inline-block layout */
+  }
+
+  .post{
+    &.preview{
+
+      .text{
+        line-height: 1.5;
+      }
+    }
+  }
 }
 .magazine .featured .text p,
 .magazine .post.preview .text p {
-  line-height: 20px;
-  font-size:16px;
 }
 .magazine .featured .ribbon {
   background-color: @primary;
