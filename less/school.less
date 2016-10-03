@@ -7,7 +7,7 @@
 @navbar-hover-border-radius: @border-radius-base + 1;
 @underline-border-image: url("../images/underline.png");
 @text-size-hero-numbers: 16px;
-@text-size-h2: 24px;
+@text-size-h2: 22pt;
 @btn-large-padding: 12px;
 
 /* Colours */
@@ -130,6 +130,7 @@ body.single{
 h1, h2, h3, h4, h5, h6, .brand, .strapline, label, .btn, button, input, p.intro {
   font-family: @base-font-family;
 }
+
 h1 {
   margin-bottom: 6px;
 }
@@ -142,8 +143,8 @@ h2,
 }
 h3,
 #content .post .entry h3 {
-  font-size:22px;
-  line-height:24px;
+  font-size: 22px;
+  line-height: 24px;
 }
 h4 {
   font-size: 20px;
@@ -195,11 +196,19 @@ a {
 #content{
   .pagetitle{
     margin-top: 0;
+    margin-bottom: 20px;
   }
 
+  h1,
+  h2{
+    font-weight: 400;
+  }
+  
   .post-content{
+
     h2{
       margin-top: 0;
+      margin-bottom: 20px;
     }
   }
 }
