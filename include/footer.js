@@ -30,7 +30,6 @@ function random_words_slider() {
 
 jQuery(document).ready(function ($) {
 
-  random_words_slider();
   var random_words = setInterval(random_words_slider, 4950);
 
   $(".trimmed").dotdotdot({});
