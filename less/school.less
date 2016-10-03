@@ -81,6 +81,21 @@ html {
   background-color: @primary;
 }
 
+.archive,
+.page-template-magazine-front,
+.page-template-default,
+.single{
+  > .container{
+    padding: 30px 0;
+  }
+}
+
+body.archive,
+body.blog,
+body.single{
+  background: @white;
+}
+
 @media (max-width: 767px){
   body{
     padding: 0;
@@ -139,7 +154,6 @@ h5 {
 h6 {
   font-size: 16px;
 }
-
 figure{
   margin: 0;
 }
@@ -176,6 +190,18 @@ li {
 
 a {
   color: @primary;
+}
+
+#content{
+  .pagetitle{
+    margin-top: 0;
+  }
+
+  .post-content{
+    h2{
+      margin-top: 0;
+    }
+  }
 }
 
 .btn{
@@ -778,6 +804,12 @@ body.single {
   color: @core-dark-gray;
 }
 
+#blog-single{
+  p{
+    text-align: inherit;
+  }
+}
+
 
 /* Footer */
 /* ====== */
@@ -1114,5 +1146,12 @@ body div.slideshow-window * img{
     &:not(:first-child){
       display: none;      
     }
+  }
+}
+
+#blog-archives{
+  .pagetitle{
+    margin-bottom: 30px;
+    color: @core-cyan;
   }
 }

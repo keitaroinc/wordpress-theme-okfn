@@ -17,7 +17,7 @@
 
 					<?php do_action( 'bp_before_blog_post' ); ?>
 
-					<div id="post-<?php the_ID(); ?>" <?php post_class('box extend'); ?>>
+					<div id="post-<?php the_ID(); ?>" <?php post_class('extend'); ?>>
 
 						<div class="author-box">
 							<a href="<?php echo bp_core_get_user_domain( $post->post_author ); ?>">
