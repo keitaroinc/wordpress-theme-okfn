@@ -5,13 +5,10 @@
     <meta http-equiv="Content-Type" content="<?php bloginfo('html_type') ?>; charset=<?php bloginfo('charset') ?>" />
     <title>
       <?php
-
       wp_title('|', true, 'right');
       bloginfo('name');
-
       ?>
       <?php
-
       global $options;
       foreach ($options as $value) {
         if (get_option($value['id']) === FALSE) {
@@ -21,7 +18,6 @@
         }
       }
       if ($okfn_tagline_title == "true" && get_bloginfo('description')) :
-
         ?>
         - <?php echo bloginfo('description'); ?>
       <?php endif; ?>
@@ -35,14 +31,11 @@
     <link rel="pingback" href="<?php bloginfo('pingback_url') ?>" />
 
     <?php
-
     wp_head();
-
     ?>
 
     <!-- Theme Settings -->
     <?php
-
     if ($okfn_flags_sprite == "true") :
       wp_enqueue_style('flags16', '//cloud.github.com/downloads/lafeber/world-flags-sprite/flags16.css');
       wp_enqueue_style('flags32', '//cloud.github.com/downloads/lafeber/world-flags-sprite/flags32.css');
@@ -59,7 +52,6 @@
     elseif ($okfn_colours == "school") :
       wp_enqueue_style('okfn-school', get_stylesheet_directory_uri() . '/css/school.css', array(), '1.1.2');
     endif;
-
     ?>
 
     <style type="text/css">
@@ -109,7 +101,6 @@
     </style>
 
     <?php
-
     if (!empty($okfn_favicon)) {
       $favicon_url = $okfn_favicon;
     } elseif ($okfn_colours == "blue") {
@@ -121,7 +112,6 @@
     } else {
       $favicon_url = '//assets.okfn.org/p/okfn/img/favicon.ico';
     }
-
     ?>
     <link rel="shortcut icon" href="<?php echo $favicon_url; ?>" />
 
@@ -144,31 +134,25 @@
 
   <body <?php body_class() ?> id="bp-default">
     <?php
-
     /* Javascript includes */
     do_action('bp_before_header');
-
     ?>
     <?php
-
     if (!empty($okfn_corner_ribbon_text) && $okfn_corner_ribbon == "true") {
       echo '
       <a class="corner ribbon" href="' . stripslashes($okfn_corner_ribbon_link) . '" >
         ' . stripslashes($okfn_corner_ribbon_text) . '
       </a>';
     }
-
     ?>
 
     <?php if ($okfn_okf_ribbon !== "true") : ?>
       <?php do_action('okf_panel'); ?>
     <?php endif; ?>
     <?php
-
     if ($okfn_mailinglist_bar_location == "header" && is_front_page()) {
       include('mailing-bar.php');
     }
-
     ?>
     <header<?php if ($okfn_subheader == "true"): ?> class="has-subheader"<?php endif; ?>>
       <div class="navbar<?php if ($okfn_colours == "default") : ?> navbar-inverse<?php endif; ?>">
@@ -195,11 +179,9 @@
                href="<?php echo home_url(); ?>">
 
               <?php
-
               // Check for header image
               $header_image = get_header_image();
               if (!empty($header_image) && $okfn_logo_icon == "false") :
-
                 ?>
                 <img src="<?php header_image(); ?>" alt="logo" />
               <?php elseif ($okfn_logo_icon == "false") : ?>
@@ -243,14 +225,12 @@
                 </div>
               <?php endif; ?>
               <?php
-
               wp_nav_menu(array(
-                'container' => false,
-                'menu_class' => 'nav',
-                'menu_id' => 'nav',
-                'theme_location' => 'primary',
-                'fallback_cb' => 'okfn_fallback_nav_menu'));
-
+                  'container' => false,
+                  'menu_class' => 'nav',
+                  'menu_id' => 'nav',
+                  'theme_location' => 'primary',
+                  'fallback_cb' => 'okfn_fallback_nav_menu'));
               ?>
             </nav>
             <!-- Disabled until I've got separate images and confirmed link addresses -->
@@ -276,13 +256,11 @@
           <div class="row">
             <div class="span8">
               <?php
-
-              //function_exists() — Return TRUE if the given function has been defined.
-              //code by BOUTROS ABICHEDID. Adding breadcrumb trail to the WordPress theme.
+//function_exists() — Return TRUE if the given function has been defined.
+//code by BOUTROS ABICHEDID. Adding breadcrumb trail to the WordPress theme.
               if (function_exists('wp_bac_breadcrumb') && $okfn_subheader == "true") {
                 wp_bac_breadcrumb();
               }
-
               ?>
             </div>
             <div class="span4">
@@ -304,43 +282,44 @@
 
     </header>
     <?php do_action('bp_after_header') ?>
-
-
-
     <?php
-
-    global $options;
-    foreach ($options as $value) {
-      if (array_key_exists('id', $value)) {
-        if (get_option($value['id']) === FALSE) {
-          if (array_key_exists('std', $value)) {
-            $$value['id'] = $value['std'] or NULL;
+    if (has_post_thumbnail()):
+      okfn_header_w_featured_image();
+    else:
+      global $options;
+      foreach ($options as $value) {
+        if (array_key_exists('id', $value)) {
+          if (get_option($value['id']) === FALSE) {
+            if (array_key_exists('std', $value)) {
+              $$value['id'] = $value['std'] or NULL;
+            }
+          } else {
+            $$value['id'] = get_option($value['id']);
           }
-        } else {
-          $$value['id'] = get_option($value['id']);
         }
       }
-    }
-    if ($okfn_tagline_location == "default" && get_bloginfo('description')) :
-
-      ?>
-      <h2 id="site-description"></h2>
-      <div class="container">
-        <div class="strapline">
-          <div class="inner">
-            <?php echo bloginfo('description'); ?>
-          </div><!-- /inner     -->
-        </div><!-- /strapline -->
-      </div><!-- /container -->
-    <?php elseif ($okfn_tagline_location == "home" && get_bloginfo('description') && is_front_page()) : ?>
-      <div class="container">
-        <div class="strapline">
-          <div class="inner">
-            <?php echo bloginfo('description'); ?>
-          </div><!-- /inner     -->
-        </div><!-- /strapline -->
-      </div><!-- /container -->
-    <?php endif; ?>
+      if ($okfn_tagline_location == "default" && get_bloginfo('description')) :
+        ?>
+        <h2 id="site-description"></h2>
+        <div class="container">
+          <div class="strapline">
+            <div class="inner">
+              <?php echo bloginfo('description'); ?>
+            </div><!-- /inner     -->
+          </div><!-- /strapline -->
+        </div><!-- /container -->
+      <?php elseif ($okfn_tagline_location == "home" && get_bloginfo('description') && is_front_page()) : ?>
+        <div class="container">
+          <div class="strapline">
+            <div class="inner">
+              <?php echo bloginfo('description'); ?>
+            </div><!-- /inner     -->
+          </div><!-- /strapline -->
+        </div><!-- /container -->
+        <?php
+      endif;
+    endif;
+    ?>
 
     <?php do_action('bp_before_container') ?>
     <div class="container">

@@ -33,7 +33,7 @@
 }
 
 .nav-collapse-responsive{
-  margin: 0 -40px -10px;
+  margin: 0 -40px;
   padding: 0 40px;
 }
 
@@ -111,6 +111,7 @@ body.single{
   position: relative;
   overflow: hidden;
   padding: 90px 0 80px;
+  margin-top: 0;
 
   @media (min-width: 768px){
     padding: 90px 40px 80px;    
@@ -203,7 +204,7 @@ a {
   h2{
     font-weight: 400;
   }
-  
+
   .post-content{
 
     h2{
@@ -407,7 +408,11 @@ code {
 
 /* Header */
 /* ====== */
+
 .navbar{
+  @media (min-width: 980px){
+    max-height: inherit;
+  }
 
   .btn-navbar{
     .btn-navbar-reset;
@@ -415,32 +420,33 @@ code {
     position: relative;
     top: 10px;
 
-
     &:hover{
       .btn-navbar-reset;
     }
   }
+
+  .navbar-inner {
+    filter: none; /* IE6-9 */
+    background-image: none;
+    background-color: @primary;
+    padding: 10px 40px;
+  }
+  .navbar .brand {
+    color: #FFF;
+    text-shadow: none;
+  }
+}
+
+.box.extend,
+.strapline,
+header{
+  margin-bottom: 0;
 }
 
 @media (min-width: 980px){
-  .navbar{
-    max-height: inherit;
-  }
-
   .hero-buttons{
     margin-left: -40px;
   }
-}
-
-.navbar-inner {
-  filter: none; /* IE6-9 */
-  background-image: none;
-  background-color: @primary;
-  padding: 10px 40px;
-}
-.navbar .brand {
-  color: #FFF;
-  text-shadow: none;
 }
 
 .nav-collapse{
@@ -1200,4 +1206,42 @@ body div.slideshow-window * img{
     margin-bottom: 30px;
     color: @core-cyan;
   }
+}
+
+.page-banner{
+  position: relative;
+
+  &:before{
+    content: ' ';
+    background-color: @core-dark-gray;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.5;
+  }
+
+  &,
+  p{
+    color: @white;    
+  }
+
+  p:last-of-type{
+    margin-bottom: 40px;
+  }
+
+  h1{
+    font-size: 36pt;
+    font-weight: 400;
+    margin-top: 60px;
+    margin-bottom: 20px;
+  }
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-content: center;
+  justify-content: center;
 }

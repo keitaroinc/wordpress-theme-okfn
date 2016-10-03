@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Enables the Excerpt meta box in Page edit screen.
+ */
+function okfn_add_excerpt_support_for_pages() {
+  add_post_type_support('page', 'excerpt');
+}
+
+add_action('init', 'okfn_add_excerpt_support_for_pages');
+
 /* Make OKFN theme available for translation.
  * Translations can be added to the /languages/ directory.
  */
@@ -25,7 +34,6 @@ include('simple_html_dom.php');
 
 function remove_xprofile_links() {
   remove_filter('bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
-
 }
 
 add_action('bp_init', 'remove_xprofile_links');
@@ -36,7 +44,7 @@ add_action('bp_init', 'remove_xprofile_links');
 if (!function_exists('bp_dtheme_enqueue_styles')) :
 
   function bp_dtheme_enqueue_styles() {
-
+    
   }
 
 endif;
@@ -65,7 +73,6 @@ function filter_nav_menu($header) {
   }
 
   return $header;
-
 }
 
 /* Taken from buddypress:functions.php.bp_dtheme_main_nav. Used by header.php */
@@ -74,24 +81,22 @@ function okfn_fallback_nav_menu($args) {
   global $bp;
 
   $pages_args = array(
-    'depth' => 0,
-    'echo' => false,
-    'exclude' => '',
-    'title_li' => ''
+      'depth' => 0,
+      'echo' => false,
+      'exclude' => '',
+      'title_li' => ''
   );
   $menu = wp_page_menu($pages_args);
   $menu = str_replace(array('<div class="menu"><ul>', '</ul></div>'), array('<ul id="nav" class="nav">', '</ul><!-- #nav -->'), $menu);
   echo $menu;
 
   do_action('bp_nav_items');
-
 }
 
 function register_form_blurb($args) {
   echo "<p>Community Membership is a way of &quot;opting in&quot; and publicly acknowledging a connnection with the Open Knowledge Foundation and support for its activities."
   . " It entails no specific obligations (nor confers specific rights!) and anyone may join.</p>"
   . "<p><a href=\"/governance/#community-membership\">Read more about Community Membership &raquo;</a></p>";
-
 }
 
 /*
@@ -133,7 +138,6 @@ function choose_best_category($categories) {
   return $categories[0]->name;
   // I have no special categories. Just choose the first one.
   return '???';
-
 }
 
 function echo_magazine_post($post, $is_featured, $echo = true) {
@@ -174,7 +178,6 @@ function echo_magazine_post($post, $is_featured, $echo = true) {
   else:
     return $print;
   endif;
-
 }
 
 // The height and width of your custom header. You can hook into the theme's own filters to change these values.
@@ -193,117 +196,117 @@ $default_category_priority_string = implode(', ', $default_category_priority);
 $themename = "OKF Theme";
 $shortname = "okfn";
 $options = array(
-  array("name" => "general_options",
-    "type" => "open"),
-  array("name" => "General Styling",
-    "type" => "title"),
-  array("name" => "Flavour",
-    "id" => $shortname . "_colours",
-    "type" => "radio",
-    "desc" => "Change the general look of the site",
-    "options" => array("default" => "Classic", "grey" => "OKF", "blue" => "Ckan", "turquoise" => "Glam", "school" => "School", "white" => "Simple"),
-    "std" => "grey",
-    "class" => "thumbs"),
-  array("name" => "Favicon",
-    "desc" => "Replace default favicon with your own ico file",
-    "id" => $shortname . "_favicon",
-    "type" => "text",
-    "placeholder" => "enter url"),
-  array("name" => "Tagline Location",
-    "id" => $shortname . "_tagline_location",
-    "type" => "radio",
-    "desc" => "Where would you like the tagline to appear on the page?",
-    "options" => array("home" => "Top of home page", "default" => "Top of every page", "header" => "In the header", "hide" => "Nowhere"),
-    "std" => "hide"),
-  array("name" => "TopBar",
-    "type" => "title"),
-  array("name" => "Show TopBar?",
-    "desc" => "Show / hide the BuddyPress bar at the top of this site.",
-    "id" => $shortname . "_buddypress_disable",
-    "type" => "radio",
-    "options" => array("true" => "Hide", "false" => "Show"),
-    "std" => "true"),
-  array("name" => "Header",
-    "type" => "title"),
-  array("name" => "Header Height",
-    "desc" => "Check this box to make the header taller.",
-    "id" => $shortname . "_tall_header",
-    "type" => "radio",
-    "options" => array("true" => "Tall", "false" => "Short"),
-    "std" => "true"),
-  array("name" => "Make my logo bigger!",
-    "desc" => "Check this box to increase font size of site title. Useful when you have a short title. Only works with tall header.",
-    "id" => $shortname . "_large_title",
-    "type" => "checkbox",
-    "std" => "false"),
-  array("name" => "Logo Font",
-    "id" => $shortname . "_logo_font",
-    "type" => "radio",
-    "desc" => "Font for header logo text",
-    "options" => array("default" => "Open Sans", "ubuntu" => "Ubuntu"),
-    "std" => "default"),
-  array("name" => "Hide Logo Icon?",
-    "desc" => "Check this box if you would like to HIDE the logo image.",
-    "id" => $shortname . "_logo_icon",
-    "type" => "checkbox",
-    "std" => "false"),
-  array("name" => "Hide Logo Text?",
-    "desc" => "Check this box if you would like to HIDE the logo text.",
-    "id" => $shortname . "_logo_text",
-    "type" => "checkbox",
-    "std" => "false"),
-  array("name" => "Custom Header Text",
-    "desc" => "Check this box to enable custom header text.",
-    "id" => $shortname . "_header_text",
-    "type" => "checkbox",
-    "std" => "false"),
-  array("name" => "Header Text",
-    "desc" => "Text or html to display in header.",
-    "id" => $shortname . "_header_textarea",
-    "type" => "textarea"),
-  array("name" => "Underlined Words",
-    "desc" => "A comma-separated list of words to be displayed within the slider on the Home page.",
-    "id" => $shortname . "_underlined_textarea",
-    "type" => "textarea"),
-  array("name" => "Align Header Text",
-    "id" => $shortname . "_header_text_align",
-    "type" => "radio",
-    "desc" => "Which side of the header would you like this to appear?",
-    "options" => array("left" => "Left", "right" => "Right"),
-    "std" => "right"),
-  array("name" => "Custom Header Text Two",
-    "desc" => "Check this box to enable custom header text.",
-    "id" => $shortname . "_header_text2",
-    "type" => "checkbox",
-    "std" => "false"),
-  array("name" => "Header Text",
-    "desc" => "Text or html to display in header.",
-    "id" => $shortname . "_header_textarea2",
-    "type" => "textarea"),
-  array("name" => "Align Header Text",
-    "id" => $shortname . "_header_text_align2",
-    "type" => "radio",
-    "desc" => "Which side of the header would you like this to appear?",
-    "options" => array("left" => "Left", "right" => "Right"),
-    "std" => "right"),
-  array("name" => "Corner Ribbon Toggle",
-    "desc" => "Check this box to enable text in the top right of the page.",
-    "id" => $shortname . "_corner_ribbon",
-    "type" => "checkbox",
-    "std" => "false"),
-  array("name" => "Corner Ribbon Text",
-    "desc" => "Text or html to display in the ribbon.",
-    "id" => $shortname . "_corner_ribbon_text",
-    "type" => "textarea"),
-  array("name" => "Corner Ribbon Link",
-    "desc" => "url to link to",
-    "id" => $shortname . "_corner_ribbon_link",
-    "type" => "text"),
-  array("name" => "Hide OKF Ribbon",
-    "desc" => "Check this box to disable OKF Panel hooks.",
-    "id" => $shortname . "_okf_ribbon",
-    "type" => "checkbox",
-    "std" => "false"),
+    array("name" => "general_options",
+        "type" => "open"),
+    array("name" => "General Styling",
+        "type" => "title"),
+    array("name" => "Flavour",
+        "id" => $shortname . "_colours",
+        "type" => "radio",
+        "desc" => "Change the general look of the site",
+        "options" => array("default" => "Classic", "grey" => "OKF", "blue" => "Ckan", "turquoise" => "Glam", "school" => "School", "white" => "Simple"),
+        "std" => "grey",
+        "class" => "thumbs"),
+    array("name" => "Favicon",
+        "desc" => "Replace default favicon with your own ico file",
+        "id" => $shortname . "_favicon",
+        "type" => "text",
+        "placeholder" => "enter url"),
+    array("name" => "Tagline Location",
+        "id" => $shortname . "_tagline_location",
+        "type" => "radio",
+        "desc" => "Where would you like the tagline to appear on the page?",
+        "options" => array("home" => "Top of home page", "default" => "Top of every page", "header" => "In the header", "hide" => "Nowhere"),
+        "std" => "hide"),
+    array("name" => "TopBar",
+        "type" => "title"),
+    array("name" => "Show TopBar?",
+        "desc" => "Show / hide the BuddyPress bar at the top of this site.",
+        "id" => $shortname . "_buddypress_disable",
+        "type" => "radio",
+        "options" => array("true" => "Hide", "false" => "Show"),
+        "std" => "true"),
+    array("name" => "Header",
+        "type" => "title"),
+    array("name" => "Header Height",
+        "desc" => "Check this box to make the header taller.",
+        "id" => $shortname . "_tall_header",
+        "type" => "radio",
+        "options" => array("true" => "Tall", "false" => "Short"),
+        "std" => "true"),
+    array("name" => "Make my logo bigger!",
+        "desc" => "Check this box to increase font size of site title. Useful when you have a short title. Only works with tall header.",
+        "id" => $shortname . "_large_title",
+        "type" => "checkbox",
+        "std" => "false"),
+    array("name" => "Logo Font",
+        "id" => $shortname . "_logo_font",
+        "type" => "radio",
+        "desc" => "Font for header logo text",
+        "options" => array("default" => "Open Sans", "ubuntu" => "Ubuntu"),
+        "std" => "default"),
+    array("name" => "Hide Logo Icon?",
+        "desc" => "Check this box if you would like to HIDE the logo image.",
+        "id" => $shortname . "_logo_icon",
+        "type" => "checkbox",
+        "std" => "false"),
+    array("name" => "Hide Logo Text?",
+        "desc" => "Check this box if you would like to HIDE the logo text.",
+        "id" => $shortname . "_logo_text",
+        "type" => "checkbox",
+        "std" => "false"),
+    array("name" => "Custom Header Text",
+        "desc" => "Check this box to enable custom header text.",
+        "id" => $shortname . "_header_text",
+        "type" => "checkbox",
+        "std" => "false"),
+    array("name" => "Header Text",
+        "desc" => "Text or html to display in header.",
+        "id" => $shortname . "_header_textarea",
+        "type" => "textarea"),
+    array("name" => "Underlined Words",
+        "desc" => "A comma-separated list of words to be displayed within the slider on the Home page.",
+        "id" => $shortname . "_underlined_textarea",
+        "type" => "textarea"),
+    array("name" => "Align Header Text",
+        "id" => $shortname . "_header_text_align",
+        "type" => "radio",
+        "desc" => "Which side of the header would you like this to appear?",
+        "options" => array("left" => "Left", "right" => "Right"),
+        "std" => "right"),
+    array("name" => "Custom Header Text Two",
+        "desc" => "Check this box to enable custom header text.",
+        "id" => $shortname . "_header_text2",
+        "type" => "checkbox",
+        "std" => "false"),
+    array("name" => "Header Text",
+        "desc" => "Text or html to display in header.",
+        "id" => $shortname . "_header_textarea2",
+        "type" => "textarea"),
+    array("name" => "Align Header Text",
+        "id" => $shortname . "_header_text_align2",
+        "type" => "radio",
+        "desc" => "Which side of the header would you like this to appear?",
+        "options" => array("left" => "Left", "right" => "Right"),
+        "std" => "right"),
+    array("name" => "Corner Ribbon Toggle",
+        "desc" => "Check this box to enable text in the top right of the page.",
+        "id" => $shortname . "_corner_ribbon",
+        "type" => "checkbox",
+        "std" => "false"),
+    array("name" => "Corner Ribbon Text",
+        "desc" => "Text or html to display in the ribbon.",
+        "id" => $shortname . "_corner_ribbon_text",
+        "type" => "textarea"),
+    array("name" => "Corner Ribbon Link",
+        "desc" => "url to link to",
+        "id" => $shortname . "_corner_ribbon_link",
+        "type" => "text"),
+    array("name" => "Hide OKF Ribbon",
+        "desc" => "Check this box to disable OKF Panel hooks.",
+        "id" => $shortname . "_okf_ribbon",
+        "type" => "checkbox",
+        "std" => "false"),
 //  array("name" => "Search Icon",
 //    "desc" => "Enable search bar in header",
 //    "id" => $shortname . "_header_search",
@@ -321,203 +324,203 @@ $options = array(
 //    "id" => $shortname . "_subheader_search",
 //    "type" => "checkbox",
 //    "std" => "false"),
-  array("type" => "close"),
-  array("name" => "social_options",
-    "type" => "open"),
-  array("name" => "Social",
-    "type" => "title"),
-  array("name" => "Twitter Link",
-    "desc" => "Add link to Twitter profile.",
-    "id" => $shortname . "_twitter_link",
-    "type" => "checkbox",
-    "std" => "false"),
-  array("name" => "Twitter Username",
-    "desc" => "twitter.com/...",
-    "id" => $shortname . "_twitter_username",
-    "type" => "text"),
-  array("name" => "Twitter Location",
-    "id" => $shortname . "_twitter_location",
-    "type" => "radio",
-    "desc" => "Where to put Twitter icon",
-    "options" => array("default" => "Header", "footer" => "Footer", "both" => "Header and Footer"),
-    "std" => "default"),
-  array("name" => "Facebook Link",
-    "desc" => "Add link to Facebook profile.",
-    "id" => $shortname . "_facebook_link",
-    "type" => "checkbox",
-    "std" => "false"),
-  array("name" => "Facebook Username",
-    "desc" => "This is what comes after'facebook.com/' in the URL (this will also be used for Open Graph tags).",
-    "id" => $shortname . "_facebook_username",
-    "type" => "text"),
-  array("name" => "Facebook Location",
-    "id" => $shortname . "_facebook_location",
-    "type" => "radio",
-    "desc" => "Where to put Facebook icon",
-    "options" => array("default" => "Header", "footer" => "Footer", "both" => "Header and Footer"),
-    "std" => "default"),
-  array("name" => "ShareThis",
-    "desc" => "Check this box to enable ShareThis.",
-    "id" => $shortname . "_sharethis",
-    "type" => "checkbox",
-    "std" => "false"),
-  array("name" => "Publisher ID",
-    "desc" => "If you have a ShareThis account, enter your publisher ID here.",
-    "id" => $shortname . "_sharethis_id",
-    "std" => "",
-    "type" => "text"),
-  array("name" => "ShareThis Location",
-    "id" => $shortname . "_sharethis_location",
-    "type" => "radio",
-    "desc" => "Where is it going?",
-    "options" => array("footer" => "Footer", "elsewhere" => "Elsewhere"),
-    "std" => "footer"),
+    array("type" => "close"),
+    array("name" => "social_options",
+        "type" => "open"),
+    array("name" => "Social",
+        "type" => "title"),
+    array("name" => "Twitter Link",
+        "desc" => "Add link to Twitter profile.",
+        "id" => $shortname . "_twitter_link",
+        "type" => "checkbox",
+        "std" => "false"),
+    array("name" => "Twitter Username",
+        "desc" => "twitter.com/...",
+        "id" => $shortname . "_twitter_username",
+        "type" => "text"),
+    array("name" => "Twitter Location",
+        "id" => $shortname . "_twitter_location",
+        "type" => "radio",
+        "desc" => "Where to put Twitter icon",
+        "options" => array("default" => "Header", "footer" => "Footer", "both" => "Header and Footer"),
+        "std" => "default"),
+    array("name" => "Facebook Link",
+        "desc" => "Add link to Facebook profile.",
+        "id" => $shortname . "_facebook_link",
+        "type" => "checkbox",
+        "std" => "false"),
+    array("name" => "Facebook Username",
+        "desc" => "This is what comes after'facebook.com/' in the URL (this will also be used for Open Graph tags).",
+        "id" => $shortname . "_facebook_username",
+        "type" => "text"),
+    array("name" => "Facebook Location",
+        "id" => $shortname . "_facebook_location",
+        "type" => "radio",
+        "desc" => "Where to put Facebook icon",
+        "options" => array("default" => "Header", "footer" => "Footer", "both" => "Header and Footer"),
+        "std" => "default"),
+    array("name" => "ShareThis",
+        "desc" => "Check this box to enable ShareThis.",
+        "id" => $shortname . "_sharethis",
+        "type" => "checkbox",
+        "std" => "false"),
+    array("name" => "Publisher ID",
+        "desc" => "If you have a ShareThis account, enter your publisher ID here.",
+        "id" => $shortname . "_sharethis_id",
+        "std" => "",
+        "type" => "text"),
+    array("name" => "ShareThis Location",
+        "id" => $shortname . "_sharethis_location",
+        "type" => "radio",
+        "desc" => "Where is it going?",
+        "options" => array("footer" => "Footer", "elsewhere" => "Elsewhere"),
+        "std" => "footer"),
 //		array(  "name" => "Enable Tweet",
 //        "desc" => "Include Seaclouds Tweet script. Uses twitter username specified above.",
 //        "id" => $shortname."_enable_tweet",
 //        "type" => "checkbox",
 //        "std" => "false"),
-  array("name" => "Mailing List Bar",
-    "type" => "title"),
-  array("name" => "MailChimp Plugin",
-    "desc" => "MailChimp form powered by N-Media MailChimp plugin",
-    "id" => $shortname . "_mailchimp_bar",
-    "type" => "checkbox",
-    "std" => "false"),
-  array("name" => "Mailing List Heading",
-    "desc" => "Appears next to the form",
-    "id" => $shortname . "_mailchimp_heading",
-    "type" => "text"),
-  array("name" => "Description",
-    "desc" => "Used if multiple lists",
-    "id" => $shortname . "_mailchimp_description",
-    "type" => "text"),
-  array("name" => "Form ID",
-    "desc" => "fid number found in shortcode",
-    "id" => $shortname . "_mailchimp_id",
-    "type" => "text"),
-  array("name" => "Native Mailing List 1",
-    "desc" => "Add mailing list form",
-    "id" => $shortname . "_mailinglist_bar",
-    "type" => "checkbox",
-    "std" => "false"),
-  array("name" => "Type",
-    "id" => $shortname . "_mailinglist_bar_type",
-    "type" => "radio",
-    "desc" => "Where is the mailing list",
-    "options" => array("mailman" => "Mailman", "mailchimp" => "MailChimp"),
-    "std" => "mailman"),
-  array("name" => "Mailing List Heading",
-    "desc" => "Appears next to the form",
-    "id" => $shortname . "_mailinglist_heading",
-    "type" => "text"),
-  array("name" => "Description",
-    "desc" => "Used if multiple lists",
-    "id" => $shortname . "_mailinglist_description",
-    "type" => "text"),
-  array("name" => "Action",
-    "desc" => "URL from form action attribute. Mailman example: http://lists.okfn.org/mailman/subscribe/XYZ",
-    "id" => $shortname . "_mailinglist_action",
-    "type" => "text"),
-  array("name" => "Native Mailing List 2",
-    "desc" => "Add mailing list form",
-    "id" => $shortname . "_mailinglist_bar2",
-    "type" => "checkbox",
-    "std" => "false"),
-  array("name" => "Type",
-    "id" => $shortname . "_mailinglist_bar_type2",
-    "type" => "radio",
-    "desc" => "Where is the mailing list",
-    "options" => array("mailman" => "Mailman", "mailchimp" => "MailChimp"),
-    "std" => "mailman"),
-  array("name" => "Mailing List Heading",
-    "desc" => "Appears next to the form",
-    "id" => $shortname . "_mailinglist_heading2",
-    "type" => "text"),
-  array("name" => "Description",
-    "desc" => "Used if multiple lists",
-    "id" => $shortname . "_mailinglist_description2",
-    "type" => "text"),
-  array("name" => "Action",
-    "desc" => "URL from form action attribute. Mailman example: http://lists.okfn.org/mailman/subscribe/XYZ",
-    "id" => $shortname . "_mailinglist_action2",
-    "type" => "text"),
-  array("name" => "Mailing List Location",
-    "id" => $shortname . "_mailinglist_bar_location",
-    "type" => "radio",
-    "desc" => "Where to put bar",
-    "options" => array("header" => "Header (home page, first list only)", "footer" => "Footer"),
-    "std" => "footer"),
-  array("type" => "close"),
-  array("name" => "blog_options",
-    "type" => "open"),
-  array("name" => "Blog",
-    "type" => "title"),
-  array("name" => "Large Blog Avatars",
-    "desc" => "Check this box to use large avatars on blog post page (requires Gravatar).",
-    "id" => $shortname . "_large_avatars",
-    "type" => "checkbox",
-    "std" => "false"),
-  array("name" => "Blog Archive",
-    "desc" => "URL to all blog posts, used in Magazine template.",
-    "id" => $shortname . "_blog_link",
-    "type" => "text"),
-  array("name" => "Magazine Posts",
-    "desc" => "How many posts to show in the Magazine template.",
-    "id" => $shortname . "_magazine_posts",
-    "type" => "text"),
-  array("name" => "Featured Category",
-    "desc" => "Name of category to feature on magazine style pages ('Featured' by default).",
-    "id" => $shortname . "_magazine_featured",
-    "type" => "text"),
-  array("name" => "Home Category",
-    "desc" => "Name of category to feature on homepage ('Featured' by default).",
-    "id" => $shortname . "_home_featured",
-    "type" => "text"),
-  array("name" => "Events Category",
-    "desc" => "Name of category to feature on events page ('Events' by default).",
-    "id" => $shortname . "_events_featured",
-    "type" => "text"),
-  array("name" => "Narrow Post Column",
-    "desc" => "Check this box to use alternative post page layout.",
-    "id" => $shortname . "_narrow_blog",
-    "type" => "checkbox",
-    "std" => "false"),
-  array("name" => "Category Priority",
-    "type" => "title"),
-  array("name" => "Which category is shown, when only room for one?",
-    "desc" => "List in order of priority. Categories must be comma separated, and are case sensitive.",
-    "id" => $shortname . "_category_priority",
-    "type" => "textarea",
-    "rows" => "11",
-    "placeholder" => $default_category_priority_string),
-  array("type" => "close"),
-  array("name" => "misc_options",
-    "type" => "open"),
-  array("name" => "Misc",
-    "type" => "title"),
-  //array("name" => "Carousel Style",
-  //"id" => $shortname."_carosel",
-  //"type" => "radio",
-  //"desc" => "Change layout style of Bootstrap carousel",
-  //"options" => array("default" => "Default", "text-right" => "Text on Right (full width)", "stack" => "Text on Right (photo stack)"),
-  //"std" => "default"),
-  array("name" => "Tagline in meta title?",
-    "desc" => "Check this box to append site title with tagline in the meta title tag.",
-    "id" => $shortname . "_tagline_title",
-    "type" => "checkbox",
-    "std" => "false"),
-  array("name" => "Flattr OKFN",
-    "desc" => "Check this box to add a link to donate to the Open Knowledge Foundation.",
-    "id" => $shortname . "_flattr_okfn",
-    "type" => "checkbox",
-    "std" => "false"),
-  array("name" => "Enable Flags",
-    "desc" => "https://github.com/lafeber/world-flags-sprite",
-    "id" => $shortname . "_flags_sprite",
-    "type" => "checkbox",
-    "std" => "false"),
-  array("type" => "close"),
+    array("name" => "Mailing List Bar",
+        "type" => "title"),
+    array("name" => "MailChimp Plugin",
+        "desc" => "MailChimp form powered by N-Media MailChimp plugin",
+        "id" => $shortname . "_mailchimp_bar",
+        "type" => "checkbox",
+        "std" => "false"),
+    array("name" => "Mailing List Heading",
+        "desc" => "Appears next to the form",
+        "id" => $shortname . "_mailchimp_heading",
+        "type" => "text"),
+    array("name" => "Description",
+        "desc" => "Used if multiple lists",
+        "id" => $shortname . "_mailchimp_description",
+        "type" => "text"),
+    array("name" => "Form ID",
+        "desc" => "fid number found in shortcode",
+        "id" => $shortname . "_mailchimp_id",
+        "type" => "text"),
+    array("name" => "Native Mailing List 1",
+        "desc" => "Add mailing list form",
+        "id" => $shortname . "_mailinglist_bar",
+        "type" => "checkbox",
+        "std" => "false"),
+    array("name" => "Type",
+        "id" => $shortname . "_mailinglist_bar_type",
+        "type" => "radio",
+        "desc" => "Where is the mailing list",
+        "options" => array("mailman" => "Mailman", "mailchimp" => "MailChimp"),
+        "std" => "mailman"),
+    array("name" => "Mailing List Heading",
+        "desc" => "Appears next to the form",
+        "id" => $shortname . "_mailinglist_heading",
+        "type" => "text"),
+    array("name" => "Description",
+        "desc" => "Used if multiple lists",
+        "id" => $shortname . "_mailinglist_description",
+        "type" => "text"),
+    array("name" => "Action",
+        "desc" => "URL from form action attribute. Mailman example: http://lists.okfn.org/mailman/subscribe/XYZ",
+        "id" => $shortname . "_mailinglist_action",
+        "type" => "text"),
+    array("name" => "Native Mailing List 2",
+        "desc" => "Add mailing list form",
+        "id" => $shortname . "_mailinglist_bar2",
+        "type" => "checkbox",
+        "std" => "false"),
+    array("name" => "Type",
+        "id" => $shortname . "_mailinglist_bar_type2",
+        "type" => "radio",
+        "desc" => "Where is the mailing list",
+        "options" => array("mailman" => "Mailman", "mailchimp" => "MailChimp"),
+        "std" => "mailman"),
+    array("name" => "Mailing List Heading",
+        "desc" => "Appears next to the form",
+        "id" => $shortname . "_mailinglist_heading2",
+        "type" => "text"),
+    array("name" => "Description",
+        "desc" => "Used if multiple lists",
+        "id" => $shortname . "_mailinglist_description2",
+        "type" => "text"),
+    array("name" => "Action",
+        "desc" => "URL from form action attribute. Mailman example: http://lists.okfn.org/mailman/subscribe/XYZ",
+        "id" => $shortname . "_mailinglist_action2",
+        "type" => "text"),
+    array("name" => "Mailing List Location",
+        "id" => $shortname . "_mailinglist_bar_location",
+        "type" => "radio",
+        "desc" => "Where to put bar",
+        "options" => array("header" => "Header (home page, first list only)", "footer" => "Footer"),
+        "std" => "footer"),
+    array("type" => "close"),
+    array("name" => "blog_options",
+        "type" => "open"),
+    array("name" => "Blog",
+        "type" => "title"),
+    array("name" => "Large Blog Avatars",
+        "desc" => "Check this box to use large avatars on blog post page (requires Gravatar).",
+        "id" => $shortname . "_large_avatars",
+        "type" => "checkbox",
+        "std" => "false"),
+    array("name" => "Blog Archive",
+        "desc" => "URL to all blog posts, used in Magazine template.",
+        "id" => $shortname . "_blog_link",
+        "type" => "text"),
+    array("name" => "Magazine Posts",
+        "desc" => "How many posts to show in the Magazine template.",
+        "id" => $shortname . "_magazine_posts",
+        "type" => "text"),
+    array("name" => "Featured Category",
+        "desc" => "Name of category to feature on magazine style pages ('Featured' by default).",
+        "id" => $shortname . "_magazine_featured",
+        "type" => "text"),
+    array("name" => "Home Category",
+        "desc" => "Name of category to feature on homepage ('Featured' by default).",
+        "id" => $shortname . "_home_featured",
+        "type" => "text"),
+    array("name" => "Events Category",
+        "desc" => "Name of category to feature on events page ('Events' by default).",
+        "id" => $shortname . "_events_featured",
+        "type" => "text"),
+    array("name" => "Narrow Post Column",
+        "desc" => "Check this box to use alternative post page layout.",
+        "id" => $shortname . "_narrow_blog",
+        "type" => "checkbox",
+        "std" => "false"),
+    array("name" => "Category Priority",
+        "type" => "title"),
+    array("name" => "Which category is shown, when only room for one?",
+        "desc" => "List in order of priority. Categories must be comma separated, and are case sensitive.",
+        "id" => $shortname . "_category_priority",
+        "type" => "textarea",
+        "rows" => "11",
+        "placeholder" => $default_category_priority_string),
+    array("type" => "close"),
+    array("name" => "misc_options",
+        "type" => "open"),
+    array("name" => "Misc",
+        "type" => "title"),
+    //array("name" => "Carousel Style",
+    //"id" => $shortname."_carosel",
+    //"type" => "radio",
+    //"desc" => "Change layout style of Bootstrap carousel",
+    //"options" => array("default" => "Default", "text-right" => "Text on Right (full width)", "stack" => "Text on Right (photo stack)"),
+    //"std" => "default"),
+    array("name" => "Tagline in meta title?",
+        "desc" => "Check this box to append site title with tagline in the meta title tag.",
+        "id" => $shortname . "_tagline_title",
+        "type" => "checkbox",
+        "std" => "false"),
+    array("name" => "Flattr OKFN",
+        "desc" => "Check this box to add a link to donate to the Open Knowledge Foundation.",
+        "id" => $shortname . "_flattr_okfn",
+        "type" => "checkbox",
+        "std" => "false"),
+    array("name" => "Enable Flags",
+        "desc" => "https://github.com/lafeber/world-flags-sprite",
+        "id" => $shortname . "_flags_sprite",
+        "type" => "checkbox",
+        "std" => "false"),
+    array("type" => "close"),
 );
 
 function mytheme_add_admin() {
@@ -554,7 +557,6 @@ function mytheme_add_admin() {
   }
 
   add_theme_page($themename . " Options", "" . $themename . " Options", 'switch_themes', basename(__FILE__), 'mytheme_admin');
-
 }
 
 function mytheme_admin() {
@@ -565,7 +567,6 @@ function mytheme_admin() {
     echo '<div id="message" class="updated fade"><p><strong>' . $themename . ' settings saved.</strong></p></div>';
   if ($_REQUEST['reset'])
     echo '<div id="message" class="updated fade"><p><strong>' . $themename . ' settings reset.</strong></p></div>';
-
   ?>
 
   <div class="options wrap">
@@ -633,43 +634,35 @@ function mytheme_admin() {
       <form method="post">
 
         <?php
-
         foreach ($options as $value) {
 
           switch ($value['type']) {
 
             case "open":
-
               ?>
               <div id="<?php echo $value['name']; ?>" class="group" <?php if ($active_tab !== $value['name']) : ?> style="display:none;"<?php endif; ?> >
 
                 <?php
-
                 break;
 
               case "close":
-
                 ?>
 
               </div>
 
 
               <?php
-
               break;
 
             case "title":
-
               ?>
               <h3><?php echo $value['name']; ?></h3>
 
 
               <?php
-
               break;
 
             case 'text':
-
               ?>
 
               <div class="section section-text" id="section_<?php echo $value['id']; ?>">
@@ -680,13 +673,11 @@ function mytheme_admin() {
                 <div class="option">
                   <div class="controls">
                     <input name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" value="<?php
-
                     if (get_option($value['id']) != "") {
                       echo get_option($value['id']);
                     } else {
                       echo $value['std'];
                     }
-
                     ?>" <?php if ($value['placeholder'] != "") : ?>placeholder="<?php echo $value['placeholder']; ?>"<?php endif ?>/>
                     <br>
                   </div>
@@ -696,18 +687,14 @@ function mytheme_admin() {
 
 
               <?php
-
               break;
 
             case 'textarea':
-
               ?>
 
               <?php
-
               $input = get_option($value['id']);
               $output = stripslashes($input);
-
               ?>
 
               <div class="section section-textarea" id="section_<?php echo $value['id']; ?>">
@@ -718,21 +705,17 @@ function mytheme_admin() {
                 <div class="option">
                   <div class="controls">
                     <textarea name="<?php echo $value['id']; ?>" cols="70" rows="<?php
-
                     if ($value['rows'] != "") {
                       echo $value['rows'];
                     } else {
                       echo '5';
                     }
-
                     ?>" <?php if ($value['placeholder'] != "") : ?>placeholder="<?php echo $value['placeholder']; ?>"<?php endif ?>><?php
-
                                 if (get_option($value['id']) != "") {
                                   echo $output;
                                 } else {
                                   echo $value['std'];
                                 }
-
                                 ?></textarea>
                     <br>
                   </div>
@@ -741,11 +724,9 @@ function mytheme_admin() {
               </div>
 
               <?php
-
               break;
 
             case 'select':
-
               ?>
 
               <div class="section section-select" id="section_<?php echo $value['id']; ?>">
@@ -756,13 +737,11 @@ function mytheme_admin() {
                 <div class="option">
                   <div class="controls">
                     <select name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>"><?php foreach ($value['options'] as $option) { ?><option<?php
-
                         if (get_option($value['id']) == $option) {
                           echo ' selected="selected"';
                         } elseif ($option == $value['std']) {
                           echo ' selected="selected"';
                         }
-
                         ?>><?php echo $option; ?></option><?php } ?></select>
                     <br>
                   </div>
@@ -771,12 +750,10 @@ function mytheme_admin() {
               </div>
 
               <?php
-
               break;
 
             case 'media':
               $upload_button_text = __('Upload', 'okfn');
-
               ?>
 
               <div class="section section-text" id="section_<?php echo $value['id']; ?>">
@@ -787,13 +764,11 @@ function mytheme_admin() {
                 <div class="option">
                   <div class="controls">
                     <input type="text" id="<?php echo $value['id']; ?>" name="<?php echo $value['id']; ?>" value="<?php
-
                     if (get_option($value['id']) != "") {
                       echo get_option($value['id']);
                     } else {
                       echo $value['std'];
                     }
-
                     ?>" <?php if ($value['placeholder'] != "") : ?>placeholder="<?php echo $value['placeholder']; ?>"<?php endif ?> />
                     <!--<input id="<?php echo $value['id']; ?>_upload_button" type="button" class="button" value="<?php echo $upload_button_text; ?>" /> -->
                     <br>
@@ -804,11 +779,9 @@ function mytheme_admin() {
 
 
               <?php
-
               break;
 
             case "checkbox":
-
               ?>
 
               <div class="section section-checkbox" id="section_<?php echo $value['id']; ?>">
@@ -818,7 +791,6 @@ function mytheme_admin() {
                 <div class="option">
                   <div class="controls">
                     <?php
-
                     if (get_option($value['id'])) {
                       $checked = "checked=\"checked\"";
                     } else {
@@ -828,7 +800,6 @@ function mytheme_admin() {
                         $checked = "";
                       }
                     }
-
                     ?>
                     <input type="checkbox" name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" value="true" <?php echo $checked; ?> />
                     <label for="<?php echo $value['id']; ?>" class="explain"><?php echo $value['desc']; ?></label>
@@ -838,11 +809,9 @@ function mytheme_admin() {
               </div>
 
               <?php
-
               break;
 
             case "radio":
-
               ?>
 
               <div class="section section-radio <?php echo $value['class'] ?>" id="section_<?php echo $value['id']; ?>">
@@ -853,7 +822,6 @@ function mytheme_admin() {
                 <div class="option">
                   <div class="controls">
                     <?php
-
                     foreach ($value['options'] as $option_value => $option_text) {
                       $checked = ' ';
                       if (get_option($value['id']) == $option_value) {
@@ -873,7 +841,6 @@ function mytheme_admin() {
                       echo '<label style="background-image:url(' . $bgimage . ');"><span><input type="radio" style="margin-right:10px;" name="' . $value['id'] . '" value="' .
                       $option_value . '" ' . $checked . "/>" . $option_text . "</span></label>";
                     }
-
                     ?>
                   </div>
                   <div class="clear"></div>
@@ -881,11 +848,9 @@ function mytheme_admin() {
               </div>
 
               <?php
-
               break;
           }
         }
-
         ?>
 
 
@@ -904,7 +869,6 @@ function mytheme_admin() {
     </div>
 
     <?php
-
   }
 
   add_action('admin_menu', 'mytheme_add_admin');
@@ -915,41 +879,40 @@ function mytheme_admin() {
     if (function_exists('register_sidebar')):
 
       register_sidebar(array(
-        'id' => 'sidebar-1',
-        'before_widget' => '<div id="%1$s" class="widget %2$s">',
-        'after_widget' => '</div>'
+          'id' => 'sidebar-1',
+          'before_widget' => '<div id="%1$s" class="widget %2$s">',
+          'after_widget' => '</div>'
       ));
 
       register_sidebar(array(
-        'id' => 'first-footer-widget-area',
-        'name' => __('First Footer Widget Area', 'okfn'),
-        'before_widget' => '<div class="widget">',
-        'after_widget' => '</div>',
+          'id' => 'first-footer-widget-area',
+          'name' => __('First Footer Widget Area', 'okfn'),
+          'before_widget' => '<div class="widget">',
+          'after_widget' => '</div>',
       ));
 
       register_sidebar(array(
-        'id' => 'second-footer-widget-area',
-        'name' => __('Second Footer Widget Area', 'okfn'),
-        'before_widget' => '<div class="widget">',
-        'after_widget' => '</div>',
+          'id' => 'second-footer-widget-area',
+          'name' => __('Second Footer Widget Area', 'okfn'),
+          'before_widget' => '<div class="widget">',
+          'after_widget' => '</div>',
       ));
 
       register_sidebar(array(
-        'id' => 'third-footer-widget-area',
-        'name' => __('Third Footer Widget Area', 'okfn'),
-        'before_widget' => '<div class="widget">',
-        'after_widget' => '</div>',
+          'id' => 'third-footer-widget-area',
+          'name' => __('Third Footer Widget Area', 'okfn'),
+          'before_widget' => '<div class="widget">',
+          'after_widget' => '</div>',
       ));
 
       register_sidebar(array(
-        'id' => 'fourth-footer-widget-area',
-        'name' => __('Fourth Footer Widget Area', 'okfn'),
-        'before_widget' => '<div class="widget">',
-        'after_widget' => '</div>',
+          'id' => 'fourth-footer-widget-area',
+          'name' => __('Fourth Footer Widget Area', 'okfn'),
+          'before_widget' => '<div class="widget">',
+          'after_widget' => '</div>',
       ));
 
     endif;
-
   }
 
   /*   * *********************************************************************
@@ -1102,7 +1065,6 @@ function mytheme_admin() {
       }
       echo '</ul>';
     }
-
   }
 
   /*
@@ -1164,7 +1126,6 @@ function mytheme_admin() {
       }
 
       return $html;
-
     }
 
   }
@@ -1175,7 +1136,6 @@ function mytheme_admin() {
 
   function set_bp_default_avatar_style($avatar_default) {
     return 'mystery';
-
   }
 
   /**
@@ -1212,25 +1172,25 @@ function mytheme_admin() {
      * If the source is NOT from the .org repo, then source is also required.
      */
     $plugins = array(
-      // This is an example of how to include a plugin pre-packaged with a theme
-      /*
+        // This is an example of how to include a plugin pre-packaged with a theme
+        /*
+          array(
+          'name'     				=> 'TGM Example Plugin', // The plugin name
+          'slug'     				=> 'tgm-example-plugin', // The plugin slug (typically the folder name)
+          'source'   				=> get_stylesheet_directory() . '/lib/plugins/tgm-example-plugin.zip', // The plugin source
+          'required' 				=> true, // If false, the plugin is only 'recommended' instead of required
+          'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+          'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
+          'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
+          'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
+          ),
+         */
+        // This is an example of how to include a plugin from the WordPress Plugin Repository
         array(
-        'name'     				=> 'TGM Example Plugin', // The plugin name
-        'slug'     				=> 'tgm-example-plugin', // The plugin slug (typically the folder name)
-        'source'   				=> get_stylesheet_directory() . '/lib/plugins/tgm-example-plugin.zip', // The plugin source
-        'required' 				=> true, // If false, the plugin is only 'recommended' instead of required
-        'version' 				=> '', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
-        'force_activation' 		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
-        'force_deactivation' 	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
-        'external_url' 			=> '', // If set, overrides default API URL and points to an external URL
+            'name' => 'JM Last Twit Shortcode',
+            'slug' => 'jm-last-twit-shortcode',
+            'required' => false,
         ),
-       */
-      // This is an example of how to include a plugin from the WordPress Plugin Repository
-      array(
-        'name' => 'JM Last Twit Shortcode',
-        'slug' => 'jm-last-twit-shortcode',
-        'required' => false,
-      ),
     );
     // Change this to your theme text domain, used for internationalising strings
     $theme_text_domain = 'okfn';
@@ -1242,37 +1202,36 @@ function mytheme_admin() {
      * end of each line for what each argument will be.
      */
     $config = array(
-      'domain' => $theme_text_domain, // Text domain - likely want to be the same as your theme.
-      'default_path' => '', // Default absolute path to pre-packaged plugins
-      'parent_menu_slug' => 'themes.php', // Default parent menu slug
-      'parent_url_slug' => 'themes.php', // Default parent URL slug
-      'menu' => 'install-required-plugins', // Menu slug
-      'has_notices' => true, // Show admin notices or not
-      'is_automatic' => false, // Automatically activate plugins after installation or not
-      'message' => '', // Message to output right before the plugins table
-      'strings' => array(
-        'page_title' => __('Install Required Plugins', $theme_text_domain),
-        'menu_title' => __('Install Plugins', $theme_text_domain),
-        'installing' => __('Installing Plugin: %s', $theme_text_domain), // %1$s = plugin name
-        'oops' => __('Something went wrong with the plugin API.', $theme_text_domain),
-        'notice_can_install_required' => _n_noop('This theme requires the following plugin: %1$s.', 'This theme requires the following plugins: %1$s.'), // %1$s = plugin name(s)
-        'notice_can_install_recommended' => _n_noop('This theme recommends the following plugin: %1$s.', 'This theme recommends the following plugins: %1$s.'), // %1$s = plugin name(s)
-        'notice_cannot_install' => _n_noop('Sorry, but you do not have the correct permissions to install the %s plugin. Contact the administrator of this site for help on getting the plugin installed.', 'Sorry, but you do not have the correct permissions to install the %s plugins. Contact the administrator of this site for help on getting the plugins installed.'), // %1$s = plugin name(s)
-        'notice_can_activate_required' => _n_noop('The following required plugin is currently inactive: %1$s.', 'The following required plugins are currently inactive: %1$s.'), // %1$s = plugin name(s)
-        'notice_can_activate_recommended' => _n_noop('The following recommended plugin is currently inactive: %1$s.', 'The following recommended plugins are currently inactive: %1$s.'), // %1$s = plugin name(s)
-        'notice_cannot_activate' => _n_noop('Sorry, but you do not have the correct permissions to activate the %s plugin. Contact the administrator of this site for help on getting the plugin activated.', 'Sorry, but you do not have the correct permissions to activate the %s plugins. Contact the administrator of this site for help on getting the plugins activated.'), // %1$s = plugin name(s)
-        'notice_ask_to_update' => _n_noop('The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s.', 'The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s.'), // %1$s = plugin name(s)
-        'notice_cannot_update' => _n_noop('Sorry, but you do not have the correct permissions to update the %s plugin. Contact the administrator of this site for help on getting the plugin updated.', 'Sorry, but you do not have the correct permissions to update the %s plugins. Contact the administrator of this site for help on getting the plugins updated.'), // %1$s = plugin name(s)
-        'install_link' => _n_noop('Begin installing plugin', 'Begin installing plugins'),
-        'activate_link' => _n_noop('Activate installed plugin', 'Activate installed plugins'),
-        'return' => __('Return to Required Plugins Installer', $theme_text_domain),
-        'plugin_activated' => __('Plugin activated successfully.', $theme_text_domain),
-        'complete' => __('All plugins installed and activated successfully. %s', $theme_text_domain), // %1$s = dashboard link
-        'nag_type' => 'updated' // Determines admin notice type - can only be 'updated' or 'error'
-      )
+        'domain' => $theme_text_domain, // Text domain - likely want to be the same as your theme.
+        'default_path' => '', // Default absolute path to pre-packaged plugins
+        'parent_menu_slug' => 'themes.php', // Default parent menu slug
+        'parent_url_slug' => 'themes.php', // Default parent URL slug
+        'menu' => 'install-required-plugins', // Menu slug
+        'has_notices' => true, // Show admin notices or not
+        'is_automatic' => false, // Automatically activate plugins after installation or not
+        'message' => '', // Message to output right before the plugins table
+        'strings' => array(
+            'page_title' => __('Install Required Plugins', $theme_text_domain),
+            'menu_title' => __('Install Plugins', $theme_text_domain),
+            'installing' => __('Installing Plugin: %s', $theme_text_domain), // %1$s = plugin name
+            'oops' => __('Something went wrong with the plugin API.', $theme_text_domain),
+            'notice_can_install_required' => _n_noop('This theme requires the following plugin: %1$s.', 'This theme requires the following plugins: %1$s.'), // %1$s = plugin name(s)
+            'notice_can_install_recommended' => _n_noop('This theme recommends the following plugin: %1$s.', 'This theme recommends the following plugins: %1$s.'), // %1$s = plugin name(s)
+            'notice_cannot_install' => _n_noop('Sorry, but you do not have the correct permissions to install the %s plugin. Contact the administrator of this site for help on getting the plugin installed.', 'Sorry, but you do not have the correct permissions to install the %s plugins. Contact the administrator of this site for help on getting the plugins installed.'), // %1$s = plugin name(s)
+            'notice_can_activate_required' => _n_noop('The following required plugin is currently inactive: %1$s.', 'The following required plugins are currently inactive: %1$s.'), // %1$s = plugin name(s)
+            'notice_can_activate_recommended' => _n_noop('The following recommended plugin is currently inactive: %1$s.', 'The following recommended plugins are currently inactive: %1$s.'), // %1$s = plugin name(s)
+            'notice_cannot_activate' => _n_noop('Sorry, but you do not have the correct permissions to activate the %s plugin. Contact the administrator of this site for help on getting the plugin activated.', 'Sorry, but you do not have the correct permissions to activate the %s plugins. Contact the administrator of this site for help on getting the plugins activated.'), // %1$s = plugin name(s)
+            'notice_ask_to_update' => _n_noop('The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s.', 'The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s.'), // %1$s = plugin name(s)
+            'notice_cannot_update' => _n_noop('Sorry, but you do not have the correct permissions to update the %s plugin. Contact the administrator of this site for help on getting the plugin updated.', 'Sorry, but you do not have the correct permissions to update the %s plugins. Contact the administrator of this site for help on getting the plugins updated.'), // %1$s = plugin name(s)
+            'install_link' => _n_noop('Begin installing plugin', 'Begin installing plugins'),
+            'activate_link' => _n_noop('Activate installed plugin', 'Activate installed plugins'),
+            'return' => __('Return to Required Plugins Installer', $theme_text_domain),
+            'plugin_activated' => __('Plugin activated successfully.', $theme_text_domain),
+            'complete' => __('All plugins installed and activated successfully. %s', $theme_text_domain), // %1$s = dashboard link
+            'nag_type' => 'updated' // Determines admin notice type - can only be 'updated' or 'error'
+        )
     );
     tgmpa($plugins, $config);
-
   }
 
   add_theme_support('post-thumbnails');
@@ -1292,7 +1251,6 @@ function mytheme_admin() {
     curl_close($ch);
 
     return explode("\n", $data);
-
   }
 
   // Include scripts the proper way and in the footer
@@ -1320,7 +1278,6 @@ function mytheme_admin() {
     wp_enqueue_script('bootstrap-js', '//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js', ['jquery'], '2.1.1', true);
     wp_enqueue_script('dotdotdot', get_stylesheet_directory_uri() . '/include/jquery.dotdotdot-1.5.6-packed.js', ['jquery'], '1.5.6', true);
     wp_enqueue_script('footer', get_stylesheet_directory_uri() . '/include/footer.js', ['jquery'], '', true);
-
   }
 
   // Include stylesheets the proper way
@@ -1329,5 +1286,37 @@ function mytheme_admin() {
 
   function okfn_enqueue_styles() {
     wp_enqueue_style('wordpress-theme-okfn', get_stylesheet_uri(), array(), filemtime(get_stylesheet_directory() . '/style.css'));
-
   }
+
+  /**
+   * Display an optional post thumbnail.
+   *
+   * Wraps the post thumbnail in an anchor element on index views, or a div
+   * element when on single views.
+   *
+   */
+  function okfn_header_w_featured_image() {
+    if (post_password_required() || is_attachment() || !has_post_thumbnail()) {
+      return;
+    }
+
+    if (is_page()) :
+      ?>
+
+      <div class="page-banner" style="background-image: url('<?php echo get_the_post_thumbnail_url(); ?>')">
+        <div class="container">
+          <div class="row">
+            <div class="span8">
+              <div class="well">
+                <?php the_title('<h1>', '</h1>'); ?>
+                <?php printf('<p>%s</p>', get_the_excerpt()); ?>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- .post-thumbnail -->
+
+      <?php
+    endif; // End is_singular()
+  }
+  
