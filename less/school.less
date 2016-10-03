@@ -1200,10 +1200,10 @@ body div.slideshow-window * img{
 
 .okfn-word-slider{
   span{
+/*    animation: 5000ms fade-in-out ease-in-out;*/
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
     &:not(:first-child){
-      animation: 5000ms fade-in-out ease-in-out;
-      animation-iteration-count: 1;
-      animation-fill-mode: forwards;
       display: none;
     }
   }

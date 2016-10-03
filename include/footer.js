@@ -24,7 +24,7 @@ function random_words_slider() {
   }
   // Hide all elements
   okfn_word_slider.children().css({'display': 'none'});
-  okfn_word_slider.children('span:nth-child(' + random_number + ')').css({'display': 'inline-block'});
+  okfn_word_slider.children('span:nth-child(' + random_number + ')').css({'display': 'inline-block', 'animation': '5000ms fade-in-out ease-in-out'});
   last_number = random_number;
 }
 
