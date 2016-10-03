@@ -766,6 +766,18 @@ function okfn_load_twitter_icon() {
   return sprintf('<span class="twitter-icon"></span>');
 }
 
+// Get Twitter profile link according to the username set in the Theme Options
+
+add_shortcode('twitter_link', 'okfn_twitter_link_shortcode');
+
+function okfn_twitter_link_shortcode() {
+  $username = get_option('okfn_twitter_username');
+
+  if (!empty($username)):
+    return 'https://twitter.com/' . $username;
+  endif;
+}
+
 // Include dynamic list of words suitable for the Home page slider
 add_shortcode('okfn_word_slider', 'okfn_word_slider_shortcode');
 
