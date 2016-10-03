@@ -52,7 +52,7 @@
   border-image: @underline-border-image 2 stretch;
 }
 .footer-menu{
-  @media (max-width:767px){
+  @media (max-width:768px){
     text-align: center;
   }
   li{
@@ -60,11 +60,11 @@
     padding: 0;
     margin: 0 0 10px;
     font-weight: 700;
-    @media (max-width:767px){
+    @media (max-width:768px){
       margin: 0 10px;
     }
 
-    @media (min-width:767px){
+    @media (min-width:768px){
       display: block;
     }
   }
@@ -76,7 +76,7 @@ html {
   background-color: @primary;
 }
 
-@media (max-width: 767px){
+@media (max-width: 768px){
   body{
     padding: 0;
   }
@@ -92,6 +92,11 @@ html {
   overflow: hidden;
   padding-top: 90px;
   padding-bottom: 80px;
+
+  @media (max-width: 768px){
+    padding-top: 30px;
+    padding-bottom: 40px;
+  }
 }
 
 h1, h2, h3, h4, h5, h6, .brand, .strapline, label, .btn, button, input, p.intro {
@@ -297,6 +302,11 @@ input[type="color"]:focus,
     line-height: 43pt;
     margin-bottom: 40px;
 
+    @media (max-width: 768px){
+      font-size: 24pt;
+      line-height: 28pt;
+    }
+
     strong{
       .underline;
       font-weight: 400;
@@ -309,12 +319,21 @@ input[type="color"]:focus,
     font-size: 18px;
     line-height: 24px;
 
+    @media (max-width: 768px){
+      font-size: 12pt;
+      line-height: 18pt;
+    }
+
     &:last-of-type{
       margin-bottom: 90px;
+
+      @media (max-width: 768px){
+        margin-bottom: 30px;
+      }
     }
   }
 
-  @media (max-width: 767px){
+  @media (max-width: 768px){
     .btn{
       margin: 20px 0;
     }
@@ -347,7 +366,7 @@ code {
     text-transform: capitalize;
     position: relative;
     top: 10px;
-    
+
 
     &:hover{
       .btn-navbar-reset;
@@ -604,6 +623,8 @@ section.coloured:after {
 }
 
 .scoda-title{
+  
+  white-space: nowrap;
 
   .uppercase-lowercase;
   color: @core-cyan;
@@ -747,7 +768,7 @@ footer{
       margin-top: 0;
     }
 
-    @media (max-width: 767px){
+    @media (max-width: 768px){
       margin: 40px 0;
     }
   }
@@ -760,7 +781,7 @@ footer{
 
 .footer-logos{
 
-  @media (max-width: 767px){
+  @media (max-width: 768px){
     text-align: center;
   }
 
@@ -782,7 +803,7 @@ footer{
 .okf-footer{
   border: none;
   font-size: inherit;
-  @media (min-width:767px){
+  @media (min-width:768px){
     padding: 0 0 0 20px;
   }
 
@@ -920,6 +941,7 @@ a.sidelink:hover:after {
 }
 
 .slideshow-window{
+  max-height: 100vh;
   z-index: 0;
   position: absolute !important;
   top: 0;
@@ -934,13 +956,15 @@ a.sidelink:hover:after {
 
 .slideshow-slide{
   img{
-    width: 100%;
+    width: inherit;
+    height: 100%;
     opacity: 0.3;
   }
 }
 
 body div.slideshow-window * img{
   max-height: inherit;
+  max-width: inherit;
 }
 
 .slideshow-controls{
