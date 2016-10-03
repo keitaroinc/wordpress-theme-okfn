@@ -558,6 +558,10 @@ code {
   border-radius: 0px;
 }
 
+.screen-reader-text{
+  display: none;
+}
+
 #sidebar .widget.widget_search input[type=submit]{
   width: 15px;
   background: url("../images/search-button-alt.png") top left no-repeat;
@@ -579,6 +583,13 @@ section.coloured:after {
 
 /* Widgets */
 /* ======= */
+#sidebar{
+  .widgettitle{
+    display: block;
+    margin: 10px 0;
+    padding: 0;
+  }
+}
 #sidebar,
 #sidebar p,
 #sidebar li,
@@ -606,9 +617,8 @@ section.coloured:after {
 #sidebar .widget h4,
 #sidebar .widget h5,
 #sidebar .widget h6 {
-  color:@primary;
+  color: @primary;
   font-size: 18px;
-  margin-bottom:0px;
 }
 #sidebar .widget a {
   color: @core-dark-gray;
@@ -619,16 +629,8 @@ section.coloured:after {
 #sidebar .tb_tweet-info {
   color: @core-dark-gray;
 }
-#sidebar{
-  .widgettitle{
-    display: block;
-    margin: 0 0 20px;
-  }
-}
-.widget{
-  .menu{
-    .footer-menu;
-  }
+.menu-sidebar-blog-container{
+  padding: 0;
 }
 
 .gce-widget-grid .gce-calendar {
@@ -818,6 +820,12 @@ footer{
   .widgettitle{
     font-size: @text-size-hero-numbers - 2;
     margin-bottom: 20px;
+  }
+
+  .widget{
+    .menu{
+      .footer-menu;
+    }
   }
 }
 
