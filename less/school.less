@@ -629,6 +629,10 @@ section.coloured:after {
     display: block;
     margin: 10px 0;
     padding: 0;
+
+    strong{
+      font-size: @base-font-size - 2;
+    }
   }
 }
 /*#sidebar,
@@ -661,6 +665,7 @@ section.coloured:after {
 #sidebar .widget h6 {
   color: @primary;
   font-size: 18px;
+  padding-top: 0;
 }
 #sidebar .widget a {
   color: @core-dark-gray;
@@ -1195,9 +1200,9 @@ body div.slideshow-window * img{
 
 .okfn-word-slider{
   span{
-    &:not(:first-child){
-      display: none;      
-    }
+    animation: 5000ms fade-in-out ease-in-out;
+    animation-iteration-count: 1;
+    display: none;
   }
 }
 
@@ -1244,4 +1249,16 @@ body div.slideshow-window * img{
   display: flex;
   align-content: center;
   justify-content: center;
+}
+
+@keyframes fade-in-out{
+  0% {
+    opacity: 0;
+  }
+  15%, 85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }

@@ -18,21 +18,20 @@ function random_words_slider() {
   // console.log('Random number is: ' + random_number);
 
   // Check if the last number is not the same as the random one
-  if (random_number === last_number) {
+  while (random_number === last_number) {
     // Remember the last number
-    last_number = random_number;
     random_number = get_random_number(total_words);
-  } else {
-    // Hide all elements
-    okfn_word_slider.children().hide();
-    okfn_word_slider.children('span:nth-child(' + random_number + ')').fadeIn(250);
-    last_number = random_number;
   }
+  // Hide all elements
+  okfn_word_slider.children().css({'display': 'none'});
+  okfn_word_slider.children('span:nth-child(' + random_number + ')').css({'display': 'inline-block'});
+  last_number = random_number;
 }
 
 jQuery(document).ready(function ($) {
 
-  var random_words = setInterval(random_words_slider, 5300);
+  random_words_slider();
+  var random_words = setInterval(random_words_slider, 4950);
 
   $(".trimmed").dotdotdot({});
 
@@ -42,6 +41,12 @@ jQuery(document).ready(function ($) {
     } else {
       $(this).text('Menu');
     }
+  });
+
+  $('.widgettitle').each(function () {
+    var me = $(this);
+    me.addClass('uppercase-lowercase');
+    me.html(me.text().replace(/(^\w+)/, '<strong>$1</strong>'));
   });
 
 // Tweeter
