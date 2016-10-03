@@ -104,7 +104,7 @@ html {
     padding-top: 60px;
     padding-bottom: 40px;
   }
-  
+
   .span8{
     @media (max-width: 979px) and (min-width: 768px){
       width: 640px;
@@ -660,11 +660,23 @@ section.coloured:after {
     display: block;
     text-align: center;
     margin-top: 40px;
+
+    .scoda-title{
+      margin-bottom: -20px;
+    }
   }
+
   @media (min-width: 768px){
     display: flex;
     align-items: center;
   }
+
+  @media (min-width: 980px){
+    .span7{
+      margin-left: -60px; 
+    }
+  }
+
 }
 
 .twitter-icon{
@@ -852,6 +864,10 @@ footer{
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  @media (min-width: 767px) and (max-width: 980px){
+    padding-top: 20px;
+  }
 
   @media (min-width: 980px){
     font-size: @text-size-hero-numbers;
