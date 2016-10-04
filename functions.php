@@ -158,9 +158,7 @@ function echo_magazine_post($post, $is_featured, $echo = true) {
   $print .= '<div class="box post ' . $post_class . '">';
   $print .= '<div class="padder"> <a class="image" href="' . get_permalink() . '" style="background-image:url(' . $post_img . ');"></a>';
   $print .= '<div class="text">';
-  $print .= '<h2><a href="' . get_permalink() . '" rel="bookmark">';
-  get_the_title();
-  $print .= '</a></h2>';
+  $print .= '<h2><a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a></h2>';
   $print .= '<span class="entry-meta"> Posted on ';
   $print .= sprintf(__('%1$s <span>in %2$s</span>', 'buddypress'), get_the_date(), get_the_category_list(', '));
   $print .= 'by ' . bp_core_get_userlink($post->post_author);

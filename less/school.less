@@ -176,6 +176,10 @@ figure{
   border-radius: @border-radius-base;
 }
 
+#content .post h2{
+  font-weight: 700;
+}
+
 #content h2,
 #content h3{
   margin-top: @base-negative-space;
@@ -235,7 +239,7 @@ a {
   }
 
   .post-content{
-    
+
     blockquote{
       color: @core-dark-gray;
       background: @core-lightest-gray;
@@ -682,9 +686,13 @@ section.coloured:after {
   color: inherit;
   border-radius: @border-radius-base;
   overflow: hidden;
-  
-  p:last-of-type{
-    margin-bottom: 10px;
+
+  p{
+    font-size: @base-font-size - 2;
+    line-height: @base-font-size + 4;
+    &:last-of-type{
+      margin-bottom: 10px;
+    }
   }
 }
 #sidebar .widget > ul li {
