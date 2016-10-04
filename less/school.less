@@ -2,9 +2,9 @@
 /* =============== */
 @base-font-family: OpenSans, sans-serif;
 @base-font-size: 16px;
-@border-radius-base: 5px;
+@base-border-radius: 5px;
 @navbar-font-size: 11.5pt;
-@navbar-hover-border-radius: @border-radius-base + 1;
+@navbar-hover-border-radius: @base-border-radius + 1;
 @underline-border-image: url("../images/underline.png");
 @text-size-hero-numbers: 16px;
 @text-size-h2: 22pt;
@@ -173,7 +173,7 @@ figure{
 #content .post .entry img{
   padding: 0;
   margin: 30px 0;
-  border-radius: @border-radius-base;
+  border-radius: @base-border-radius;
 }
 
 #content .post h2{
@@ -244,7 +244,7 @@ a {
       color: @core-dark-gray;
       background: @core-lightest-gray;
       padding: @base-negative-space / 2;
-      border-radius: @border-radius-base;
+      border-radius: @base-border-radius;
       margin-bottom: @base-negative-space / 2;
       border: 0;
     }
@@ -269,14 +269,14 @@ button,
 a.group-button,
 input[type="submit"],
 input[type="reset"] {
-  border-radius: @border-radius-base - 3;
+  border-radius: @base-border-radius - 3;
   text-shadow: none;
 }
 
 .btn-large,
 input[type=submit].btn-large,
 input[type=reset].btn-large {
-  border-radius: @border-radius-base;
+  border-radius: @base-border-radius;
   padding: (@btn-large-padding - 2) @btn-large-padding @btn-large-padding;
   font-size: 15pt;
 }
@@ -684,7 +684,7 @@ section.coloured:after {
   background-color: @core-lightest-gray;
   border-color: transparent;
   color: inherit;
-  border-radius: @border-radius-base;
+  border-radius: @base-border-radius;
   overflow: hidden;
 
   p{
@@ -1085,8 +1085,8 @@ body > .tabbable.mailing-lists .nav li a {
   background-color:#FFF;
   background-image:none;
   color:@primary;
-  -webkit-border-radius: 5 * @border-radius-base;
-  border-radius: 5 * @border-radius-base;
+  -webkit-border-radius: 5 * @base-border-radius;
+  border-radius: 5 * @base-border-radius;
   font-size: 22px;
   font-weight: bold;
   padding: 10px @base-negative-space;
@@ -1196,7 +1196,7 @@ body div.slideshow-window * img{
   .post-wrap{
     overflow: hidden;
     background-color: @white;
-    border-radius: @border-radius-base;
+    border-radius: @base-border-radius;
   }
 
   .post-meta-wrap{
@@ -1296,6 +1296,71 @@ body div.slideshow-window * img{
   display: flex;
   align-content: center;
   justify-content: center;
+}
+
+// Courses
+
+#content{
+  .course-title{
+    margin-top: 0;
+  }
+}
+.course-category{
+  .course-title{
+    font-size: @base-font-size + 2;
+  }
+  
+  ul{
+    font-weight: 700;
+    list-style: none;
+    margin-left: 0;
+  }
+  
+  li{
+    margin-bottom: 10px;
+  }
+  
+  a{
+    font-size: @base-font-size + 2;      
+    color: inherit;
+  }
+}
+
+.course-parent{
+  overflow: hidden;
+  background-color: lighten(@core-light-gray, 8%);
+  border-radius: @base-border-radius;
+  padding: @base-negative-space/2 @base-negative-space/2 0;
+  margin-bottom: 20px;
+
+  .btn-primary,
+  .more{
+    .btn-uppercase;
+  }
+}
+
+.course-toggle{
+  margin-top: 20px;
+
+  &:not(:last-child){
+    margin-bottom: 20px;
+  }
+}
+
+.course-parent-header{
+  margin-bottom: @base-negative-space/2;
+}
+
+.course-title{}
+
+.course-child{
+  background-color: @core-lightest-gray;
+  margin: 0 -(@base-negative-space/2);
+  padding: @base-negative-space/2;
+
+  &:not(:last-child){
+    border-bottom: 2px solid @white;
+  }
 }
 
 @keyframes fade-in-out{
