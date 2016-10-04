@@ -43,7 +43,7 @@ jQuery(document).ready(function ($) {
 
   function uncollapse(what) {
     $(".course-children").hide();
-    //$(".course-toggle .more").show().text('Hide Modules');
+//    $(".course-toggle .more").show();
     $(".course-children", $(what).parent().parent().parent()).show();
     //$(what).hide();
   }
@@ -62,7 +62,7 @@ jQuery(document).ready(function ($) {
   }
 
   $('.course-toggle .more').click(function () {
-    uncollapse($($(this).attr('href')));
+    uncollapse($(this, window.location.hash));
   });
 
   $('#sidebar .widgettitle').each(function () {
