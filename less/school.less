@@ -1157,17 +1157,18 @@ body div.slideshow-window * img{
 }
 
 .latest{
-  padding: 10px 0 @base-negative-space;
+  padding: (@base-negative-space/2) 0 @base-negative-space;
   background: @core-lightest-gray;
 
   h2{
     .uppercase-lowercase;
     font-weight: 400;
+    font-size: @text-size-h2 - 4;
     color: @core-cyan;
     margin-bottom: 20px;
 
     strong{
-      font-size: @text-size-h2 - 5;
+      font-size: (@text-size-h2 - 5) - 5;
     }
   }
 
