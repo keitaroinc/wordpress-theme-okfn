@@ -1347,6 +1347,18 @@ body div.slideshow-window * img{
   }
 
   a{
+
+    &.active{
+      &:before{
+        display: inline-block;
+        content: '';
+        width: 5px;
+        height: 16px;
+        margin-right: 10px;
+        background: url('../images/small_arrow.png') center no-repeat;
+      }
+    }
+
     font-size: @base-font-size + 2;      
     color: inherit;
   }
