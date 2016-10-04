@@ -134,6 +134,14 @@ body.single{
       width: 6@base-negative-space;
     }
   }
+
+  p:last-of-type{
+    margin-bottom: 90px;
+
+    @media (max-width: 767px){
+      margin-bottom: 30px;
+    }
+  }
 }
 
 h1, h2, h3, h4, h5, h6, .brand, .strapline, label, .btn, button, input, p.intro {
@@ -392,14 +400,6 @@ input[type="color"]:focus,
     @media (max-width: 767px){
       font-size: 12pt;
       line-height: 18pt;
-    }
-
-    &:last-of-type{
-      margin-bottom: 90px;
-
-      @media (max-width: 767px){
-        margin-bottom: 30px;
-      }
     }
   }
 
