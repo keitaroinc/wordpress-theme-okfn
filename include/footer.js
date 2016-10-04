@@ -41,7 +41,7 @@ jQuery(document).ready(function ($) {
     }
   });
 
-  $('.widgettitle').each(function () {
+  $('#sidebar .widgettitle').each(function () {
     var me = $(this);
     me.addClass('uppercase-lowercase');
     me.html(me.text().replace(/(^\w+)/, '<strong>$1</strong>'));
