@@ -1308,14 +1308,14 @@ body div.slideshow-window * img{
   .courses{
 
     .course-category-header{
-      
+
       &:not(:first-child){
         margin-top: @base-negative-space;
       }
 
       h2{
         font-size: @text-size-h2 + 8;
-        margin-bottom: 0;
+        margin-bottom: 5px;
         margin-top: 0;
       }
     }
@@ -1323,11 +1323,11 @@ body div.slideshow-window * img{
 }
 
 .course-category-header{
-  padding: 0 (@base-negative-space/2) @base-negative-space;
-  
-  p{
-    font-weight: 700;
-  }
+  padding: 0 (@base-negative-space/2) (@base-negative-space/2)-10;
+}
+
+.course-category-description{
+  font-weight: 700;  
 }
 
 .course-category{
