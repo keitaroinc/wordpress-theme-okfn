@@ -41,6 +41,8 @@ jQuery(document).ready(function ($) {
     }
   });
 
+  $('.courses .more').click(uncollapse($(this).attr('href')));
+
   $('#sidebar .widgettitle').each(function () {
     var me = $(this);
     me.addClass('uppercase-lowercase');
