@@ -235,6 +235,15 @@ a {
   }
 
   .post-content{
+    
+    blockquote{
+      color: @core-dark-gray;
+      background: @core-lightest-gray;
+      padding: @base-negative-space / 2;
+      border-radius: @border-radius-base;
+      margin-bottom: @base-negative-space / 2;
+      border: 0;
+    }
 
     h2{
       margin-top: 0;
@@ -673,6 +682,10 @@ section.coloured:after {
   color: inherit;
   border-radius: @border-radius-base;
   overflow: hidden;
+  
+  p:last-of-type{
+    margin-bottom: 10px;
+  }
 }
 #sidebar .widget > ul li {
   border-top-color:fade(@primary, 35%);
