@@ -42,11 +42,11 @@ jQuery(document).ready(function ($) {
   });
 
   if (window.location.hash !== "") {
-    $('.course-category a[href="' + window.location.hash + '"]').addClass('active');
+    $('.course-category li a[href="' + window.location.hash + '"]').addClass('active');
   }
 
-  $('.course-category a').click(function () {
-    $('.course-category a').removeClass('active');
+  $('.course-category ul a').click(function () {
+    $('.course-category ul a').removeClass('active');
     $(this).addClass('active');
   });
 
@@ -54,11 +54,12 @@ jQuery(document).ready(function ($) {
     var toggleButton = $(this).parent().children('.course-parent-header').children().children('.btn');
     toggleButton.text('Hide Modules');
     window.location.hash = toggleButton.attr('href');
-    $('.course-category a[href="' + window.location.hash + '"]').addClass('active');
+    $('.course-category ul a').removeClass('active');
+    $('.course-category ul a[href="' + window.location.hash + '"]').addClass('active');
   });
+  
   $('.course-children').on('hide', function () {
     $(this).parent().children('.course-parent-header').children().children('.btn').text('Show Modules');
-    $('.course-category a[href="' + window.location.hash + '"]').removeClass('active');
     window.location.hash = '/';
   });
 

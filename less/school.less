@@ -1333,6 +1333,7 @@ body div.slideshow-window * img{
     top: 40px;
 
     @media(max-width: 767px){
+      margin-bottom: @base-negative-space;
       position: inherit;
     }
   }
@@ -1347,11 +1348,29 @@ body div.slideshow-window * img{
 }
 
 .course-category{
+  
+  .scoda-title{
+    display: none;
+  }
+  
+  @media (max-width: 767px){
+    text-align: center;
+    
+    .scoda-title{
+      display: block;
+      margin-bottom: @base-negative-space;
+    }
+  }
   .course-title{
     font-size: @base-font-size + 2;
   }
 
   ul{
+
+    @media (max-width: 767px){
+      display: none;
+    }
+
     font-weight: 700;
     list-style: none;
     margin-left: 0;
