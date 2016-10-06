@@ -222,8 +222,8 @@ a {
 
 #content{
 
-  .page{
-    @media (min-width: 980px){
+  @media (min-width: 980px){
+    #blog-single{
       padding-right: @base-negative-space;    
     }
   }
@@ -1299,13 +1299,17 @@ body div.slideshow-window * img{
 }
 
 // Courses
-
 #content{
   .course-title{
     margin-top: 0;
   }
 
   .courses{
+
+    @media(max-width: 767px){
+      padding-left: 0;
+      padding-right: 0;
+    }
 
     .collapse{
       overflow: visible;
@@ -1327,6 +1331,10 @@ body div.slideshow-window * img{
 
   .course-categories-sidebar{
     top: 40px;
+
+    @media(max-width: 767px){
+      position: inherit;
+    }
   }
 }
 
@@ -1414,7 +1422,7 @@ body div.slideshow-window * img{
 .course-quiz,
 .course-text,
 .course-video{
-  padding-right: (@base-negative-space*3) + 10;
+  padding-right: @base-negative-space*4;
 }
 
 .course-best-practice{
