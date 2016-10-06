@@ -51,12 +51,15 @@ jQuery(document).ready(function ($) {
   });
 
   $('.course-children').on('show', function () {
-    $(this).parent().children('.course-parent-header').children().children('.btn').text('Hide Modules');
+    var toggleButton = $(this).parent().children('.course-parent-header').children().children('.btn');
+    toggleButton.text('Hide Modules');
+    window.location.hash = toggleButton.attr('href') + 'Parent';
     $('.course-category a[href="' + window.location.hash + '"]').addClass('active');
   });
   $('.course-children').on('hide', function () {
     $(this).parent().children('.course-parent-header').children().children('.btn').text('Show Modules');
     $('.course-category a[href="' + window.location.hash + '"]').removeClass('active');
+    window.location.hash = '/';
   });
 
   // Transform Sidebar widget titles to SCODA style
