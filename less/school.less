@@ -1310,7 +1310,7 @@ body div.slideshow-window * img{
     .collapse{
       overflow: visible;
     }
-    
+
     .course-category-header{
 
       &:not(:first-child){
@@ -1324,7 +1324,7 @@ body div.slideshow-window * img{
       }
     }
   }
-  
+
   .course-categories-sidebar{
     top: 40px;
   }
@@ -1397,9 +1397,10 @@ body div.slideshow-window * img{
   margin-bottom: @base-negative-space/2;
 }
 
-.course-title{}
-
 .course-child{
+  background-position: 95% center;
+  background-repeat: no-repeat;
+  background-size: 15%;
   background-color: @core-lightest-gray;
   margin: 0 -(@base-negative-space/2);
   padding: @base-negative-space/2;
@@ -1407,6 +1408,29 @@ body div.slideshow-window * img{
   &:not(:last-child){
     border-bottom: 2px solid @white;
   }
+}
+
+.course-best-practice,
+.course-quiz,
+.course-text,
+.course-video{
+  padding-right: (@base-negative-space*3) + 10;
+}
+
+.course-best-practice{
+  background-image: url("../images/best-practice.png");
+}
+
+.course-video{
+  background-image: url("../images/video.png");
+}
+
+.course-text{
+  background-image: url("../images/text.png");
+}
+
+.course-quiz{
+  background-image: url("../images/quiz.png");
 }
 
 @keyframes fade-in-out{
