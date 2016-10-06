@@ -41,30 +41,41 @@ jQuery(document).ready(function ($) {
     }
   });
 
-  function uncollapse(what) {
-    $(".course-children").hide();
-//    $(".course-toggle .more").show();
-    $(".course-children", $(what).parent().parent().parent()).show();
-    //$(what).hide();
+  if (window.location.hash !== "") {
+    $('.course-category a[href="' + window.location.hash + '"]').addClass('active');
   }
-
-  $(".course-children").hide();
 
   $('.course-category a').click(function () {
     $('.course-category a').removeClass('active');
     $(this).addClass('active');
   });
 
-  if (window.location.hash !== "") {
-    uncollapse($("a", $(window.location.hash))[0]);
-    $('.course-category a').removeClass('active');
+  $('.course-children').on('show', function () {
+    $(this).parent().children('.course-parent-header').children().children('.btn').text('Hide Modules');
     $('.course-category a[href="' + window.location.hash + '"]').addClass('active');
-  }
-
-  $('.course-toggle .more').click(function () {
-    uncollapse($(this, window.location.hash));
+  });
+  $('.course-children').on('hide', function () {
+    $(this).parent().children('.course-parent-header').children().children('.btn').text('Show Modules');
+    $('.course-category a[href="' + window.location.hash + '"]').removeClass('active');
   });
 
+//  // Uncollapse course modules on the Online Courses page
+//  function uncollapse(what) {
+//    $(".course-children").hide();
+//    $(".course-children", $(what).parent().parent().parent()).show();
+//  }
+//
+//  // Hide all children courses on the Online Courses page
+//  $(".course-children").hide();
+//
+
+
+//  $('.course-toggle .more').click(function () {
+//    uncollapse($(this, window.location.hash));
+//    $(this).text('Hide Modules');
+//  });
+
+  // Transform Sidebar widget titles to SCODA style
   $('#sidebar .widgettitle').each(function () {
     var me = $(this);
     me.addClass('uppercase-lowercase');
