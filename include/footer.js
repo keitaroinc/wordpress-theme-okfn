@@ -53,7 +53,7 @@ jQuery(document).ready(function ($) {
   $('.course-children').on('show', function () {
     var toggleButton = $(this).parent().children('.course-parent-header').children().children('.btn');
     toggleButton.text('Hide Modules');
-    window.location.hash = toggleButton.attr('href') + 'Parent';
+    window.location.hash = toggleButton.attr('href');
     $('.course-category a[href="' + window.location.hash + '"]').addClass('active');
   });
   $('.course-children').on('hide', function () {
