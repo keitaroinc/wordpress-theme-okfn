@@ -59,22 +59,6 @@ jQuery(document).ready(function ($) {
     $('.course-category a[href="' + window.location.hash + '"]').removeClass('active');
   });
 
-//  // Uncollapse course modules on the Online Courses page
-//  function uncollapse(what) {
-//    $(".course-children").hide();
-//    $(".course-children", $(what).parent().parent().parent()).show();
-//  }
-//
-//  // Hide all children courses on the Online Courses page
-//  $(".course-children").hide();
-//
-
-
-//  $('.course-toggle .more').click(function () {
-//    uncollapse($(this, window.location.hash));
-//    $(this).text('Hide Modules');
-//  });
-
   // Transform Sidebar widget titles to SCODA style
   $('#sidebar .widgettitle').each(function () {
     var me = $(this);
