@@ -359,7 +359,7 @@ input[type="search"],
 input[type="tel"],
 input[type="color"],
 .uneditable-input{
-  border-color: transparent;
+  border-color: @core-light-gray;
   box-shadow: none;
 }
 
@@ -669,6 +669,28 @@ section.coloured:after {
     }
   }
 }
+
+.widget{
+  textarea,
+  input[type="text"],
+  input[type="password"],
+  input[type="datetime"],
+  input[type="datetime-local"],
+  input[type="date"],
+  input[type="month"],
+  input[type="time"],
+  input[type="week"],
+  input[type="number"],
+  input[type="email"],
+  input[type="url"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="color"],
+  .uneditable-input{
+    border-color: transparent;
+  }
+}
+
 /*#sidebar,
 #sidebar p,
 #sidebar li,
@@ -1348,14 +1370,14 @@ body div.slideshow-window * img{
 }
 
 .course-category{
-  
+
   .scoda-title{
     display: none;
   }
-  
+
   @media (max-width: 767px){
     text-align: center;
-    
+
     .scoda-title{
       display: block;
       margin-bottom: @base-negative-space;
