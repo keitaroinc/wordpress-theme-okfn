@@ -50,7 +50,7 @@
     elseif ($okfn_colours == "turquoise") :
       wp_enqueue_style('okfn-turquoise', get_stylesheet_directory_uri() . '/css/turquoise.css', array(), '1.1.0');
     elseif ($okfn_colours == "school") :
-      wp_enqueue_style('okfn-school', get_stylesheet_directory_uri() . '/css/school.css', array(), '1.1.2');
+      wp_enqueue_style('okfn-school', get_stylesheet_directory_uri() . '/css/school.css', array(), filemtime(get_stylesheet_directory() . '/css/school.css'));
     endif;
     ?>
 
