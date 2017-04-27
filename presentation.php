@@ -1,8 +1,8 @@
 <?php
 /*
-Template Name: Presentation 
+Template Name: Presentation
  */
- 
+
 // shortcode
 
 // theme options
@@ -22,18 +22,18 @@ foreach ($options as $value) {
 	<link rel="stylesheet" href="<?php echo get_bloginfo('stylesheet_directory'); ?>/css/shower.css"/>
   <?php if ($okfn_colours == "school") {?>
   <link rel="stylesheet" href="<?php echo get_bloginfo('stylesheet_directory'); ?>/css/shower-school.css"/>
-  <?php } else {?> 
+  <?php } else {?>
   <link rel="stylesheet" href="<?php echo get_bloginfo('stylesheet_directory'); ?>/css/shower-okf.css"/>
   <?php }?>
-  
+
   <?php if ($okfn_colours == "blue") : ?>
-    <link rel="shortcut icon" href="http://assets.okfn.org/p/ckan/img/ckan.ico" />
+    <link rel="shortcut icon" href="//assets.okfn.org/p/ckan/img/ckan.ico" />
   <?php elseif ($okfn_colours == "white" || $okfn_colours == "turquoise") : ?>
-    <link rel="shortcut icon" href="http://assets.okfn.org/p/okfn/img/grey-favicon.ico" />
+    <link rel="shortcut icon" href="//assets.okfn.org/p/okfn/img/grey-favicon.ico" />
   <?php elseif ($okfn_colours == "school") : ?>
-    <link rel="shortcut icon" href="http://assets.okfn.org/p/schoolofdata/img/favicon.ico" />
+    <link rel="shortcut icon" href="//assets.okfn.org/p/schoolofdata/img/favicon.ico" />
   <?php else: ?>
-    <link rel="shortcut icon" href="http://assets.okfn.org/p/okfn/img/favicon.ico" />
+    <link rel="shortcut icon" href="//assets.okfn.org/p/okfn/img/favicon.ico" />
   <?php endif; ?>
 </head>
 <body class="list">
@@ -50,7 +50,7 @@ foreach ($options as $value) {
 				}
 		?>
 	</header>
-		
+
 
     <?php the_content(); ?>
   <?php endwhile; endif; ?>
@@ -66,11 +66,11 @@ foreach ($options as $value) {
             <?php echo stripslashes($okfn_header_textarea2); ?>
           </div>
         <?php endif; ?>
-        
-        <a title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>" 
-            class="brand" 
+
+        <a title="<?php _ex( 'Home', 'Home page banner link title', 'buddypress' ); ?>"
+            class="brand"
             href="<?php echo home_url(); ?>">
-            
+
           <?php
             // Check for header image
             $header_image = get_header_image();
@@ -78,9 +78,9 @@ foreach ($options as $value) {
           ?>
             <img src="<?php header_image(); ?>" alt="logo" />
           <?php elseif ($okfn_logo_icon == "false") : ?>
-            <img src="http://assets.okfn.org/web/images/header-logox2.png" alt="logo"/>
+            <img src="//assets.okfn.org/web/images/header-logox2.png" alt="logo"/>
           <?php endif; ?>
-      
+
           <?php if ( $okfn_logo_text == "false" ) : ?>
             <?php bp_site_name(); ?>
           <?php endif; ?>

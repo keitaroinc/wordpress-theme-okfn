@@ -181,7 +181,7 @@ function echo_magazine_post($post, $is_featured, $echo = true) {
   } elseif (count($matches))
     $post_img = $matches[1]; // else use old featured image
   else {
-    $post_img = 'http://assets.okfn.org/web/images/blog-placeholder.png'; // else use placeholder
+    $post_img = '//assets.okfn.org/web/images/blog-placeholder.png'; // else use placeholder
   }
   $print .= '<div class="box post ' . $post_class . '">';
   $print .= '<div class="padder"> <a class="image" href="' . get_permalink() . '" style="background-image:url(' . $post_img . ');"></a>';

@@ -65,7 +65,7 @@ function carousel_slide_shortcode($atts) {
   } elseif (!empty($calendar)) {
     $slideContent = '<div class="calendar-slide">' . do_shortcode($googleCalendar) . '</div>';
   } else {
-    $slideContent = '<img src="http://farm8.staticflickr.com/7174/6554801385_83acdc501d_o_d.png">';
+    $slideContent = '<img src="//farm8.staticflickr.com/7174/6554801385_83acdc501d_o_d.png">';
   };
   if (!empty($caption)) {
     $slideCaptionOpen = '<div class="carousel-caption">';
@@ -105,7 +105,7 @@ add_shortcode('zcarousel', 'zcarousel_shortcode');
 
 function zcarousel_slide_shortcode($atts, $content = null) {
   extract(shortcode_atts(array(
-      'img' => 'http://farm8.staticflickr.com/7174/6554801385_83acdc501d_o_d.png',
+      'img' => '//farm8.staticflickr.com/7174/6554801385_83acdc501d_o_d.png',
                   ), $atts));
   return 'data.push({"url":"' . $img . '","caption":"' . $content . '"});';
 }
@@ -126,7 +126,7 @@ add_shortcode('banner', 'banner_shortcode');
 
 function banner_shortcode($atts, $content = null) {
   extract(shortcode_atts(array(
-      'bg' => 'http://assets.okfn.org/web/images/banner.png',
+      'bg' => '//assets.okfn.org/web/images/banner.png',
       'height' => '320',
       'bgcolour' => 'd4d4d4',
       'class' => ''
