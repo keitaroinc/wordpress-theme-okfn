@@ -517,8 +517,17 @@ function latest_post_shortcode($atts) {
   $latest_post = '';
 
   $q = new WP_Query(
-          array('posts_per_page' => 1, 'category_name' => $category, 'p' => $id)
+          array(
+      // Display just the first sticky post, if none return the last post published
+      'posts_per_page' => 1,
+      'post__in' => get_option('sticky_posts'),
+      'ignore_sticky_posts' => 1,
+      // ---
+      'category_name' => $category,
+      'p' => $id
+          )
   );
+
 
   while ($q->have_posts()) : $q->the_post();
 
@@ -787,6 +796,7 @@ function okfn_word_slider_shortcode($atts) {
   );
 
   $options_set = trim(get_option('okfn_underlined_textarea'));
+  $echo = '';
 
   if (!empty($words)):
     $slide_words = explode(',', $words);
