@@ -1,4 +1,32 @@
 <?php
+// Register default School of Data background image
+register_default_headers(array(
+    'scoda-1' => array(
+        'url' => '%s/images/HOME_1.jpg',
+        'thumbnail_url' => '%s/images/HOME_1.jpg',
+        'description' => __('School of Data Background #1', 'okfn')
+    ),
+    'scoda-2' => array(
+        'url' => '%s/images/HOME_2.jpg',
+        'thumbnail_url' => '%s/images/HOME_2.jpg',
+        'description' => __('School of Data Background #2', 'okfn')
+    ),
+    'scoda-3' => array(
+        'url' => '%s/images/HOME_3.jpg',
+        'thumbnail_url' => '%s/images/HOME_3.jpg',
+        'description' => __('School of Data Background #3', 'okfn')
+    ),
+    'scoda-4' => array(
+        'url' => '%s/images/HOME_4.jpg',
+        'thumbnail_url' => '%s/images/HOME_4.jpg',
+        'description' => __('School of Data Background #4', 'okfn')
+    ),
+    'scoda-5' => array(
+        'url' => '%s/images/HOME_5.jpg',
+        'thumbnail_url' => '%s/images/HOME_5.jpg',
+        'description' => __('School of Data Background #5', 'okfn')
+    )
+));
 
 /**
  * Enables the Excerpt meta box in Page edit screen.
@@ -44,7 +72,7 @@ add_action('bp_init', 'remove_xprofile_links');
 if (!function_exists('bp_dtheme_enqueue_styles')) :
 
   function bp_dtheme_enqueue_styles() {
-    
+
   }
 
 endif;
@@ -57,18 +85,18 @@ function filter_nav_menu($header) {
 
   $header = str_get_html($header);
   foreach ($header->find('li') as $li) {
-    // "current-menu-item" is marked as "active" for bootstra
+// "current-menu-item" is marked as "active" for bootstra
     if (stristr($li->class, "current-menu-item")) {
       $li->class .= " active";
     }
-    // Any <li> containing a <ul> gets a special class
+// Any <li> containing a <ul> gets a special class
     $isDropdown = count($li->find('ul')) > 0;
     if ($isDropdown) {
-      $li->class.=" dropdown";
+      $li->class .= " dropdown";
       $tag = 'data-dropdown';
       $li->$tag = "dropdown";
-      $li->find('a', 0)->class.=" dropdown-toggle";
-      $li->find('ul', 0)->class.=" dropdown-menu";
+      $li->find('a', 0)->class .= " dropdown-toggle";
+      $li->find('ul', 0)->class .= " dropdown-menu";
     }
   }
 
@@ -107,7 +135,7 @@ function register_form_blurb($args) {
  */
 
 function choose_best_category($categories) {
-  // Cannot fathom why my array comes inside an array...
+// Cannot fathom why my array comes inside an array...
   $categories = $categories[0];
   global $options;
   foreach ($options as $value) {
@@ -127,7 +155,7 @@ function choose_best_category($categories) {
   } else {
     $category_priority = okfn_load_file(get_bloginfo('stylesheet_directory') . '/category-priority.txt');
   }
-  // Choose the first category I have in the priority list
+// Choose the first category I have in the priority list
   $first = null;
   foreach ($category_priority as $priority) {
     foreach ($categories as $category) {
@@ -136,7 +164,7 @@ function choose_best_category($categories) {
     }
   }
   return $categories[0]->name;
-  // I have no special categories. Just choose the first one.
+// I have no special categories. Just choose the first one.
   return '???';
 }
 
@@ -145,7 +173,7 @@ function echo_magazine_post($post, $is_featured, $echo = true) {
   $print = '';
   $post_class = $is_featured ? 'featured' : 'preview';
   $post_category = choose_best_category(array(get_the_category()));
-  // Extract the first img src from the post body
+// Extract the first img src from the post body
   $regex = '/magazine.image\s*=\s*"?([^"\s]*)/';
   preg_match($regex, get_the_content(), $matches);
   if (has_post_thumbnail()) {
@@ -180,8 +208,8 @@ function echo_magazine_post($post, $is_featured, $echo = true) {
 
 // The height and width of your custom header. You can hook into the theme's own filters to change these values.
 // Add a filter to bp_dtheme_header_image_width and bp_dtheme_header_image_height to change these values.
-define('HEADER_IMAGE_WIDTH', apply_filters('bp_dtheme_header_image_width', 60));
-define('HEADER_IMAGE_HEIGHT', apply_filters('bp_dtheme_header_image_height', 60));
+//define('HEADER_IMAGE_WIDTH', apply_filters('bp_dtheme_header_image_width', 60));
+//define('HEADER_IMAGE_HEIGHT', apply_filters('bp_dtheme_header_image_height', 60));
 
 
 /*
@@ -498,11 +526,11 @@ $options = array(
     array("name" => "Misc",
         "type" => "title"),
     //array("name" => "Carousel Style",
-    //"id" => $shortname."_carosel",
-    //"type" => "radio",
-    //"desc" => "Change layout style of Bootstrap carousel",
-    //"options" => array("default" => "Default", "text-right" => "Text on Right (full width)", "stack" => "Text on Right (photo stack)"),
-    //"std" => "default"),
+//"id" => $shortname."_carosel",
+//"type" => "radio",
+//"desc" => "Change layout style of Bootstrap carousel",
+//"options" => array("default" => "Default", "text-right" => "Text on Right (full width)", "stack" => "Text on Right (photo stack)"),
+//"std" => "default"),
     array("name" => "Tagline in meta title?",
         "desc" => "Check this box to append site title with tagline in the meta title tag.",
         "id" => $shortname . "_tagline_title",
@@ -561,10 +589,12 @@ function mytheme_admin() {
 
   global $themename, $shortname, $options;
 
-  if ($_REQUEST['saved'])
+  if ($_REQUEST['saved']) {
     echo '<div id="message" class="updated fade"><p><strong>' . $themename . ' settings saved.</strong></p></div>';
-  if ($_REQUEST['reset'])
+  }
+  if ($_REQUEST['reset']) {
     echo '<div id="message" class="updated fade"><p><strong>' . $themename . ' settings reset.</strong></p></div>';
+  }
   ?>
 
   <div class="options wrap">
@@ -874,43 +904,39 @@ function mytheme_admin() {
   add_action('widgets_init', 'okfn_widgets_init');
 
   function okfn_widgets_init() {
-    if (function_exists('register_sidebar')):
+    register_sidebar(array(
+        'id' => 'sidebar-1',
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget' => '</div>'
+    ));
 
-      register_sidebar(array(
-          'id' => 'sidebar-1',
-          'before_widget' => '<div id="%1$s" class="widget %2$s">',
-          'after_widget' => '</div>'
-      ));
+    register_sidebar(array(
+        'id' => 'first-footer-widget-area',
+        'name' => __('First Footer Widget Area', 'okfn'),
+        'before_widget' => '<div id="%1$s" class="widget">',
+        'after_widget' => '</div>',
+    ));
 
-      register_sidebar(array(
-          'id' => 'first-footer-widget-area',
-          'name' => __('First Footer Widget Area', 'okfn'),
-          'before_widget' => '<div class="widget">',
-          'after_widget' => '</div>',
-      ));
+    register_sidebar(array(
+        'id' => 'second-footer-widget-area',
+        'name' => __('Second Footer Widget Area', 'okfn'),
+        'before_widget' => '<div id="%1$s" class="widget">',
+        'after_widget' => '</div>',
+    ));
 
-      register_sidebar(array(
-          'id' => 'second-footer-widget-area',
-          'name' => __('Second Footer Widget Area', 'okfn'),
-          'before_widget' => '<div class="widget">',
-          'after_widget' => '</div>',
-      ));
+    register_sidebar(array(
+        'id' => 'third-footer-widget-area',
+        'name' => __('Third Footer Widget Area', 'okfn'),
+        'before_widget' => '<div id="%1$s" class="widget">',
+        'after_widget' => '</div>',
+    ));
 
-      register_sidebar(array(
-          'id' => 'third-footer-widget-area',
-          'name' => __('Third Footer Widget Area', 'okfn'),
-          'before_widget' => '<div class="widget">',
-          'after_widget' => '</div>',
-      ));
-
-      register_sidebar(array(
-          'id' => 'fourth-footer-widget-area',
-          'name' => __('Fourth Footer Widget Area', 'okfn'),
-          'before_widget' => '<div class="widget">',
-          'after_widget' => '</div>',
-      ));
-
-    endif;
+    register_sidebar(array(
+        'id' => 'fourth-footer-widget-area',
+        'name' => __('Fourth Footer Widget Area', 'okfn'),
+        'before_widget' => '<div id="%1$s" class="widget">',
+        'after_widget' => '</div>',
+    ));
   }
 
   /*   * *********************************************************************
@@ -1286,6 +1312,31 @@ function mytheme_admin() {
     wp_enqueue_style('wordpress-theme-okfn', get_stylesheet_uri(), array(), filemtime(get_stylesheet_directory() . '/style.css'));
   }
 
+  add_action('after_setup_theme', 'okfn_theme_init');
+
+  function okfn_theme_init() {
+
+    global $wp_version;
+    if (version_compare($wp_version, '3.4', '>=')) :
+
+//      add_theme_support('custom-background', array(
+//          'default-image' => get_template_directory_uri() . '/images/HOME_1.jpg',
+//              )
+//      );
+
+      add_theme_support('custom-header', array(
+          'flex-width' => true,
+          'flex-height' => true,
+          'default-image' => get_template_directory_uri() . '/images/HOME_1.jpg'
+      ));
+
+    else :
+      add_custom_image_header($wp_head_callback, $admin_head_callback);
+    endif;
+  }
+
+  add_shortcode('okfn_load_header_image', 'okfn_header_w_featured_image');
+
   /**
    * Display an optional post thumbnail.
    *
@@ -1294,27 +1345,40 @@ function mytheme_admin() {
    *
    */
   function okfn_header_w_featured_image() {
-    if (post_password_required() || is_attachment() || !has_post_thumbnail()) {
+    if (post_password_required() || is_attachment()) {
       return;
     }
 
-    if (is_page()) :
-      ?>
+    $header_image = okfn_get_header_background_src();
+    ?>
 
-      <div class="page-banner" style="background-image: url('<?php echo get_the_post_thumbnail_url(); ?>')">
+    <?php if ($header_image) : ?>
+      <div class="page-banner" style="background-image: url('<?php echo $header_image; ?>')">
         <div class="container">
           <div class="row">
             <div class="span8">
               <div class="well">
-                <?php the_title('<h1>', '</h1>'); ?>
-                <?php printf('<p>%s</p>', get_the_excerpt()); ?>
+                <?php
+                if (is_page()) :
+                  the_title('<h1>', '</h1>');
+                  printf('<p>%s</p>', get_the_excerpt());
+                endif; // End is_singular()
+                ?>
               </div>
             </div>
           </div>
         </div>
       </div><!-- .post-thumbnail -->
-
       <?php
-    endif; // End is_singular()
+    endif;
   }
-  
+
+  function okfn_get_header_background_src() {
+    if (is_home()):
+      $header_image = get_header_image();
+    else :
+      $header_image = get_the_post_thumbnail_url($post, 'large');
+    endif;
+
+    return $header_image;
+  }

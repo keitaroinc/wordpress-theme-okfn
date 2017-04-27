@@ -813,3 +813,12 @@ function okfn_word_slider_shortcode($atts) {
     return sprintf('<strong class="okfn-word-slider">%s</strong>', $echo);
   endif;
 }
+
+add_shortcode('okfn_header_image', 'okfn_header_image_shortcode');
+
+function okfn_header_image_shortcode() {
+  $header_image = get_header_image();
+  if ($header_image):
+    return sprintf('style="background-image: url(\'%s\')"', $header_image);
+  endif;
+}
