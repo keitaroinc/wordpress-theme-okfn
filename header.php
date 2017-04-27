@@ -11,10 +11,10 @@
       <?php
       global $options;
       foreach ($options as $value) {
-        if (get_option($value['id']) === FALSE) {
-          $$value['id'] = $value['std'];
+        if (version_compare(PHP_VERSION, '7.0.0', '>=')) {
+          ${$value['id']} = get_option($value['id'], $value['std']);
         } else {
-          $$value['id'] = get_option($value['id']);
+          $$value['id'] = get_option($value['id'], $value['std']);
         }
       }
       if ($okfn_tagline_title == "true" && get_bloginfo('description')) :
@@ -291,10 +291,18 @@
         if (array_key_exists('id', $value)) {
           if (get_option($value['id']) === FALSE) {
             if (array_key_exists('std', $value)) {
-              $$value['id'] = $value['std'] or NULL;
+              if (version_compare(PHP_VERSION, '7.0.0', '>=')) {
+                ${$value['id']} = $value['std'] or NULL;
+              } else {
+                $$value['id'] = $value['std'] or NULL;
+              }
             }
           } else {
-            $$value['id'] = get_option($value['id']);
+            if (version_compare(PHP_VERSION, '7.0.0', '>=')) {
+              ${$value['id']} = get_option($value['id']);
+            } else {
+              $$value['id'] = get_option($value['id']);
+            }
           }
         }
       }
