@@ -1376,7 +1376,7 @@ function mytheme_admin() {
   function okfn_get_header_background_src() {
     if (is_home()):
       $header_image = get_header_image();
-    else :
+    elseif (is_page()) :
       $header_image = get_the_post_thumbnail_url($post, 'large');
     endif;
 
