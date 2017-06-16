@@ -553,9 +553,9 @@ function mytheme_add_admin() {
 
   global $themename, $shortname, $options;
 
-  if ($_GET['page'] == basename(__FILE__)) {
+  if (isset($_GET['page']) && $_GET['page'] == basename(__FILE__)) {
 
-    if ('save' == $_REQUEST['action']) {
+    if (isset($_REQUEST['action']) && 'save' == $_REQUEST['action']) {
 
       foreach ($options as $value) {
         update_option($value['id'], $_REQUEST[$value['id']]);
@@ -571,7 +571,7 @@ function mytheme_add_admin() {
 
       header("Location: themes.php?page=functions.php&saved=true");
       die;
-    } else if ('reset' == $_REQUEST['action']) {
+    } else if (isset($_REQUEST['action']) && 'reset' == $_REQUEST['action']) {
 
       foreach ($options as $value) {
         delete_option($value['id']);
@@ -589,10 +589,10 @@ function mytheme_admin() {
 
   global $themename, $shortname, $options;
 
-  if ($_REQUEST['saved']) {
+  if (isset($_REQUEST['saved']) && $_REQUEST['saved']) {
     echo '<div id="message" class="updated fade"><p><strong>' . $themename . ' settings saved.</strong></p></div>';
   }
-  if ($_REQUEST['reset']) {
+  if (isset($_REQUEST['saved']) && $_REQUEST['reset']) {
     echo '<div id="message" class="updated fade"><p><strong>' . $themename . ' settings reset.</strong></p></div>';
   }
   ?>
@@ -683,38 +683,40 @@ function mytheme_admin() {
               break;
 
             case "title":
-              ?>
-              <h3><?php echo $value['name']; ?></h3>
-
-
-              <?php
+              if (isset($value)) {
+                ?>
+                <h3><?php echo $value['name']; ?></h3>
+                <?php
+              }
               break;
 
             case 'text':
-              ?>
+              if (isset($value)) {
+                ?>
 
-              <div class="section section-text" id="section_<?php echo $value['id']; ?>">
-                <div class="heading">
-                  <h4><?php echo $value['name']; ?></h4>
-                  <p class="explain"><?php echo $value['desc']; ?></p>
-                </div>
-                <div class="option">
-                  <div class="controls">
-                    <input name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" value="<?php
-                    if (get_option($value['id']) != "") {
-                      echo get_option($value['id']);
-                    } else {
-                      echo $value['std'];
-                    }
-                    ?>" <?php if ($value['placeholder'] != "") : ?>placeholder="<?php echo $value['placeholder']; ?>"<?php endif ?>/>
-                    <br>
+                <div class="section section-text" id="section_<?php echo $value['id']; ?>">
+                  <div class="heading">
+                    <h4><?php echo $value['name']; ?></h4>
+                    <p class="explain"><?php echo $value['desc']; ?></p>
                   </div>
-                  <div class="clear"></div>
+                  <div class="option">
+                    <div class="controls">
+                      <input name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" value="<?php
+                      if (get_option($value['id']) != "") {
+                        echo get_option($value['id']);
+                      } else {
+                        echo $value['std'];
+                      }
+                      ?>" <?php if (isset($value['placeholder']) && $value['placeholder'] != "") : ?>placeholder="<?php echo $value['placeholder']; ?>"<?php endif ?>/>
+                      <br>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
                 </div>
-              </div>
 
 
-              <?php
+                <?php
+              }
               break;
 
             case 'textarea':
@@ -810,72 +812,76 @@ function mytheme_admin() {
               break;
 
             case "checkbox":
-              ?>
+              if (isset($value)) {
+                ?>
 
-              <div class="section section-checkbox" id="section_<?php echo $value['id']; ?>">
-                <div class="heading">
-                  <h4><?php echo $value['name']; ?></h4>
-                </div>
-                <div class="option">
-                  <div class="controls">
-                    <?php
-                    if (get_option($value['id'])) {
-                      $checked = "checked=\"checked\"";
-                    } else {
-                      if ($value['std'] === "true") {
+                <div class="section section-checkbox" id="section_<?php echo $value['id']; ?>">
+                  <div class="heading">
+                    <h4><?php echo $value['name']; ?></h4>
+                  </div>
+                  <div class="option">
+                    <div class="controls">
+                      <?php
+                      if (get_option($value['id'])) {
                         $checked = "checked=\"checked\"";
                       } else {
-                        $checked = "";
+                        if ($value['std'] === "true") {
+                          $checked = "checked=\"checked\"";
+                        } else {
+                          $checked = "";
+                        }
                       }
-                    }
-                    ?>
-                    <input type="checkbox" name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" value="true" <?php echo $checked; ?> />
-                    <label for="<?php echo $value['id']; ?>" class="explain"><?php echo $value['desc']; ?></label>
+                      ?>
+                      <input type="checkbox" name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" value="true" <?php echo $checked; ?> />
+                      <label for="<?php echo $value['id']; ?>" class="explain"><?php echo $value['desc']; ?></label>
+                    </div>
+                    <div class="clear"></div>
                   </div>
-                  <div class="clear"></div>
                 </div>
-              </div>
 
-              <?php
+                <?php
+              }
               break;
 
             case "radio":
-              ?>
+              if (isset($value)) {
+                ?>
 
-              <div class="section section-radio <?php echo $value['class'] ?>" id="section_<?php echo $value['id']; ?>">
-                <div class="heading">
-                  <h4><?php echo $value['name']; ?></h4>
-                  <p class="explain"><?php echo $value['desc']; ?></p>
-                </div>
-                <div class="option">
-                  <div class="controls">
-                    <?php
-                    foreach ($value['options'] as $option_value => $option_text) {
-                      $checked = ' ';
-                      if (get_option($value['id']) == $option_value) {
-                        $checked = ' checked="checked" ';
-                      } else if (get_option($value['id']) === FALSE && $value['std'] == $option_value) {
-                        $checked = ' checked="checked" ';
-                      } else {
-                        $checked = ' ';
-                      }
-
-                      if ($value['class'] == "thumbs") {
-                        $bgimage = "" . get_bloginfo('stylesheet_directory') . "/screenshot-" . $option_value . ".png";
-                      } else {
-                        $bgimage = '';
-                      }
-
-                      echo '<label style="background-image:url(' . $bgimage . ');"><span><input type="radio" style="margin-right:10px;" name="' . $value['id'] . '" value="' .
-                      $option_value . '" ' . $checked . "/>" . $option_text . "</span></label>";
-                    }
-                    ?>
+                <div class="section section-radio <?php echo $value['class'] ?>" id="section_<?php echo $value['id']; ?>">
+                  <div class="heading">
+                    <h4><?php echo $value['name']; ?></h4>
+                    <p class="explain"><?php echo $value['desc']; ?></p>
                   </div>
-                  <div class="clear"></div>
-                </div>
-              </div>
+                  <div class="option">
+                    <div class="controls">
+                      <?php
+                      foreach ($value['options'] as $option_value => $option_text) {
+                        $checked = ' ';
+                        if (get_option($value['id']) == $option_value) {
+                          $checked = ' checked="checked" ';
+                        } else if (get_option($value['id']) === FALSE && $value['std'] == $option_value) {
+                          $checked = ' checked="checked" ';
+                        } else {
+                          $checked = ' ';
+                        }
 
-              <?php
+                        if (isset($value['class']) && $value['class'] == "thumbs") {
+                          $bgimage = "" . get_bloginfo('stylesheet_directory') . "/screenshot-" . $option_value . ".png";
+                        } else {
+                          $bgimage = '';
+                        }
+
+                        echo '<label style="background-image:url(' . $bgimage . ');"><span><input type="radio" style="margin-right:10px;" name="' . $value['id'] . '" value="' .
+                        $option_value . '" ' . $checked . "/>" . $option_text . "</span></label>";
+                      }
+                      ?>
+                    </div>
+                    <div class="clear"></div>
+                  </div>
+                </div>
+
+                <?php
+              }
               break;
           }
         }
@@ -1377,8 +1383,10 @@ function mytheme_admin() {
     if (is_home()):
       $header_image = get_header_image();
     elseif (is_page()) :
-      $header_image = get_the_post_thumbnail_url($post, 'large');
+      $header_image = get_the_post_thumbnail_url(get_the_ID(), 'large');
     endif;
 
-    return $header_image;
+    if (isset($header_image)):
+      return $header_image;
+    endif;
   }
