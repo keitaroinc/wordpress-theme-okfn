@@ -154,7 +154,7 @@
       include('mailing-bar.php');
     }
     ?>
-    <header<?php if ($okfn_subheader == "true"): ?> class="has-subheader"<?php endif; ?>>
+    <header<?php if (isset($okfn_subheader) && $okfn_subheader == "true"): ?> class="has-subheader"<?php endif; ?>>
       <div class="navbar<?php if ($okfn_colours == "default") : ?> navbar-inverse<?php endif; ?>">
         <div class="navbar-inner">
           <div class="container">
@@ -200,7 +200,7 @@
             <?php endif; ?>
 
             <nav class="nav-collapse collapse">
-              <?php if (($okfn_header_search == "true") && ($okfn_subheader_search == "false")) : ?>
+              <?php if ((isset($okfn_header_search) && $okfn_header_search == "true") && ($okfn_subheader_search == "false")) : ?>
                 <div class="header-search">
                   <a>Search</a>
                   <div class="search-bar">
