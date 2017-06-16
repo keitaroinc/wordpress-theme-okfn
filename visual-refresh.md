@@ -504,6 +504,10 @@ It is __crucially important__ that the __WordPress shortcodes__ -- *bracketed wo
 </div>
 ```
 
+### 3. Widgets
+
+`TO DO`
+
 #### 1. Courses - Excerpt
 
 The excerpt text shown below the page title is set per page, within the __Excerpt__ field, while editing he page in the WordPress back-end.
@@ -622,4 +626,12 @@ Use the [twitter_icon] shortcode to generate a block of HTML markup, to show a l
 
 ## 6. New OKF Theme Options
 
+`TO DO`
+
 ### 1. Underlined Words
+
+`TO DO`
+
+### 2. Header Images
+
+`TO DO`
