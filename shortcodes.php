@@ -480,7 +480,7 @@ function latest_posts_shortcode($atts) {
     // Extract the first img src from the post body
     $regex = '/magazine.image\s*=\s*"?([^"\s]*)/';
     preg_match($regex, get_the_content(), $matches);
-    $post_img = 'http://assets.okfn.org/web/images/blog-placeholder.png';
+    $post_img = '//assets.okfn.org/web/images/blog-placeholder.png';
     if (count($matches))
       $post_img = $matches[1];
 
@@ -766,9 +766,9 @@ function tweeter_shortcode($atts) {
   return $open . $jmlt . $close;
 }
 
-// Print an SVG Twitter icon where needed
-
 add_shortcode('tweeter', 'tweeter_shortcode');
+
+// Print an SVG Twitter icon where needed
 add_shortcode('twitter_icon', 'okfn_load_twitter_icon');
 
 function okfn_load_twitter_icon() {
@@ -776,7 +776,6 @@ function okfn_load_twitter_icon() {
 }
 
 // Get Twitter profile link according to the username set in the Theme Options
-
 add_shortcode('twitter_link', 'okfn_twitter_link_shortcode');
 
 function okfn_twitter_link_shortcode() {
