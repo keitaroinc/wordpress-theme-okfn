@@ -527,7 +527,7 @@ Using the shortcode with the category attribute, will generate the three most re
 To limit the number of queried posts, use the `postnumber` attribute.
 
 ```php
-[latest_posts postnumber=10 category='News']
+[latest_posts postnumber='10' category='News']
 ```
 
 To add a specific CSS class to the wrapping `<ul>` element, use the class attribute.
