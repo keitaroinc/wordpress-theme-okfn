@@ -4,11 +4,17 @@ get_header();
 // get template options
 global $options;
 foreach ($options as $value) {
-  if (get_option($value['id']) === FALSE) {
-    $$value['id'] = $value['std'];
-  } else {
-    $$value['id'] = get_option($value['id']);
-  }
+
+  if (isset($value['id'], $value['std'])):
+    $option_value = get_option($value['id'], $value['std']);
+    if (isset($option_value)):
+      if (version_compare(PHP_VERSION, '7.0.0', '>=')) {
+        ${$value['id']} = $option_value;
+      } else {
+        $$value['id'] = $option_value;
+      }
+    endif;
+  endif;
 }
 // set variables for layout
 if ($okfn_narrow_blog == "true") {
