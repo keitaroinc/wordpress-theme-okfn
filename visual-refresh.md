@@ -18,7 +18,7 @@ __If pages are not modified with the required HTML markup elements, the content 
 
 ## 3. New HTML markup
 
-### 1. Home page
+### 3.1. Home page
 
 The visually refreshed Home page is expected to have the following HTML structure. Text can be modified and translated, but the HTML structure must remain the same, to get the exact appearance as on the [schoolofdata.org](https://schoolofdata.org/) website.
 
@@ -73,7 +73,7 @@ It is __crucially important__ that the __WordPress shortcodes__ -- *bracketed wo
 </section>
 ```
 
-### 2. Courses page
+### 3.2. Courses page
 
 The visually refreshed Courses page is expected to have the following HTML structure. Text can be modified and translated, but the HTML structure must remain the same, to get the exact appearance as on the [schoolofdata.org](https://schoolofdata.org/courses/) Courses page.
 
@@ -504,21 +504,99 @@ It is __crucially important__ that the __WordPress shortcodes__ -- *bracketed wo
 </div>
 ```
 
-### 3. Widgets
-
-`TO DO`
-
-#### 1. Courses - Excerpt
+#### 3.2.1. Courses - Excerpt
 
 The excerpt text shown below the page title is set per page, within the __Excerpt__ field, while editing he page in the WordPress back-end.
 
-#### 2. Courses - Featured image
+#### 3.2.2. Courses - Featured image
 
 The main header image of the Courses page is set as a [Featured image](https://en.support.wordpress.com/featured-images/) while editing the page in the WordPress back-end.
 
-## 4. Updated WordPress shortcodes
+## 4. Widgets
 
-### 1. [latest_posts]
+The [wordpress-theme-okfn-fresh](https://github.com/keitaroinc/wordpress-theme-okfn-fresh) WordPress theme comes with five (5) different widget sidebars, listed and described below:
+
+* __Sidebar 1__ - shown in the right page side and visible on the Blog and all blog posts
+* __First Footer Widget Area__ - first placeholder within the page footer, visible on every page
+* __Second Footer Widget Area__ - second placeholder within the page footer, visible on every page
+* __Third Footer Widget Area__ - third placeholder within the page footer, visible on every page
+* __Fourth Footer Widget Area__ - fourth placeholder within the page footer, visible on every page
+
+Accessing sidebars and widgets is possible through __Appearance > Widgets__.
+
+#### 4.1 Sidebar 1
+
+Sidebar 1 is the least specific sidebar in the theme. Already existing widgets from other WordPress themes are placed in Sidebar 1 upon theme switching.
+
+#### 4.2 First Footer Widget Area
+
+First Footer Widget Area is a placeholder for any type of content to be shown in the footer section of every page.
+
+By default, this sidebar should contain only one __Text__ widget __without a title__ and __with the following content__:
+
+```html
+<div class="hero-numbers">
+    <div class="hero-numbers-block">6000<sup>+</sup> <strong>people</strong> trained
+    </div>
+    <div class="hero-numbers-block">
+    44 <strong>learning</strong> modules
+    </div>
+    <div class="hero-numbers-block">
+    13 <strong>member</strong> organisations
+    </div>
+    <div class="hero-numbers-block">
+    100 individual <strong>members</strong>
+    </div>
+    <div class="hero-numbers-block">
+    34 <strong>countries</strong> represented
+    </div>
+</div>
+```
+
+Numbers and strings can be modified, but the __HTML markup must remain intact__, so that the correct visual appearance is rendered.
+
+#### 4.3 Second Footer Widget Area
+
+Second Footer Widget Area is a placeholder for any type of content, to be __shown after the First Footer Widget Area__ in the footer section of every page.
+
+By default, this sidebar contains only one __Text__ widget which includes linked logos of supporting organizations. The widget title is "__Built with the support of__" and it has the following content:
+
+```html
+<ul class="list-inline footer-logos">
+    <li><a href=""><img src="https://schoolofdata.scoda.okfn.org/files/2016/07/okfn-logo-200x206.png"></a></li>
+    <li><a href=""><img src="https://schoolofdata.scoda.okfn.org/files/2016/07/od4d-logo-400x150.png"></a></li>
+    <li><a href=""><img src="https://schoolofdata.scoda.okfn.org/files/2016/07/hivos-logo-498x255.png"></a></li>
+    <li><a href=""><img src="https://schoolofdata.scoda.okfn.org/files/2016/07/hawlet-logo-512x199.png"></a></li>
+    <li><a href=""><img src="https://schoolofdata.scoda.okfn.org/files/2016/07/osf-logo-512x120.png"></a></li>
+</ul>
+```
+
+#### 4.4 Third Footer Widget Area
+
+Third Footer Widget Area is a placeholder for any type of content, to be __shown after the Second Footer Widget Area__ in the footer section of every page.
+
+By default, this sidebar includes a single __Text__ widget with a newsletter subscription form. The widget has a title: "__Subscribe to our newsletter__" and includes the following content:
+
+```html
+<form class="subscribe-form" action="https://sendy.okfn.org/subscribe" method="POST" accept-charset="utf-8">
+    <input onfocus="this.value=''" value="Your name" type="text" name="name" id="name"/>
+    <input onfocus="this.value=''" value="Your email" type="text" name="email" id="email"/>
+    <input type="hidden" name="list" value="9pyCOvz36TjQX6xCLDtR763A"/>
+    <div>
+        <input type="submit" class="btn btn-primary btn-uppercase" name="email-button" id="submit"/ value="Subscribe">
+    </div>
+</form>
+```
+
+#### 4.5 Fourth Footer Widget Area
+
+Fourth Footer Widget Area is a placeholder for any type of content, to be __shown after the Third Footer Widget Area__ in the footer section of every page.
+
+By default, this sidebar includes a single __Custom Menu__ widget which shows the _Footer Links_ menu, previously created in __Appearance > Menus__.
+
+## 5. Updated WordPress shortcodes
+
+### 5.1. [latest_posts]
 
 The existing [latest_posts] shortcode has been extended to support WordPress categories and custom CSS classes.
 
@@ -546,11 +624,11 @@ More than one CSS class can be added, if separated by spaces.
 [latest_posts class='news-css-class another-news-css-class' category='News']
 ```
 
-## 5. New WordPress shortcodes
+## 6. New WordPress shortcodes
 
 [wordpress-theme-okfn-fresh](https://github.com/keitaroinc/wordpress-theme-okfn-fresh) provides several new WordPress shortcodes, as addition to the existing library in `shortcodes.php`. Each new shortcode is described in details below.
 
-### 1. [latest_post]
+### 6.1. [latest_post]
 
 The [latest_post] shortcode is a modified version of the [latest_posts] shortcode, to add support for querying specific posts.
 
@@ -586,7 +664,7 @@ More than one CSS class can be added, if separated by spaces.
 [latest_post class='news-css-class another-news-css-class' category='News']
 ```
 
-### 2. [okfn_header_image]
+### 6.2. [okfn_header_image]
 
 Use the [okfn_header_image] shortcode to generate a background image for an HTML element. 
 
@@ -594,7 +672,7 @@ It is expected that the element is `<section>` and that the shortcode is called 
 
 The shortcode will output the element's `style` attribute with the property `background-image` set to the URL returned from the `get_header_image()` WordPress function.
 
-### 3. [okfn_word_slider]
+### 6.3. [okfn_word_slider]
 
 Use the [okfn_word_slider] shortcode to create an animated word slider within the `<section>` with the `banner` class.
 
@@ -606,7 +684,7 @@ The shortcode is expected to be used within the main title in the `<section>` wi
 
 The word list can be specified in __Appearance > OKF Theme Options__, within the Underlined Words text area. Comma (,) should be used as a word delimiter. The last word in the list does not need to have a delimiter.
 
-### 4. [twitter_link]
+### 6.4. [twitter_link]
 
 Use the [twitter_link] shortcode to generate a URL to the Twitter profile specified in __Appearance > OKF Theme Options__, in the __Twitter Username__ field -- within the __Social__ tab.
 
@@ -616,7 +694,7 @@ Text wrapped between the `<strong>` and `</strong>` HTML tags will be rendered w
 <a href="[twitter_link]"><strong>Follow</strong> us on</a>
 ```
 
-### 5. [twitter_icon]
+### 6.5. [twitter_icon]
 
 Use the [twitter_icon] shortcode to generate a block of HTML markup, to show a large icon with the Twitter symbol. `[twitter_icon]` adds `<span class="twitter-icon"></span>` to the HTML markup. The CSS class `twitter-icon` is used to load the Twitter icon from an image file.
 
@@ -624,14 +702,26 @@ Use the [twitter_icon] shortcode to generate a block of HTML markup, to show a l
 <div class="scoda-title"><a href="[twitter_link]"><strong>Follow</strong> us on</a>[twitter_icon]</div>
 ```
 
-## 6. New OKF Theme Options
+## 7. New Theme Features and Options
 
-`TO DO`
+The [wordpress-theme-okfn-fresh](https://github.com/keitaroinc/wordpress-theme-okfn-fresh) WordPress theme offers several new theme options which provide new or updated theme functionalities.
 
-### 1. Underlined Words
+### 7.1. Underlined Words
 
-`TO DO`
+The _Underlined Words_ setting in __Appearance > OKF Theme Options > Header__ provides a way to customize the content of __[okfn_word_slider]__. This field accepts a comma-separated list of terms which are shown as underlined fading words on the front-end, within the homepage slider.
 
-### 2. Header Images
+Please note that a __comma is not needed after the last term in the list__ and it may cause empty words to appear in the slider.
 
-`TO DO`
+### 7.2. Header Images
+
+Customizing slider images is possible through __Appearance > Customize > Header Image__. There are five (5) default images which are used by default and offered as suggestions, if the slider has not been modified from its default state.
+
+A new image can be added through the WordPress Media library, by clicking the __Add new image__ button and by uploading the selected image or by selecting an existing image from the WordPress Media library.
+
+The number of images that the slider can contain is not limited by the theme, however adding many images will definitely have performance implications.
+
+It is recommended that the slider images are optimized for web before upload.
+
+The __Randomize suggested headers__ toggle, which can either be turned On or Off, offers the option to randomize the image order and show a different slider image whenever the homepage is loaded.
+
+The live preview in the ___Customize___ mode ___might or might not work___ depending on the server infrastructure and the WordPress setup.
