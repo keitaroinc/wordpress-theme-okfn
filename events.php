@@ -75,12 +75,9 @@ function browser_body_class($classes = '') {
   <div id="content" class="span8">
     <div class="padder">
 
-    <?php do_action( 'bp_before_blog_home' ) ?>
-
     <?php do_action( 'template_notices' ) ?>
 
     <div class="page" id="blog-latest" role="main">
-
 
     <?php
     /* =================== */
@@ -140,8 +137,6 @@ function browser_body_class($classes = '') {
         </div>
       </div>
     </div>
-
-    <?php do_action( 'bp_after_blog_home' ) ?>
 
     </div><!-- .padder -->
 </div><!-- #content -->

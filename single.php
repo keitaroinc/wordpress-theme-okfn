@@ -28,7 +28,6 @@ if ($okfn_narrow_blog == "true") {
     <div class="padder">
       <div class="row">
         <div id="content" class="<?php echo $contentSpan; ?>">
-          <?php do_action('bp_before_blog_single_post') ?>
 
           <div class="page" id="blog-single" role="main">
 
@@ -75,7 +74,6 @@ if ($okfn_narrow_blog == "true") {
 
           </div>
 
-          <?php do_action('bp_after_blog_single_post') ?>
         </div><!-- #content -->
 
         <?php if ($okfn_narrow_blog == "true") : ?>
@@ -83,14 +81,14 @@ if ($okfn_narrow_blog == "true") {
             <?php if ($okfn_large_avatars == "true") : ?>
               <div class="author-box">
                 <?php echo get_avatar(get_the_author_meta('user_email'), '130'); ?>
-                <h3><?php printf(_x('Written by %s', 'Post written by...', 'buddypress'), str_replace('<a href=', '<a rel="author" href=', bp_core_get_userlink($post->post_author))); ?></h3>
+                <h3><?php printf(_x('Written by %s', 'Post written by...', 'buddypress'), get_the_author_posts_link() ); ?></h3>
                 <p><!--Replace this with buddypress field --><?php the_author_meta('user_description'); ?></p>
               </div>
             <?php else: ?>
               <div class="author-box small">
                 <div class="author-title">
                   <div class="avatar"><?php echo get_avatar(get_the_author_meta('user_email'), '50'); ?></div>
-                  <h3><?php printf(_x('Written by <br /> %s', 'Post written by...', 'buddypress'), str_replace('<a href=', '<a rel="author" href=', bp_core_get_userlink($post->post_author))); ?></h3>
+                  <h3><?php printf(_x('Written by <br /> %s', 'Post written by...', 'buddypress'), get_the_author_posts_link() ); ?></h3>
                 </div>
                 <p><!--Replace this with buddypress field --><?php the_author_meta('user_description'); ?></p>
               </div>
@@ -113,7 +111,7 @@ if ($okfn_narrow_blog == "true") {
         <?php if ($okfn_large_avatars == "true") : ?>
           <div class="author-box">
             <?php echo get_avatar(get_the_author_meta('user_email'), '240'); ?>
-            <h3><?php printf(_x('Written by %s', 'Post written by...', 'buddypress'), str_replace('<a href=', '<a rel="author" href=', bp_core_get_userlink($post->post_author))); ?></h3>
+            <h3><?php printf(_x('Written by %s', 'Post written by...', 'buddypress'), get_the_author_posts_link() ); ?></h3>
             <p><!--Replace this with buddypress field --><?php the_author_meta('user_description'); ?></p>
           </div>
         <?php else: ?>

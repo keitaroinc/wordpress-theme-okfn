@@ -26,7 +26,6 @@
     <?php if (get_bloginfo('description')) : ?>
       <meta name="description" content="<?php echo bloginfo('description'); ?>" />
     <?php endif; ?>
-    <?php do_action('bp_head') ?>
 
     <link rel="pingback" href="<?php bloginfo('pingback_url') ?>" />
 
@@ -134,10 +133,6 @@
 
   <body <?php body_class() ?> id="bp-default">
     <?php
-    /* Javascript includes */
-    do_action('bp_before_header');
-    ?>
-    <?php
     if (!empty($okfn_corner_ribbon_text) && $okfn_corner_ribbon == "true") {
       echo '
       <a class="corner ribbon" href="' . stripslashes($okfn_corner_ribbon_link) . '" >
@@ -189,7 +184,7 @@
               <?php endif; ?>
 
               <?php if ($okfn_logo_text == "false") : ?>
-                <?php bp_site_name(); ?>
+                <?php bloginfo('name'); ?>
               <?php endif; ?>
             </a>
 
@@ -204,13 +199,10 @@
                 <div class="header-search">
                   <a>Search</a>
                   <div class="search-bar">
-                    <?php do_action('bp_before_blog_search_form') ?>
                     <form role="search" method="get" id="searchform" action="<?php echo home_url() ?>/">
                       <input type="text" value="<?php the_search_query(); ?>" name="s" id="s" placeholder="Search" />
                       <input type="submit" id="searchsubmit" value="<?php _e('Search', 'buddypress') ?>" />
-                      <?php do_action('bp_blog_search_form') ?>
                     </form>
-                    <?php do_action('bp_after_blog_search_form') ?>
                   </div>
                 </div>
               <?php endif; ?>
@@ -239,17 +231,12 @@
 
       </div>
 
-      <form action="<?php echo bp_search_form_action() ?>" method="post" class="search-form" role="search">
+      <form action="" method="post" class="search-form" role="search">
         <label for="search-terms" class="accessibly-hidden"><?php _e('Search for:', 'buddypress'); ?></label>
-        <input type="text" id="search-terms" name="search-terms" value="<?php echo isset($_REQUEST['s']) ? esc_attr($_REQUEST['s']) : ''; ?>" />
-
-        <?php echo bp_search_form_type_select() ?>
+        <input type="text" id="search-terms" name="search-terms" value="<?php the_search_query(); ?>" />
 
         <input type="submit" name="search-submit" id="search-submit" value="<?php _e('Search', 'buddypress') ?>" />
-        <?php wp_nonce_field('bp_search_form') ?>
       </form><!-- #search-form -->
-      <?php do_action('bp_search_login_bar') ?>
-      <?php do_action('bp_header') ?>
 
       <div class="sub-header">
         <div class="container">
@@ -266,13 +253,10 @@
             <div class="span4">
               <?php if ($okfn_subheader == "true" && $okfn_subheader_search == "true" && !is_front_page()) : ?>
                 <div class="search-bar">
-                  <?php do_action('bp_before_blog_search_form') ?>
                   <form role="search" method="get" id="searchform" action="<?php echo home_url() ?>/">
                     <input type="text" value="<?php the_search_query(); ?>" name="s" id="s" placeholder="Search" />
                     <input type="submit" id="searchsubmit" value="<?php _e('Search', 'buddypress') ?>" />
-                    <?php do_action('bp_blog_search_form') ?>
                   </form>
-                  <?php do_action('bp_after_blog_search_form') ?>
                 </div>
               <?php endif; ?>
             </div>
@@ -281,7 +265,6 @@
       </div>
 
     </header>
-    <?php do_action('bp_after_header') ?>
     <?php
     if (has_post_thumbnail()):
       okfn_header_w_featured_image();
@@ -329,6 +312,5 @@
     endif;
     ?>
 
-    <?php do_action('bp_before_container') ?>
     <div class="container">
 

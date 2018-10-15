@@ -48,34 +48,12 @@ load_child_theme_textdomain('buddypress', get_stylesheet_directory() . '/languag
  * Register a series of DOM-manipulating filters.
  */
 add_filter('wp_nav_menu', 'filter_nav_menu');
-add_filter('bp_before_account_details_fields', 'register_form_blurb');
 
 /*
  * Use the simple_html_dom library to perform
  * easy manipulations on wordpress' output.
  */
 include('simple_html_dom.php');
-
-/*
- * Kill Buddypress' profile links. They are wrong and stupid!
- */
-
-function remove_xprofile_links() {
-  remove_filter('bp_get_the_profile_field_value', 'xprofile_filter_link_profile_data', 9, 2);
-}
-
-add_action('bp_init', 'remove_xprofile_links');
-
-/*
- * Disable the parent theme's stylesheets. We work from scratch.
- */
-if (!function_exists('bp_dtheme_enqueue_styles')) :
-
-  function bp_dtheme_enqueue_styles() {
-
-  }
-
-endif;
 
 /*
  * Modify the DOM to enable bootstrap dropdown menus.
@@ -118,13 +96,6 @@ function okfn_fallback_nav_menu($args) {
   $menu = str_replace(array('<div class="menu"><ul>', '</ul></div>'), array('<ul id="nav" class="nav">', '</ul><!-- #nav -->'), $menu);
   echo $menu;
 
-  do_action('bp_nav_items');
-}
-
-function register_form_blurb($args) {
-  echo "<p>Community Membership is a way of &quot;opting in&quot; and publicly acknowledging a connnection with the Open Knowledge Foundation and support for its activities."
-  . " It entails no specific obligations (nor confers specific rights!) and anyone may join.</p>"
-  . "<p><a href=\"/governance/#community-membership\">Read more about Community Membership &raquo;</a></p>";
 }
 
 /*
@@ -139,15 +110,16 @@ function choose_best_category($categories) {
   $categories = $categories[0];
   global $options;
   foreach ($options as $value) {
-    if (array_key_exists('id', $value)) {
-      if (get_option($value['id']) === FALSE) {
-        if (array_key_exists('std', $value)) {
-          $$value['id'] = $value['std'] or NULL;
-        }
-      } else {
-        $$value['id'] = get_option($value['id']);
-      }
-    }
+	if (isset($value['id'], $value['std'])):
+	  $option_value = get_option($value['id'], $value['std']);
+	  if (isset($option_value)):
+		if (version_compare(PHP_VERSION, '7.0.0', '>=')) {
+		  ${$value['id']} = $option_value;
+		} else {
+		  $$value['id'] = $option_value;
+		}
+	  endif;
+	endif;
   }
   if (!empty($okfn_category_priority)) {
     $category_priority_custom = stripslashes($okfn_category_priority);
@@ -189,7 +161,7 @@ function echo_magazine_post($post, $is_featured, $echo = true) {
   $print .= '<h2><a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a></h2>';
   $print .= '<span class="entry-meta"> Posted on ';
   $print .= sprintf(__('%1$s <span>in %2$s</span>', 'buddypress'), get_the_date(), get_the_category_list(', '));
-  $print .= 'by ' . bp_core_get_userlink($post->post_author);
+  $print .= 'by ' . get_the_author_posts_link();
   $print .= '</span>';
   $print .= get_the_excerpt();
   $print .= '</div>';
@@ -205,12 +177,6 @@ function echo_magazine_post($post, $is_featured, $echo = true) {
     return $print;
   endif;
 }
-
-// The height and width of your custom header. You can hook into the theme's own filters to change these values.
-// Add a filter to bp_dtheme_header_image_width and bp_dtheme_header_image_height to change these values.
-//define('HEADER_IMAGE_WIDTH', apply_filters('bp_dtheme_header_image_width', 60));
-//define('HEADER_IMAGE_HEIGHT', apply_filters('bp_dtheme_header_image_height', 60));
-
 
 /*
  *  Theme Options
@@ -1161,13 +1127,6 @@ function mytheme_admin() {
   }
 
 
-// Default avatar fix
-  add_filter('bp_user_gravatar_default', 'set_bp_default_avatar_style');
-
-  function set_bp_default_avatar_style($avatar_default) {
-    return 'mystery';
-  }
-
   /**
    * @package	   TGM-Plugin-Activation
    * @subpackage Example
@@ -1297,12 +1256,10 @@ function mytheme_admin() {
 
   function okfn_enqueue_scripts() {
 
-    if (is_singular() && bp_is_blog_page() && get_option('thread_comments')):
-      wp_enqueue_script('comment-reply');
-    endif;
+	wp_enqueue_script('jquery');
 
-    if (!is_admin()):
-      wp_enqueue_script('jquery');
+	if (is_singular() && get_option('thread_comments')):
+      wp_enqueue_script('comment-reply');
     endif;
 
     wp_enqueue_script('bootstrap-js', '//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js', ['jquery'], '2.1.1', true);

@@ -1,11 +1,5 @@
 </div> <!-- /container -->
 
-<?php do_action('bp_after_container') ?>
-
-<?php do_action('bp_before_footer') ?>
-
-<?php do_action('bp_after_footer') ?>
-
 <?php do_action('cookie_bar'); ?>
 
 <?php

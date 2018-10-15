@@ -4,9 +4,6 @@
  *
  * A custom page template without sidebar.
  *
- * @package BuddyPress
- * @subpackage BP_Default
- * @since BuddyPress (1.5)
  */
 
 get_header();
@@ -14,8 +11,6 @@ get_header();
 <div class="row">
   <div id="content" class="span12">
     <div class="padder one-column">
-
-      <?php do_action('bp_before_blog_page'); ?>
 
       <div class="page" id="blog-page" role="main">
 
@@ -46,8 +41,6 @@ get_header();
         ?>
 
       </div><!-- .page -->
-
-      <?php do_action('bp_after_blog_page'); ?>
 
     </div><!-- .padder -->
   </div><!-- #content -->

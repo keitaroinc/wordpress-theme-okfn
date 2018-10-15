@@ -82,7 +82,7 @@ foreach ($options as $value) {
           <?php endif; ?>
 
           <?php if ( $okfn_logo_text == "false" ) : ?>
-            <?php bp_site_name(); ?>
+            <?php bloginfo('name'); ?>
           <?php endif; ?>
         </a>
       </div>

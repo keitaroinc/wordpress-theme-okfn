@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Home 
+Template Name: Home
  */
 
 /* body class="magazine" */
@@ -27,18 +27,16 @@ function browser_body_class($classes = '') {
   <div id="content" class="span12">
     <div class="padder">
 
-    <?php do_action( 'bp_before_blog_home' ) ?>
-
     <?php do_action( 'template_notices' ) ?>
 
     <div class="page" id="blog-latest" role="main">
-    
+
 		<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
     <?php the_content(); ?>
 		<?php endwhile; endif; ?>
     <h3 class="blog-latest-heading"><?php echo __("From our Blog", "okfn")?></h3>
     <div class="posts">
-    <?php 
+    <?php
     /* =================== */
     /* == Magazine Body == */
     /* =================== */
@@ -67,8 +65,6 @@ function browser_body_class($classes = '') {
     ?>
     </div>
     </div>
-
-    <?php do_action( 'bp_after_blog_home' ) ?>
 
     </div><!-- .padder -->
 </div><!-- #content -->
