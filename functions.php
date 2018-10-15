@@ -42,7 +42,6 @@ add_action('init', 'okfn_add_excerpt_support_for_pages');
  */
 //load_theme_textdomain( 'okfn', TEMPLATEPATH.'/languages' );
 load_child_theme_textdomain('okfn', get_stylesheet_directory() . '/languages');
-load_child_theme_textdomain('buddypress', get_stylesheet_directory() . '/languages/bp-languages');
 
 /*
  * Register a series of DOM-manipulating filters.
@@ -53,7 +52,7 @@ add_filter('wp_nav_menu', 'filter_nav_menu');
  * Use the simple_html_dom library to perform
  * easy manipulations on wordpress' output.
  */
-include('simple_html_dom.php');
+get_template_part('simple_html_dom');
 
 /*
  * Modify the DOM to enable bootstrap dropdown menus.
