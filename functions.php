@@ -181,8 +181,10 @@ function echo_magazine_post($post, $is_featured, $echo = true) {
  *  Theme Options
  */
 // Get default category priority list to use as placeholder
-$default_category_priority = okfn_load_file(get_bloginfo('stylesheet_directory') . '/category-priority.txt');
-$default_category_priority_string = implode(', ', $default_category_priority);
+$default_category_priority = okfn_load_file( get_bloginfo( 'stylesheet_directory' ) . '/category-priority.txt' );
+if ( $default_category_priority ) :
+	$default_category_priority_string = implode( ', ', $default_category_priority );
+endif;
 // Settings
 $themename = "OKF Theme";
 $shortname = "okfn";
@@ -484,7 +486,7 @@ $options = array(
         "id" => $shortname . "_category_priority",
         "type" => "textarea",
         "rows" => "11",
-        "placeholder" => $default_category_priority_string),
+        "placeholder" => ( isset( $default_category_priority_string ) ? $default_category_priority_string : false ) ),
     array("type" => "close"),
     array("name" => "misc_options",
         "type" => "open"),
@@ -1192,8 +1194,7 @@ function mytheme_admin() {
     $config = array(
         'domain' => $theme_text_domain, // Text domain - likely want to be the same as your theme.
         'default_path' => '', // Default absolute path to pre-packaged plugins
-        'parent_menu_slug' => 'themes.php', // Default parent menu slug
-        'parent_url_slug' => 'themes.php', // Default parent URL slug
+        'parent_slug' => 'themes.php', // Default parent menu slug
         'menu' => 'install-required-plugins', // Menu slug
         'has_notices' => true, // Show admin notices or not
         'is_automatic' => false, // Automatically activate plugins after installation or not
