@@ -12,9 +12,13 @@ function browser_body_class($classes = '') {
 
     // Get options
     global $options;
-    foreach ($options as $value) {
-      if (get_option( $value['id'] ) === FALSE) { $$value['id'] = $value['std']; } else { $$value['id'] = get_option( $value['id'] ); }
-    }
+	foreach ($options as $value) {
+        if (version_compare(PHP_VERSION, '7.0.0', '>=')) {
+          ${$value['id']} = get_option($value['id'], $value['std']);
+        } else {
+          $$value['id'] = get_option($value['id'], $value['std']);
+        }
+      }
 		if (!empty($okfn_home_featured)) {
 		  $featured_cat = $okfn_home_featured;
 		} else {

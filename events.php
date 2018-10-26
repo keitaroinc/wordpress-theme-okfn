@@ -13,8 +13,12 @@ function browser_body_class($classes = '') {
   // Get options
   global $options;
   foreach ($options as $value) {
-    if (get_option( $value['id'] ) === FALSE) { $$value['id'] = $value['std']; } else { $$value['id'] = get_option( $value['id'] ); }
-   }
+	if (version_compare(PHP_VERSION, '7.0.0', '>=')) {
+	  ${$value['id']} = get_option($value['id'], $value['std']);
+	} else {
+	  $$value['id'] = get_option($value['id'], $value['std']);
+	}
+  }
   // to use if custom post number is required
   if (!empty($okfn_event_posts)) {
 	  $eventPostNumber = $okfn_event_posts;
